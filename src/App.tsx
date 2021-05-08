@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Footer from './components/Footer'
 import Header from './components/Header'
 import Main from './components/Main'
+import ItemModal from './components/Modals/ItemModal'
 
 export const App = () => {
 	const user = useSelector((state: IRootState) => state.user)
@@ -23,6 +24,11 @@ export const App = () => {
 				<Main sex={sex} favs={favs} setFavs={setFavs} />
 				<Footer />
 			</div>
+			<Switch>
+				<Route path={`/item/:id`}>
+					<ItemModal favs={favs} setFavs={setFavs} user={user} />
+				</Route>
+			</Switch>
 		</Router>
 	)
 }

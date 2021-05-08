@@ -48,7 +48,7 @@ interface IItemStateAction extends Action {
 
 //PROPS
 interface IModalProps {
-	children: HTMLElement
+	children: JSX.IntrinsicElements.div
 }
 
 interface IHeaderProps {
@@ -76,6 +76,12 @@ interface IFavButtonProps {
 
 interface IMainProps {
 	sex: string
+	favs: string[]
+	setFavs: function
+}
+
+interface IItemModalProps {
+	user: IUserState
 	favs: string[]
 	setFavs: function
 }
