@@ -50,3 +50,9 @@ interface IFavButtonProps {
 	favs: string[]
 	setFavs: function
 }
+
+interface IMainProps {
+	sex: string
+	favs: string[]
+	setFavs: function
+}
