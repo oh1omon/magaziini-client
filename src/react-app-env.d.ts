@@ -2,5 +2,9 @@
 
 // STORE TYPES AND INTERFACES
 interface IRootState {
-    def: {}
+	def: {}
+}
+
+interface IModalProps {
+	children: HTMLElement
 }

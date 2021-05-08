@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom'
 import { useHistory } from 'react-router-dom'
 import usePortal from '../../services/hooks/usePortal'
 
-const Modal = ({ children }: { children: HTMLElement }) => {
+const Modal = ({ children }: IModalProps) => {
 	const target = usePortal()
 	let history = useHistory()
 
