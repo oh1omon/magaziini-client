@@ -33,3 +33,14 @@ interface IHeaderProps {
 	sex: string
 	setSex: function
 }
+
+interface IItemCardProps {
+	id: string
+	name: string
+	description: string
+	img: string
+	price: number
+	url: string
+	favs: []
+	setFavs: function
+}
