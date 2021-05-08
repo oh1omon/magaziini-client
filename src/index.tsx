@@ -1,15 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './index.css'
-import { App } from './App'
-import { store } from './store/store'
 import { Provider } from 'react-redux'
-import GlobalStyling from './theme/GlobalStyling'
+import { App } from './App'
+import './index.css'
+import { store } from './store/store'
 
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
-            <GlobalStyling />
             <App />
         </Provider>
     </React.StrictMode>,

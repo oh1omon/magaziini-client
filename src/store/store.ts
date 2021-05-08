@@ -1,5 +1,4 @@
-import { applyMiddleware, combineReducers, createStore, Store } from 'redux'
-import thunk from 'redux-thunk'
+import { combineReducers, createStore, Store } from 'redux'
 
 export const rootReducer = combineReducers({
     def: () => {
@@ -7,7 +6,4 @@ export const rootReducer = combineReducers({
     },
 })
 
-export const store: Store<IRootState> = createStore(
-    rootReducer,
-    applyMiddleware(thunk)
-)
+export const store: Store<IRootState> = createStore(rootReducer)
