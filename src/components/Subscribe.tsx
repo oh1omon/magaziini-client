@@ -1,0 +1,50 @@
+import axios from 'axios'
+import React, { useState } from 'react'
+import { Error } from './SVGs/Error'
+import { Okay } from './SVGs/Okay'
+import { Send } from './SVGs/Send'
+
+export const Subscribe = () => {
+	const renderSwitch = (param: string) => {
+		switch (param) {
+			case 'error':
+				return <Error />
+			case 'info':
+				return <Okay />
+			default:
+				return <Send />
+		}
+	}
+
+	const [subEmail, setSubEmail] = useState('')
+
+	const [infoMessage, setInfoMessage] = useState({ type: '' })
+
+	const valueHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setSubEmail(`${e.target.value}`)
+	}
+
+	const submitHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+		e.preventDefault()
+		axios.post('http://localhost:3002/sending', { email: subEmail, type: 'sub' }).then((resp) => {
+			setInfoMessage({ type: resp.data.type })
+		})
+	}
+	return (
+		<form className='flex flex-row group'>
+			<input
+				placeholder='E-mail'
+				type='email'
+				name='email'
+				onChange={(e) => valueHandler(e)}
+				className='w-full h-12 px-4 font-mono text-sm border-2 border-blue-100 lg:w-4/5 focus:border-black focus:outline-none'
+			/>
+			<button
+				onClick={(e) => submitHandler(e)}
+				className='h-12 px-4 text-white bg-black border-2 border-blue-100 lg:-ml-12'
+			>
+				{renderSwitch(infoMessage.type)}
+			</button>
+		</form>
+	)
+}
