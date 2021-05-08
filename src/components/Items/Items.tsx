@@ -9,13 +9,6 @@ const Items = ({ sex, favs, setFavs }: IMainProps) => {
 
 	const items = useSelector((state: IRootState) => state.items)
 
-	// useEffect(() => {
-	// 	axios.get('http://localhost:3002/db').then((response) => {
-	// 		setItems(response.data)
-	// 		setIsLoading(false)
-	// 	})
-	// }, [])
-
 	return (
 		<div className='flex flex-wrap justify-center w-full h-auto' id='items'>
 			{isLoading && <Loader />}
