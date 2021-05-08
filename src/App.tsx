@@ -19,7 +19,7 @@ export const App = () => {
 			<div id='top'></div>
 			<div className='font-sans text-sm xl:text-2xl'>
 				<Header user={user} sex={sex} setSex={setSex} />
-				<Main />
+				<Main sex={sex} favs={favs} setFavs={setFavs} />
 			</div>
 		</Router>
 	)

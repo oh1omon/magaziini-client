@@ -3,6 +3,7 @@
 // STORE TYPES AND INTERFACES
 interface IRootState {
 	user: IUserState
+	items: IItemsState
 }
 
 type IUserState = IUser | null
@@ -21,6 +22,28 @@ interface IUser {
 	street: string
 	city: string
 	country: string
+}
+
+interface IITems {
+	_id: string
+	name: string
+	description: string
+	sex: string
+	image: string
+	sizes: string[]
+	inStock: number
+	price: number
+	color: string
+	availiableColors: string[]
+	season: string
+	structure: {}
+}
+
+type IItemsState = IITems[] | null
+
+interface IItemStateAction extends Action {
+	type: string
+	payload: IITems[]
 }
 
 //PROPS
