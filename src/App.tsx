@@ -14,7 +14,7 @@ export const App = () => {
 		localStorage.setItem('favorite', JSON.stringify(favs))
 	}, [favs])
 
-	const [sex, setSex] = useState('all')
+	const [sex, setSex] = useState('')
 	return (
 		<Router>
 			<div id='top'></div>

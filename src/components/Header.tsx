@@ -13,7 +13,7 @@ const Header = ({ user, sex, setSex }: IHeaderProps) => {
 			<div className='flex flex-row flex-wrap items-center justify-around w-full h-auto bg-blue-500 bg-opacity-75 border-b-4 border-black '>
 				<div className='flex flex-wrap items-center justify-between h-auto pt-5 lg:py-5 w-9/10'>
 					<div className='flex items-center justify-center w-1/2 lg:w-36 logo'>
-						<HashLink to='#top' smooth>
+						<HashLink to='#top' smooth={true}>
 							<h1 className='text-4xl'>
 								my<span className='font-bold'>Shop</span>
 							</h1>
@@ -23,11 +23,11 @@ const Header = ({ user, sex, setSex }: IHeaderProps) => {
 						<HashLink to='#items' smooth>
 							<button
 								className={`${
-									sex === 'male'
+									sex === 'm'
 										? 'bg-black text-white'
 										: 'transition-all duration-500 ease-out bg-left-bottom bg-gradient-to-l from-black-hard to-transparent-hard bg-200-100 hover:bg-right-bottom hover:text-white'
 								} block px-6 py-1  border-t-2 border-b-2 border-r-2 border-black `}
-								onClick={() => clickHandler('male')}
+								onClick={() => clickHandler('m')}
 							>
 								Men
 							</button>
@@ -35,9 +35,9 @@ const Header = ({ user, sex, setSex }: IHeaderProps) => {
 						<HashLink to='#items' smooth>
 							<button
 								className={`${
-									sex === 'all' ? 'bg-black text-white' : 'hover:bg-black hover:text-white'
+									sex === '' ? 'bg-black text-white' : 'hover:bg-black hover:text-white'
 								} block px-6 py-1 duration-500 border-2 border-black `}
-								onClick={() => clickHandler('all')}
+								onClick={() => clickHandler('')}
 							>
 								All
 							</button>
@@ -45,11 +45,11 @@ const Header = ({ user, sex, setSex }: IHeaderProps) => {
 						<HashLink to='#items' smooth>
 							<button
 								className={`${
-									sex === 'female'
+									sex === 'w'
 										? 'bg-black text-white'
 										: 'transition-all duration-500 ease-out bg-right-bottom bg-gradient-to-r from-black-hard to-transparent-hard bg-200-100 hover:bg-left-bottom hover:text-white'
 								} block px-6 py-1  border-t-2 border-b-2 border-l-2 border-black `}
-								onClick={() => clickHandler('female')}
+								onClick={() => clickHandler('w')}
 							>
 								Women
 							</button>
@@ -88,11 +88,11 @@ const Header = ({ user, sex, setSex }: IHeaderProps) => {
 							<HashLink to='#items' smooth>
 								<button
 									className={`${
-										sex === 'male'
+										sex === 'm'
 											? 'bg-black text-white'
 											: 'transition-all duration-500 ease-out bg-left-bottom bg-gradient-to-l from-black-hard to-transparent-hard bg-200-100 hover:bg-right-bottom hover:text-white'
 									} block px-6 py-1  border-t-2 border-b-2 border-r-2 border-black `}
-									onClick={() => clickHandler('male')}
+									onClick={() => clickHandler('m')}
 								>
 									Men
 								</button>
@@ -100,9 +100,9 @@ const Header = ({ user, sex, setSex }: IHeaderProps) => {
 							<HashLink to='#items' smooth>
 								<button
 									className={`${
-										sex === 'all' ? 'bg-black text-white' : 'hover:bg-black hover:text-white'
+										sex === '' ? 'bg-black text-white' : 'hover:bg-black hover:text-white'
 									} block px-6 py-1 duration-500 border-2 border-black `}
-									onClick={() => clickHandler('all')}
+									onClick={() => clickHandler('')}
 								>
 									All
 								</button>
@@ -110,11 +110,11 @@ const Header = ({ user, sex, setSex }: IHeaderProps) => {
 							<HashLink to='#items' smooth>
 								<button
 									className={`${
-										sex === 'female'
+										sex === 'w'
 											? 'bg-black text-white'
 											: 'transition-all duration-500 ease-out bg-right-bottom bg-gradient-to-r from-black-hard to-transparent-hard bg-200-100 hover:bg-left-bottom hover:text-white'
 									} block px-6 py-1  border-t-2 border-b-2 border-l-2 border-black `}
-									onClick={() => clickHandler('female')}
+									onClick={() => clickHandler('w')}
 								>
 									Women
 								</button>
