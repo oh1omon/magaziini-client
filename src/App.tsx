@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
 import Header from './components/Header'
+import Main from './components/Main'
 
 export const App = () => {
 	const user = useSelector((state: IRootState) => state.user)
@@ -18,6 +19,7 @@ export const App = () => {
 			<div id='top'></div>
 			<div className='font-sans text-sm xl:text-2xl'>
 				<Header user={user} sex={sex} setSex={setSex} />
+				<Main />
 			</div>
 		</Router>
 	)
