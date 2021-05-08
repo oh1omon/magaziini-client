@@ -41,6 +41,12 @@ interface IItemCardProps {
 	img: string
 	price: number
 	url: string
-	favs: []
+	favs: string[]
+	setFavs: function
+}
+
+interface IFavButtonProps {
+	id: string
+	favs: string[]
 	setFavs: function
 }

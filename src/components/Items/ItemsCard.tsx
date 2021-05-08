@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-// import FavButton from '../FavButton/FavButton'
+import FavButton from '../FavButton'
 
 const ItemCard = ({ id, name, description, img, price, url, favs, setFavs }: IItemCardProps) => {
 	return (
@@ -27,7 +27,7 @@ const ItemCard = ({ id, name, description, img, price, url, favs, setFavs }: IIt
 					>
 						Read More
 					</Link>
-					{/* <FavButton id={id} favs={favs} setFavs={setFavs} /> */}
+					<FavButton id={id} favs={favs} setFavs={setFavs} />
 				</div>
 			</div>
 		</div>
