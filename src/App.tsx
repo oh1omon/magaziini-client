@@ -9,7 +9,9 @@ import DeliveryModal from './components/Modals/DeliveryModal'
 import HistoryModal from './components/Modals/HistoryModal'
 import ItemModal from './components/Modals/ItemModal'
 import PaymentModal from './components/Modals/PaymentModal'
+import ProfileModal from './components/Modals/ProfileModal'
 import ReturnModal from './components/Modals/ReturnModal'
+import SignInUpModal from './components/Modals/SignInUpModal'
 
 export const App = () => {
 	const user = useSelector((state: IRootState) => state.user)
@@ -30,6 +32,7 @@ export const App = () => {
 				<Footer />
 			</div>
 			<Switch>
+				<Route path={`/user`}>{user ? <ProfileModal /> : <SignInUpModal />}</Route>
 				<Route path={`/item/:id`}>
 					<ItemModal favs={favs} setFavs={setFavs} user={user} />
 				</Route>

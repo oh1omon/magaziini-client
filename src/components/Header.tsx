@@ -56,21 +56,12 @@ const Header = ({ user, sex, setSex }: IHeaderProps) => {
 						</HashLink>
 					</div>
 					<div className='flex items-center justify-center w-1/2 lg:w-40'>
-						{user ? (
-							<Link
-								to={'/profile'}
-								className='px-4 py-1 text-xl duration-200 border-2 border-black lg:py-2 hover:text-white hover:bg-black '
-							>
-								{`Hello, ${user.name.split(' ', 1)}!`}
-							</Link>
-						) : (
-							<Link
-								to={'/signIn'}
-								className='px-4 py-1 text-xl duration-200 border-2 border-black lg:py-2 hover:text-white hover:bg-black '
-							>
-								Sign in
-							</Link>
-						)}
+						<Link
+							to={'/user'}
+							className='px-4 py-1 text-xl duration-200 border-2 border-black lg:py-2 hover:text-white hover:bg-black '
+						>
+							{user ? `Hello, ${user.name.split(' ', 1)}!` : 'Sign In'}
+						</Link>
 					</div>
 					<div className='flex items-center justify-center w-full h-16 lg:hidden '>
 						{/* <svg
