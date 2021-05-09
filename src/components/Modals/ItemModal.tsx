@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
-import { retrieveItem } from '../../services/dispatchers'
+import { createOrder, retrieveItem } from '../../services/dispatchers'
 import FavButton from '../FavButton'
 import Loader from '../Loader'
 import Modal from './Modal'
 
-export default function ItemModal({ user, favs, setFavs }: IItemModalProps) {
+export default function ItemModal({ favs, setFavs }: IItemModalProps) {
+	const user = useSelector((store: IRootState) => store.user)
 	const [item, setItem] = useState<IITems>({} as IITems)
 	const [isLoading, setIsLoading] = useState(true)
 	const [infoMessage, setInfoMessage] = useState({ message: '', type: '' })
 	let { id } = useParams<{ id: string }>()
 
 	const [order, setOrder] = useState({
-		item: `${id}`,
+		itemId: `${id}`,
 		size: '',
-		type: 'order',
 	})
 
 	const valueHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,17 +24,10 @@ export default function ItemModal({ user, favs, setFavs }: IItemModalProps) {
 
 	const submitHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 		e.preventDefault()
-		console.log(order)
-		// axios
-		// 	.post('http://localhost:3002/sending', {
-		// 		...order,
-		// 		// name: user.name,
-		// 		// email: user.email,
-		// 	})
-		// 	.then((resp) => {
-		// 		setInfoMessage({ message: resp.data.message, type: resp.data.type })
-		// 		console.log(resp.data)
-		// 	})
+		if (user)
+			createOrder({ ...order, submitter: user._id }).then((r) => {
+				setInfoMessage({ message: r.message, type: 'info' })
+			})
 	}
 
 	useEffect(() => {
@@ -124,9 +118,9 @@ export default function ItemModal({ user, favs, setFavs }: IItemModalProps) {
 										) : (
 											<Link
 												className='flex items-center justify-center w-3/5 py-1 font-sans text-xl duration-150 bg-white border-2 border-black xl:w-3/4 xl:py-2 lg:text-xl xl:text-2xl hover:bg-blue-400'
-												to='/signIn'
+												to='/user'
 											>
-												Buy
+												Sign In first
 											</Link>
 										)}
 										<FavButton id={item!._id} favs={favs} setFavs={setFavs} />

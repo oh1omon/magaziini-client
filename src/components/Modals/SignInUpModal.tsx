@@ -20,7 +20,7 @@ export default function SignInUpModal() {
 
 	const signUpHandler = () => {
 		register(accountData).then((r) => {
-			if (r.message === 'authenticated') {
+			if (r.message === 'authenticated' || 'User created!') {
 				return dispatch({ type: SET_USER, payload: r.user })
 			}
 			setErrMessage({ message: r.message })

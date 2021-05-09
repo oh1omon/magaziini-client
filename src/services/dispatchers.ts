@@ -1,20 +1,20 @@
 import axios from 'axios'
 
 //USER urls
-const getUserUrl = 'api/user/retrieve'
-const loginUrl = 'api/user/login'
-const registerUrl = 'api/user/register'
-const updateUserUrl = 'api/user/update'
-const signOutUrl = 'api/user/signout'
+const getUserUrl = '/api/user/retrieve'
+const loginUrl = '/api/user/login'
+const registerUrl = '/api/user/register'
+const updateUserUrl = '/api/user/update'
+const signOutUrl = '/api/user/signout'
 
 //ORDER urls
-const createOrderUrl = 'api/order/create'
+const createOrderUrl = '/api/order/create'
 
 //ITEM urls
 const getItemsUrl = '/api/item'
-const removeItemUrl = 'api/item/remove'
-const createItemUrl = 'api/item/create'
-const updateItemUrl = 'api/item/update'
+const removeItemUrl = '/api/item/remove'
+const createItemUrl = '/api/item/create'
+const updateItemUrl = '/api/item/update'
 
 //======================USERS======================
 
@@ -94,3 +94,17 @@ export const retrieveItem = (id: string) => {
 }
 
 //======================ORDERS======================
+
+/**
+ * Function for registering user
+ */
+export const createOrder = async (orderObj: ICreateOrderProps) => {
+	let order = null
+	return axios.post(createOrderUrl, orderObj).then((r) => {
+		//TODO delete console.log()
+		console.log(r)
+		//
+		order = r.data
+		return order
+	})
+}

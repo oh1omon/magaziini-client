@@ -81,7 +81,6 @@ interface IMainProps {
 }
 
 interface IItemModalProps {
-	user: IUserState
 	favs: string[]
 	setFavs: function
 }
@@ -89,4 +88,10 @@ interface IItemModalProps {
 interface ILoginUserProps {
 	email?: string
 	password?: string
+}
+
+interface ICreateOrderProps {
+	itemId: string
+	size: string
+	submitter: string
 }

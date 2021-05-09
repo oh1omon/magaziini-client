@@ -45,7 +45,7 @@ export const App = () => {
 			<Switch>
 				<Route path={`/user`}>{user ? <ProfileModal /> : <SignInUpModal />}</Route>
 				<Route path={`/item/:id`}>
-					<ItemModal favs={favs} setFavs={setFavs} user={user} />
+					<ItemModal favs={favs} setFavs={setFavs} />
 				</Route>
 				<Route path={`/contacts`} component={ContactModal} />
 				<Route path={`/payment`} component={PaymentModal} />
