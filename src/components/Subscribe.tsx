@@ -1,5 +1,5 @@
-import axios from 'axios'
 import React, { useState } from 'react'
+import { addSub } from '../services/dispatchers'
 import { Error } from './SVGs/Error'
 import { Okay } from './SVGs/Okay'
 import { Send } from './SVGs/Send'
@@ -26,9 +26,10 @@ export const Subscribe = () => {
 
 	const submitHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 		e.preventDefault()
-		axios.post('http://localhost:3002/sending', { email: subEmail, type: 'sub' }).then((resp) => {
-			setInfoMessage({ type: resp.data.type })
-		})
+		// axios.post('http://localhost:3002/sending', { email: subEmail, type: 'sub' }).then((resp) => {
+		// 	setInfoMessage({ type: resp.data.type })
+		// })
+		addSub(subEmail).then((r) => setInfoMessage({ type: r.type }))
 	}
 	return (
 		<form className='flex flex-row group'>

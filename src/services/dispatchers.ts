@@ -10,6 +10,9 @@ const signOutUrl = '/api/user/signout'
 //ORDER urls
 const createOrderUrl = '/api/order/create'
 
+//ORDER urls
+const addSubUrl = '/api/sub/add'
+
 //ITEM urls
 const getItemsUrl = '/api/item'
 const removeItemUrl = '/api/item/remove'
@@ -132,5 +135,19 @@ export const createOrder = async (orderObj: ICreateOrderProps) => {
 		//
 		order = r.data
 		return order
+	})
+}
+
+//======================SUBs======================
+
+/**
+ * Function for subscripting user byt email
+ */
+export const addSub = async (email: string) => {
+	return axios.post(addSubUrl, { email }).then((r) => {
+		//TODO delete console.log()
+		console.log(r)
+		//
+		return r.data
 	})
 }

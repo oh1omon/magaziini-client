@@ -26,11 +26,6 @@ export default function Footer() {
 				</div>
 				<div className='w-full h-full pb-6 lg:w-1/3'>
 					<h2 className='w-full py-4 uppercase border-b border-gray-700 lg:w-4/5'>About us</h2>
-					<p className='py-1 font-mono text-sm text-justify lg:py-3'>
-						<Link to='/contacts' className='duration-200 hover:text-black'>
-							Contacts
-						</Link>
-					</p>
 					<p className='py-1 font-mono text-sm text-justify lg:py-3 '>
 						<Link to='/history' className='duration-200 hover:text-black'>
 							Our history
