@@ -85,3 +85,8 @@ interface IItemModalProps {
 	favs: string[]
 	setFavs: function
 }
+
+interface ILoginUserProps {
+	email?: string
+	password?: string
+}

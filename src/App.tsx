@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Footer from './components/Footer'
 import Header from './components/Header'
@@ -12,9 +12,20 @@ import PaymentModal from './components/Modals/PaymentModal'
 import ProfileModal from './components/Modals/ProfileModal'
 import ReturnModal from './components/Modals/ReturnModal'
 import SignInUpModal from './components/Modals/SignInUpModal'
+import { retrieveItems, retrieveUser } from './services/dispatchers'
+import { SET_ITEMS } from './store/actions/itemActions'
+import { SET_USER } from './store/actions/userActions'
 
 export const App = () => {
+	const dispatch = useDispatch()
 	const user = useSelector((state: IRootState) => state.user)
+
+	useEffect(() => {
+		retrieveUser().then((r) => {
+			dispatch({ type: SET_USER, payload: r })
+		})
+		retrieveItems().then((r) => dispatch({ type: SET_ITEMS, payload: r }))
+	}, [dispatch])
 
 	const [favs, setFavs] = useState(JSON.parse(window.localStorage.getItem('favorite')!) || [])
 

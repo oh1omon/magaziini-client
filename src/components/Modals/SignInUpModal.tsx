@@ -1,17 +1,16 @@
-import axios from 'axios'
 import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { loginUser, register } from '../../services/dispatchers'
+import { SET_USER } from '../../store/actions/userActions'
 import Modal from './Modal'
 
 export default function SignInUpModal() {
+	const dispatch = useDispatch()
 	const [newAccount, setNewAccount] = useState(false)
-
-	let history = useHistory()
 
 	const [accountData, setAccountData] = useState({ email: '', password: '', name: '' })
 
 	const newAccountHandler = () => {
-		// newAccount ? setNewAccount(false) : setNewAccount(true)
 		setNewAccount(!newAccount)
 	}
 
@@ -20,40 +19,24 @@ export default function SignInUpModal() {
 	}
 
 	const signUpHandler = () => {
-		axios.post('http://localhost:3002/insert', { ...accountData, status: 'user' }).then((resp) => {
-			console.log(resp.data)
-			setInfoMessage({ message: resp.data.message, type: resp.data.type })
-
-			if (resp.data.code === 'INSERT_OK') {
-				setTimeout(() => {
-					signInHandler(false)
-					history.goBack()
-				}, 2000)
+		register(accountData).then((r) => {
+			if (r.message === 'authenticated') {
+				return dispatch({ type: SET_USER, payload: r.user })
 			}
+			setErrMessage({ message: r.message })
 		})
 	}
 
-	const signInHandler = (showMessage = true) => {
-		axios.post('http://localhost:3002/getUser', { ...accountData }).then((resp) => {
-			if (showMessage) {
-				console.log(resp.data)
-				setInfoMessage({ message: resp.data.message, type: resp.data.type })
+	const signInHandler = () => {
+		loginUser(accountData).then((r) => {
+			if (r.message === 'authenticated') {
+				return dispatch({ type: SET_USER, payload: r.user })
 			}
-
-			if (resp.data.code === 'FOUND') {
-				localStorage.setItem(
-					'user',
-					JSON.stringify({ email: resp.data.email, name: resp.data.name, status: resp.data.status })
-				)
-				// setUser({ email: resp.data.email, name: resp.data.name, status: resp.data.status })
-				setTimeout(() => {
-					history.goBack()
-				}, 2000)
-			}
+			setErrMessage({ message: r.message })
 		})
 	}
 
-	const [infoMessage, setInfoMessage] = useState({ message: '', type: '' })
+	const [errMessage, setErrMessage] = useState({ message: '' })
 
 	const submitHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 		e.preventDefault()
@@ -100,9 +83,7 @@ export default function SignInUpModal() {
 							)}
 						</div>
 						<div className='w-full text-lg text-justify h-18'>
-							<p className={`${infoMessage.type === 'info' ? 'text-blue-700' : 'text-red-700'}`}>
-								{infoMessage.message}
-							</p>
+							<p className='text-red-700'>{errMessage.message}</p>
 						</div>
 						<button
 							onClick={(e) => submitHandler(e)}

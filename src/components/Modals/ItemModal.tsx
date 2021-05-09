@@ -1,6 +1,6 @@
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { retrieveItem } from '../../services/dispatchers'
 import FavButton from '../FavButton'
 import Loader from '../Loader'
 import Modal from './Modal'
@@ -37,12 +37,11 @@ export default function ItemModal({ user, favs, setFavs }: IItemModalProps) {
 	}
 
 	useEffect(() => {
-		axios.get(`http://mag-api.herokuapp.com/api/item/${id}`).then((resp) => {
-			setItem(resp.data[0])
+		retrieveItem(id).then((r) => {
+			setIsLoading(false)
+			setItem(r)
 		})
-
-		setIsLoading(false)
-	}, []) // eslint-disable-line react-hooks/exhaustive-deps
+	}, [id])
 
 	return (
 		<Modal>
