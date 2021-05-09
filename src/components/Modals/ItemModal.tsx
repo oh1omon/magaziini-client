@@ -54,7 +54,7 @@ export default function ItemModal() {
 						<>
 							<div className='flex items-center justify-center w-auto h-auto mb-4 lg:mb-0 lg:w-2/5'>
 								<img
-									src={item.image}
+									src={`/api/${item.image}`}
 									alt={`${item!.name}`}
 									className='object-scale-down w-full border border-black lg:object-cover lg:h-full '
 								/>
@@ -71,7 +71,7 @@ export default function ItemModal() {
 									</div>
 									<div className='flex items-baseline mb-4 lg:mb-0'>
 										<div className='flex space-x-2 text-sm font-bold leading-none text-center text-gray-500 lg:space-x-5 lg:text-lg'>
-											{item.sizes &&
+											{item.sizes && typeof item.sizes !== 'string' ? (
 												item.sizes.map((s) => (
 													<div key={s}>
 														<input
@@ -92,7 +92,28 @@ export default function ItemModal() {
 															{s}
 														</label>
 													</div>
-												))}
+												))
+											) : (
+												<div key={item.sizes}>
+													<input
+														className='fixed w-0 opacity-0'
+														name='size'
+														type='radio'
+														value={item.sizes}
+														id={item.sizes}
+														onChange={(e) => valueHandler(e)}
+														// checked={order.size === s}
+													/>
+													<label
+														htmlFor={item.sizes}
+														className={`p-2 font-mono cursor-pointer 
+															${order.size === item.sizes && 'text-black'}
+															`}
+													>
+														{item.sizes}
+													</label>
+												</div>
+											)}
 										</div>
 									</div>
 									<div className='mb-4 lg:mb-0'>

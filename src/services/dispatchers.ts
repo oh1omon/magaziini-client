@@ -103,6 +103,9 @@ export const retrieveItems = () => {
 		console.log(r)
 		//
 		items = r.data
+		items.forEach((i: IITem) => {
+			i.sizes = JSON.parse(i.sizes as string)
+		})
 		return items
 	})
 }
@@ -118,7 +121,45 @@ export const retrieveItem = (id: string) => {
 		console.log(r)
 		//
 		item = r.data[0]
+		item.sizes = JSON.parse(item.sizes)
 		return item
+	})
+}
+
+/**
+ * Function for deleting item
+ */
+export const deleteItem = async (_id: string) => {
+	return axios.post(removeItemUrl, { _id }).then((r) => {
+		//TODO delete console.log()
+		console.log(r)
+		//
+		if (r.data.message) {
+			return true
+		}
+		return false
+	})
+}
+
+/**
+ * Function for retrieving one special item from DB
+ * Should be dispatched in ItemModal component
+ */
+export const addItem = (itemObj: ICreateItemProps) => {
+	const formData = new FormData()
+	formData.append('name', itemObj.name!)
+	formData.append('description', itemObj.description!)
+	formData.append('sex', itemObj.sex!)
+	formData.append('sizes', JSON.stringify(itemObj.sizes!))
+	formData.append('price', itemObj.price!)
+	if (itemObj.photo) formData.append('photo', itemObj.photo!)
+
+	return axios.post(createItemUrl, formData, { headers: { 'content-type': 'multipart/form-data' } }).then((r) => {
+		//TODO delete console.log()
+		console.log(r)
+		//
+		if (r.data.message) return { message: r.data.message, type: 'info' }
+		return { message: r.data.err, type: 'error' }
 	})
 }
 

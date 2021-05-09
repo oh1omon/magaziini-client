@@ -1,12 +1,41 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { deleteItem, retrieveItems } from '../../services/dispatchers'
+import { SET_ITEMS } from '../../store/actions/itemActions'
 import FavButton from '../FavButton'
 
 const ItemCard = ({ id, name, description, img, price, url }: IItemCardProps) => {
+	const dispatch = useDispatch()
+	const user = useSelector((state: IRootState) => state.user)
+
+	const deleteHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+		e.preventDefault()
+
+		user &&
+			user.type === 'admin' &&
+			deleteItem(id).then((r) => {
+				if (r) {
+					retrieveItems().then((resp) => dispatch({ type: SET_ITEMS, payload: resp }))
+					return console.log('successful delete')
+				}
+				return console.log('problem with deleting')
+			})
+	}
 	return (
 		<div className='relative flex flex-col m-8 overflow-hidden border-2 border-black w-105 h-140'>
+			<button
+				onClick={(e) => deleteHandler(e)}
+				className={` ${
+					user && user.type === 'admin'
+						? 'absolute -top-1 -right-1 border-2 border-black pt-1 px-1 bg-white cursor-pointer'
+						: 'hidden'
+				}`}
+			>
+				X
+			</button>
 			<div className='w-full h-full'>
-				<img className='object-cover w-full h-full' src={img} alt={name + ' image'} />
+				<img className='object-cover w-full h-full' src={`/api/${img}`} alt={name + ' image'} />
 			</div>
 			<div className='absolute bottom-0 flex flex-row items-center justify-around w-full bg-white border-t-2 border-black lg:hidden h-1/4 bg-opacity-90'>
 				<Link

@@ -24,6 +24,7 @@ interface IUser {
 	street: string
 	city: string
 	country: string
+	type: string
 }
 
 interface IITem {
@@ -32,7 +33,7 @@ interface IITem {
 	description: string
 	sex: string
 	image: string
-	sizes: string[]
+	sizes: string[] | string
 	inStock: number
 	price: number
 	color: string
@@ -100,4 +101,13 @@ interface ICreateOrderProps {
 
 interface IUpdateProps {
 	password: string
+}
+
+interface ICreateItemProps {
+	name?: string
+	description?: string
+	sex?: string
+	sizes?: string | string[]
+	price?: string
+	photo?: File
 }

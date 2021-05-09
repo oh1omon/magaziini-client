@@ -45,6 +45,26 @@ class Validator {
 
 		return err
 	}
+
+	createItem(createObj: ICreateItemProps) {
+		let err: string[] = []
+		if (!createObj.name) {
+			err.push('name')
+		}
+		if (!createObj.description) {
+			err.push('description')
+		}
+		if (!createObj.sex) {
+			err.push('sex')
+		}
+		if (!createObj.sizes) {
+			err.push('sizes')
+		}
+		if (!createObj.price) {
+			err.push('price')
+		}
+		return err
+	}
 }
 
 export default new Validator()

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { signout, updateUser } from '../../services/dispatchers'
 import { SET_USER } from '../../store/actions/userActions'
 import Modal from './Modal'
@@ -37,7 +37,7 @@ export default function ProfileModal() {
 	return (
 		<Modal>
 			<div
-				className='fixed z-10 flex items-center justify-center w-3/4 text-xs bg-white border-4 border-black lg:w-2/3 h-3/4 lg:h-1/2 bg-opacity-90'
+				className='fixed z-10 flex items-center justify-center w-3/4 text-xs bg-white border-4 border-black lg:w-1/3 h-3/4 lg:h-2/3 bg-opacity-90'
 				onClick={(e) => e.stopPropagation()}
 			>
 				<div className='flex flex-col justify-between w-4/5 font-mono text-xs text-justify lg:font-sans h-9/10 lg:h-4/5 text-opacity-80'>
@@ -93,6 +93,23 @@ export default function ProfileModal() {
 						>
 							Exitini de le Accountini
 						</button>
+					</div>
+					<div
+						className={`${
+							passInputShown ? 'hidden' : 'flex'
+						} w-full border-b border-black border-opacity-80`}
+					></div>
+					<div
+						className={`${
+							passInputShown ? 'hidden' : 'flex'
+						} flex flex-col items-center justify-center h-2/5`}
+					>
+						<Link
+							to={'/working'}
+							className='flex items-center justify-center w-full h-12 font-sans text-xl duration-150 bg-white border-2 border-black hover:bg-blue-400'
+						>
+							Add item
+						</Link>
 					</div>
 				</div>
 			</div>

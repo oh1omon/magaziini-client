@@ -11,6 +11,7 @@ import PaymentModal from './components/Modals/PaymentModal'
 import ProfileModal from './components/Modals/ProfileModal'
 import ReturnModal from './components/Modals/ReturnModal'
 import SignInUpModal from './components/Modals/SignInUpModal'
+import WorkingModal from './components/Modals/WorkingModal'
 import { retrieveItems, retrieveUser } from './services/dispatchers'
 import { SET_FAVS } from './store/actions/favActions'
 import { SET_ITEMS } from './store/actions/itemActions'
@@ -51,6 +52,7 @@ export const App = () => {
 				<Route path={`/delivery`} component={DeliveryModal} />
 				<Route path={`/returnsPolicy`} component={ReturnModal} />
 				<Route path={`/history`} component={HistoryModal} />
+				<Route path={'/working'} component={WorkingModal} />
 			</Switch>
 		</Router>
 	)
