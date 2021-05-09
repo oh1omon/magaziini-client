@@ -17,7 +17,7 @@ const addSubUrl = '/api/sub/add'
 const getItemsUrl = '/api/item'
 const removeItemUrl = '/api/item/remove'
 const createItemUrl = '/api/item/create'
-const updateItemUrl = '/api/item/update'
+// const updateItemUrl = '/api/item/update'
 
 //======================USERS======================
 

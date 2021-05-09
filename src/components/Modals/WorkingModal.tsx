@@ -107,15 +107,15 @@ export default function WorkingModal() {
 										}`}
 									></textarea>
 								</div>
-								{/* <div className='mb-4 lg:mb-0'>
+								<div className='mb-4 lg:mb-0'>
 									<p
 										className={`${
-											infoMessage.type === 'info' ? 'text-blue-700' : 'text-red-700'
+											info.type === 'info' ? 'text-blue-700' : 'text-red-700'
 										} font-mono text-xs text-justify lg:text-sm`}
 									>
-										{infoMessage.message}
+										{info.message}
 									</p>
-								</div> */}
+								</div>
 								<div className='flex flex-row justify-between w-full mb-4 lg:mb-0'>
 									<button
 										onClick={(e) => {
