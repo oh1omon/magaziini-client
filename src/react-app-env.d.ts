@@ -92,7 +92,6 @@ interface ILoginUserProps {
 interface ICreateOrderProps {
 	itemId: string
 	size: string
-	submitter: string
 }
 
 interface IUpdateProps {

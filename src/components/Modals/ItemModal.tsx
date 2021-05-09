@@ -25,7 +25,7 @@ export default function ItemModal() {
 	const submitHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 		e.preventDefault()
 		if (user)
-			createOrder({ ...order, submitter: user._id }).then((r) => {
+			createOrder({ ...order }).then((r) => {
 				setInfoMessage({ message: r.message, type: 'info' })
 			})
 	}
