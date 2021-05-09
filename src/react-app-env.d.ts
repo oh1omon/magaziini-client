@@ -89,6 +89,10 @@ interface ILoginUserProps {
 	password?: string
 }
 
+interface ISignUpProps extends ILoginUserProps {
+	name?: string
+}
+
 interface ICreateOrderProps {
 	itemId: string
 	size: string

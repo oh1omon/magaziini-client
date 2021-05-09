@@ -1,25 +1,34 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { loginUser, register } from '../../services/dispatchers'
+import Validator from '../../services/validator'
 import { SET_USER } from '../../store/actions/userActions'
 import Modal from './Modal'
 
 export default function SignInUpModal() {
 	const dispatch = useDispatch()
 	const [newAccount, setNewAccount] = useState(false)
+	//Initializing error state array
+	const [err, setErr] = useState<string[]>([])
 
-	const [accountData, setAccountData] = useState({ email: '', password: '', name: '' })
+	const [form, setForm] = useState({ email: '', password: '', name: '' })
 
 	const newAccountHandler = () => {
 		setNewAccount(!newAccount)
 	}
 
 	const valueHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setAccountData({ ...accountData, [e.target.name]: e.target.value })
+		setForm({ ...form, [e.target.name]: e.target.value })
 	}
 
 	const signUpHandler = () => {
-		register(accountData).then((r) => {
+		setErr([])
+		const validationResult = Validator.signUp(form)
+		if (validationResult.length > 0) {
+			setErr(validationResult)
+			return
+		}
+		register(form).then((r) => {
 			if (r.message === 'authenticated' || 'User created!') {
 				return dispatch({ type: SET_USER, payload: r.user })
 			}
@@ -28,7 +37,13 @@ export default function SignInUpModal() {
 	}
 
 	const signInHandler = () => {
-		loginUser(accountData).then((r) => {
+		setErr([])
+		const validationResult = Validator.signIn(form)
+		if (validationResult.length > 0) {
+			setErr(validationResult)
+			return
+		}
+		loginUser(form).then((r) => {
 			if (r.message === 'authenticated') {
 				return dispatch({ type: SET_USER, payload: r.user })
 			}
@@ -54,7 +69,9 @@ export default function SignInUpModal() {
 						<div className='h-48'>
 							<label className='font-mono'>
 								<input
-									className='w-full h-12 px-4 mb-4 font-mono text-sm border-2 border-black focus:border-blue-500 focus:outline-none'
+									className={`w-full h-12 px-4 mb-4 font-mono text-sm border-2 ${
+										err.includes('email') ? 'border-red-700' : 'border-black'
+									}  focus:border-blue-500 focus:outline-none`}
 									name='email'
 									type='email'
 									placeholder='E-mail'
@@ -63,7 +80,9 @@ export default function SignInUpModal() {
 							</label>
 							<label className='font-mono'>
 								<input
-									className='w-full h-12 px-4 mb-4 font-mono text-sm border-2 border-black focus:border-blue-500 focus:outline-none'
+									className={`w-full h-12 px-4 mb-4 font-mono text-sm border-2 ${
+										err.includes('password') ? 'border-red-700' : 'border-black'
+									}  focus:border-blue-500 focus:outline-none`}
 									name='password'
 									type='password'
 									placeholder='Password'
@@ -73,7 +92,9 @@ export default function SignInUpModal() {
 							{newAccount && (
 								<label className='font-mono'>
 									<input
-										className='w-full h-12 px-4 font-mono text-sm border-2 border-black focus:border-blue-500 focus:outline-none'
+										className={`w-full h-12 px-4 mb-4 font-mono text-sm border-2 ${
+											err.includes('name') ? 'border-red-700' : 'border-black'
+										}  focus:border-blue-500 focus:outline-none`}
 										name='name'
 										type='text'
 										placeholder='Your Name'
