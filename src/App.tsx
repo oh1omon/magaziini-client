@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Footer from './components/Footer'
@@ -21,27 +21,25 @@ export const App = () => {
 	const user = useSelector((state: IRootState) => state.user)
 
 	useEffect(() => {
+		retrieveItems().then((r) => dispatch({ type: SET_ITEMS, payload: r }))
+	}, [dispatch])
+
+	useEffect(() => {
 		retrieveUser().then((r) => {
 			dispatch({ type: SET_USER, payload: r })
 		})
-		retrieveItems().then((r) => dispatch({ type: SET_ITEMS, payload: r }))
+	}, [dispatch])
+
+	useEffect(() => {
 		dispatch({ type: SET_FAVS, payload: JSON.parse(window.localStorage.getItem('favorite')!) || [] })
 	}, [dispatch])
 
-	// const [favs, setFavs] = useState(JSON.parse(window.localStorage.getItem('favorite')!) || [])
-
-	// useEffect(() => {
-	// 	localStorage.setItem('favorite', JSON.stringify(favs))
-	// }, [favs])
-	const favs = useSelector((state: IRootState) => state.favs)
-
-	const [sex, setSex] = useState('')
 	return (
 		<Router>
 			<div id='top'></div>
 			<div className='font-sans text-sm xl:text-2xl'>
-				<Header user={user} sex={sex} setSex={setSex} />
-				<Main sex={sex} />
+				<Header user={user} />
+				<Main />
 				<Footer />
 			</div>
 			<Switch>

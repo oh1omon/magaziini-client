@@ -5,6 +5,7 @@ interface IRootState {
 	user: IUserState
 	items: IItemsState
 	favs: IFavs
+	sex: ISex
 }
 
 type IUserState = IUser | null
@@ -25,7 +26,7 @@ interface IUser {
 	country: string
 }
 
-interface IITems {
+interface IITem {
 	_id: string
 	name: string
 	description: string
@@ -40,11 +41,11 @@ interface IITems {
 	structure: {}
 }
 
-type IItemsState = IITems[] | null
+type IItemsState = IITem[] | null
 
 interface IItemStateAction extends Action {
 	type: string
-	payload: IITems[]
+	payload: IITem[]
 }
 
 type IFavs = string[]
@@ -54,6 +55,13 @@ interface IFavsActions extends Action {
 	payload: IFavs
 }
 
+type ISex = string
+
+interface ISexActions extends Action {
+	type: string
+	payload: ISex
+}
+
 //PROPS
 interface IModalProps {
 	children: JSX.IntrinsicElements.div
@@ -61,8 +69,6 @@ interface IModalProps {
 
 interface IHeaderProps {
 	user: IUser | null
-	sex: string
-	setSex: function
 }
 
 interface IItemCardProps {
@@ -77,12 +83,6 @@ interface IItemCardProps {
 interface IFavButtonProps {
 	id: string
 }
-
-interface IMainProps {
-	sex: string
-}
-
-interface IItemModalProps {}
 
 interface ILoginUserProps {
 	email?: string

@@ -8,7 +8,7 @@ import Modal from './Modal'
 
 export default function ItemModal() {
 	const user = useSelector((store: IRootState) => store.user)
-	const [item, setItem] = useState<IITems>({} as IITems)
+	const [item, setItem] = useState<IITem>({} as IITem)
 	const [isLoading, setIsLoading] = useState(true)
 	const [infoMessage, setInfoMessage] = useState({ message: '', type: '' })
 	let { id } = useParams<{ id: string }>()

@@ -1,11 +1,16 @@
 import React from 'react'
 import Headroom from 'react-headroom'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { HashLink } from 'react-router-hash-link'
+import { SET_SEX } from '../store/actions/sexActions'
 
-const Header = ({ user, sex, setSex }: IHeaderProps) => {
+const Header = ({ user }: IHeaderProps) => {
+	const dispatch = useDispatch()
+	const sex = useSelector((state: IRootState) => state.sex)
 	const clickHandler = (str: string) => {
-		setSex(str)
+		dispatch({ type: SET_SEX, payload: str })
+		// setSex(str)
 	}
 
 	return (

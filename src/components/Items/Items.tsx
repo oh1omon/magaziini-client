@@ -4,8 +4,9 @@ import { useSelector } from 'react-redux'
 import Loader from '../Loader'
 import ItemCard from './ItemsCard'
 
-const Items = ({ sex }: IMainProps) => {
+const Items = () => {
 	const items = useSelector((state: IRootState) => state.items)
+	const sex = useSelector((state: IRootState) => state.sex)
 
 	return (
 		<div className='flex flex-wrap justify-center w-full h-auto' id='items'>
