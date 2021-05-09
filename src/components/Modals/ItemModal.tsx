@@ -6,7 +6,7 @@ import FavButton from '../FavButton'
 import Loader from '../Loader'
 import Modal from './Modal'
 
-export default function ItemModal({ favs, setFavs }: IItemModalProps) {
+export default function ItemModal() {
 	const user = useSelector((store: IRootState) => store.user)
 	const [item, setItem] = useState<IITems>({} as IITems)
 	const [isLoading, setIsLoading] = useState(true)
@@ -123,7 +123,7 @@ export default function ItemModal({ favs, setFavs }: IItemModalProps) {
 												Sign In first
 											</Link>
 										)}
-										<FavButton id={item!._id} favs={favs} setFavs={setFavs} />
+										<FavButton id={item!._id} />
 									</div>
 								</form>
 							</div>

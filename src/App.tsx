@@ -12,6 +12,7 @@ import ProfileModal from './components/Modals/ProfileModal'
 import ReturnModal from './components/Modals/ReturnModal'
 import SignInUpModal from './components/Modals/SignInUpModal'
 import { retrieveItems, retrieveUser } from './services/dispatchers'
+import { SET_FAVS } from './store/actions/favActions'
 import { SET_ITEMS } from './store/actions/itemActions'
 import { SET_USER } from './store/actions/userActions'
 
@@ -24,13 +25,15 @@ export const App = () => {
 			dispatch({ type: SET_USER, payload: r })
 		})
 		retrieveItems().then((r) => dispatch({ type: SET_ITEMS, payload: r }))
+		dispatch({ type: SET_FAVS, payload: JSON.parse(window.localStorage.getItem('favorite')!) || [] })
 	}, [dispatch])
 
-	const [favs, setFavs] = useState(JSON.parse(window.localStorage.getItem('favorite')!) || [])
+	// const [favs, setFavs] = useState(JSON.parse(window.localStorage.getItem('favorite')!) || [])
 
-	useEffect(() => {
-		localStorage.setItem('favorite', JSON.stringify(favs))
-	}, [favs])
+	// useEffect(() => {
+	// 	localStorage.setItem('favorite', JSON.stringify(favs))
+	// }, [favs])
+	const favs = useSelector((state: IRootState) => state.favs)
 
 	const [sex, setSex] = useState('')
 	return (
@@ -38,13 +41,13 @@ export const App = () => {
 			<div id='top'></div>
 			<div className='font-sans text-sm xl:text-2xl'>
 				<Header user={user} sex={sex} setSex={setSex} />
-				<Main sex={sex} favs={favs} setFavs={setFavs} />
+				<Main sex={sex} />
 				<Footer />
 			</div>
 			<Switch>
 				<Route path={`/user`}>{user ? <ProfileModal /> : <SignInUpModal />}</Route>
 				<Route path={`/item/:id`}>
-					<ItemModal favs={favs} setFavs={setFavs} />
+					<ItemModal />
 				</Route>
 				<Route path={`/payment`} component={PaymentModal} />
 				<Route path={`/delivery`} component={DeliveryModal} />

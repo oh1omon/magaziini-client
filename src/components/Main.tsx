@@ -2,11 +2,11 @@ import React from 'react'
 import Hero from './Hero'
 import Items from './Items/Items'
 
-const Main = ({ sex, favs, setFavs }: IMainProps) => {
+const Main = ({ sex }: IMainProps) => {
 	return (
 		<div>
 			<Hero />
-			<Items sex={sex} favs={favs} setFavs={setFavs} />
+			<Items sex={sex} />
 		</div>
 	)
 }

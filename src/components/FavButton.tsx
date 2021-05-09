@@ -1,14 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { SET_FAVS } from '../store/actions/favActions'
 
-export default function FavButton({ id, favs, setFavs }: IFavButtonProps) {
+export default function FavButton({ id }: IFavButtonProps) {
+	const dispatch = useDispatch()
+
+	const favs: IFavs = useSelector((state: IRootState) => state.favs)
+
+	useEffect(() => {
+		localStorage.setItem('favorite', JSON.stringify(favs))
+	}, [favs])
+
 	const FavHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 		e.preventDefault()
 		if (!favs.includes(id)) {
-			setFavs([...favs, id])
+			dispatch({ type: SET_FAVS, payload: [...favs, id] })
 		} else {
 			const favIndex = favs.indexOf(id)
 			favs.splice(favIndex, 1)
-			setFavs([...favs])
+			dispatch({ type: SET_FAVS, payload: [...favs] })
 		}
 	}
 

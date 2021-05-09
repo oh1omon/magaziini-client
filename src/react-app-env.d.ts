@@ -4,6 +4,7 @@
 interface IRootState {
 	user: IUserState
 	items: IItemsState
+	favs: IFavs
 }
 
 type IUserState = IUser | null
@@ -46,6 +47,13 @@ interface IItemStateAction extends Action {
 	payload: IITems[]
 }
 
+type IFavs = string[]
+
+interface IFavsActions extends Action {
+	type: string
+	payload: IFavs
+}
+
 //PROPS
 interface IModalProps {
 	children: JSX.IntrinsicElements.div
@@ -64,26 +72,17 @@ interface IItemCardProps {
 	img: string
 	price: number
 	url: string
-	favs: string[]
-	setFavs: function
 }
 
 interface IFavButtonProps {
 	id: string
-	favs: string[]
-	setFavs: function
 }
 
 interface IMainProps {
 	sex: string
-	favs: string[]
-	setFavs: function
 }
 
-interface IItemModalProps {
-	favs: string[]
-	setFavs: function
-}
+interface IItemModalProps {}
 
 interface ILoginUserProps {
 	email?: string

@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import Loader from '../Loader'
 import ItemCard from './ItemsCard'
 
-const Items = ({ sex, favs, setFavs }: IMainProps) => {
+const Items = ({ sex }: IMainProps) => {
 	const items = useSelector((state: IRootState) => state.items)
 
 	return (
@@ -21,8 +21,6 @@ const Items = ({ sex, favs, setFavs }: IMainProps) => {
 							img={item.image}
 							url={`item/${item._id}`}
 							price={item.price}
-							favs={favs}
-							setFavs={setFavs}
 						/>
 					))
 			) : (

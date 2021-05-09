@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import FavButton from '../FavButton'
 
-const ItemCard = ({ id, name, description, img, price, url, favs, setFavs }: IItemCardProps) => {
+const ItemCard = ({ id, name, description, img, price, url }: IItemCardProps) => {
 	return (
 		<div className='relative flex flex-col m-8 overflow-hidden border-2 border-black w-105 h-140'>
 			<div className='w-full h-full'>
@@ -27,7 +27,7 @@ const ItemCard = ({ id, name, description, img, price, url, favs, setFavs }: IIt
 					>
 						Read More
 					</Link>
-					<FavButton id={id} favs={favs} setFavs={setFavs} />
+					<FavButton id={id} />
 				</div>
 			</div>
 		</div>
