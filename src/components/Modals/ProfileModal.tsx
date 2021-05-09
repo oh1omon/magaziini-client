@@ -1,25 +1,27 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
+import { signout, updateUser } from '../../services/dispatchers'
+import { SET_USER } from '../../store/actions/userActions'
 import Modal from './Modal'
 
 export default function ProfileModal() {
-	// const [passwordObj, setPasswordObj] = useState({ email: user.email, old: '', new: '' })
+	const dispatch = useDispatch()
+	const [passwordObj, setPasswordObj] = useState({ password: '' })
 	const [passInputShown, setPassInputShown] = useState(false)
 	const history = useHistory()
 
 	const passwordSubmitHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 		e.preventDefault()
-		// axios.post('http://localhost:3002/updatePassword', passwordObj).then((resp) => {
-		// 	setInfoMessage({ message: resp.data.message, type: resp.data.type })
-		// })
-		// setPassInputShown(false)
+		updateUser(passwordObj).then((r) => {
+			setInfoMessage({ message: r.message, type: 'info' })
+		})
 	}
 
-	const exitHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+	const signOutHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 		e.preventDefault()
-		localStorage.removeItem('user')
+		signout().then((r) => dispatch({ type: SET_USER, payload: r }))
 		history.push('/')
-		window.location.reload()
 	}
 
 	const passwordShowHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -28,7 +30,7 @@ export default function ProfileModal() {
 	}
 
 	const passwordValueHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-		// setPasswordObj({ ...passwordObj, [e.target.name]: e.target.value })
+		setPasswordObj({ ...passwordObj, [e.target.name]: e.target.value })
 	}
 
 	const [infoMessage, setInfoMessage] = useState({ message: '', type: '' })
@@ -52,21 +54,21 @@ export default function ProfileModal() {
 							<label className='font-mono'>
 								<input
 									className='w-full h-12 px-4 mb-4 font-mono text-sm border-2 border-black focus:border-blue-500 focus:outline-none'
-									name='old'
-									type='password'
-									placeholder='Old Password'
-									onChange={(e) => passwordValueHandler(e)}
-								/>
-							</label>
-							<label className='font-mono'>
-								<input
-									className='w-full h-12 px-4 mb-4 font-mono text-sm border-2 border-black focus:border-blue-500 focus:outline-none'
-									name='new'
+									name='password'
 									type='password'
 									placeholder='New Password'
 									onChange={(e) => passwordValueHandler(e)}
 								/>
 							</label>
+							<div
+								className={`${
+									!passInputShown ? 'hidden' : 'flex'
+								} text-mono justify-center items-center`}
+							>
+								<p className={`${infoMessage.type === 'info' ? 'text-blue-700' : 'text-red-700'} `}>
+									{infoMessage.message}
+								</p>
+							</div>
 							<button
 								onClick={(e) => passwordSubmitHandler(e)}
 								className={`flex items-center justify-center w-full h-12 font-sans text-xl duration-150 bg-white border-2 border-black hover:bg-blue-400`}
@@ -74,15 +76,6 @@ export default function ProfileModal() {
 								Change Password
 							</button>
 						</form>
-						<div className={`${passInputShown ? 'hidden' : 'flex'} `}>
-							<p
-								className={`${
-									infoMessage.type === 'info' ? 'text-blue-700' : 'text-red-700'
-								} text-mono`}
-							>
-								{infoMessage.message}
-							</p>
-						</div>
 					</div>
 					<div
 						className={`${
@@ -95,7 +88,7 @@ export default function ProfileModal() {
 						} flex flex-col items-center justify-center h-2/5`}
 					>
 						<button
-							onClick={(e) => exitHandler(e)}
+							onClick={(e) => signOutHandler(e)}
 							className='flex items-center justify-center w-full h-12 font-sans text-xl duration-150 bg-white border-2 border-black hover:bg-blue-400'
 						>
 							Exitini de le Accountini

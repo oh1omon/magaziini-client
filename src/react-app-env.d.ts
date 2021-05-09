@@ -95,3 +95,7 @@ interface ICreateOrderProps {
 	size: string
 	submitter: string
 }
+
+interface IUpdateProps {
+	password: string
+}

@@ -61,6 +61,32 @@ export const register = async (signUpObj: ILoginUserProps) => {
 	})
 }
 
+/**
+ * Function for registering user
+ */
+export const signout = async () => {
+	return axios.post(signOutUrl).then((r) => {
+		//TODO delete console.log()
+		console.log(r)
+		//
+		return r.data.user
+	})
+}
+
+/**
+ * Function for registering user
+ */
+export const updateUser = async (updatesObj: IUpdateProps) => {
+	let user = null
+	return axios.post(updateUserUrl, updatesObj).then((r) => {
+		//TODO delete console.log()
+		console.log(r)
+		//
+		user = r.data
+		return user
+	})
+}
+
 //======================ITEMS======================
 
 /**
