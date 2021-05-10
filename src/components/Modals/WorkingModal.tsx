@@ -25,7 +25,7 @@ export default function WorkingModal() {
 			return
 		}
 		console.log(form.sizes)
-		typeof form.sizes !== 'object' && setForm({ ...form, sizes: form!.sizes!.split(' ') })
+		typeof form.sizes !== 'object' && true && setForm({ ...form, sizes: form!.sizes!.split(' ') })
 		console.log(form.sizes)
 
 		addItem(form).then((r) => {
