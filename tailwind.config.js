@@ -55,6 +55,7 @@ module.exports = {
 				20: '20%',
 				40: '40%',
 			}),
+			zIndex: (theme) => ({ 5: '5' }),
 			width: (theme) => ({
 				'9/10': '90%',
 				88: '22rem',

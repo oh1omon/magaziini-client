@@ -28,7 +28,7 @@ const createItemUrl = '/api/item/create'
 export const retrieveUser = async () => {
 	let user = null
 	return axios.post(getUserUrl).then((r) => {
-		//TODO delete console.log()
+		// //TODO delete console.log()
 		// console.log(r)
 		//
 		user = r.data.user
