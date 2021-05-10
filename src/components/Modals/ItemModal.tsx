@@ -54,7 +54,7 @@ export default function ItemModal() {
 						<>
 							<div className='flex items-center justify-center w-auto h-auto mb-4 lg:mb-0 lg:w-2/5'>
 								<img
-									src={`/api/${item.image}`}
+									src={`${item.image}`}
 									alt={`${item!.name}`}
 									className='object-scale-down w-full border border-black lg:object-cover lg:h-full '
 								/>

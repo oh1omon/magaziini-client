@@ -103,9 +103,6 @@ export const retrieveItems = () => {
 		console.log(r)
 		//
 		items = r.data
-		items.forEach((i: IITem) => {
-			i.sizes = JSON.parse(i.sizes as string)
-		})
 		return items
 	})
 }
@@ -121,7 +118,6 @@ export const retrieveItem = (id: string) => {
 		console.log(r)
 		//
 		item = r.data[0]
-		item.sizes = JSON.parse(item.sizes)
 		return item
 	})
 }
@@ -146,15 +142,15 @@ export const deleteItem = async (_id: string) => {
  * Should be dispatched in ItemModal component
  */
 export const addItem = (itemObj: ICreateItemProps) => {
-	const formData = new FormData()
-	formData.append('name', itemObj.name!)
-	formData.append('description', itemObj.description!)
-	formData.append('sex', itemObj.sex!)
-	formData.append('sizes', JSON.stringify(itemObj.sizes!))
-	formData.append('price', itemObj.price!)
-	if (itemObj.photo) formData.append('photo', itemObj.photo!)
+	// const formData = new FormData()
+	// formData.append('name', itemObj.name!)
+	// formData.append('description', itemObj.description!)
+	// formData.append('sex', itemObj.sex!)
+	// formData.append('sizes', JSON.stringify(itemObj.sizes!))
+	// formData.append('price', itemObj.price!)
+	// if (itemObj.photo) formData.append('photo', itemObj.photo!)
 
-	return axios.post(createItemUrl, formData, { headers: { 'content-type': 'multipart/form-data' } }).then((r) => {
+	return axios.post(createItemUrl, itemObj).then((r) => {
 		//TODO delete console.log()
 		console.log(r)
 		//

@@ -35,7 +35,7 @@ const ItemCard = ({ id, name, description, img, price, url }: IItemCardProps) =>
 				X
 			</button>
 			<div className='w-full h-full'>
-				<img className='object-cover w-full h-full' src={`/api/${img}`} alt={name + ' image'} />
+				<img className='object-cover w-full h-full' src={`${img}`} alt={name + ' image'} />
 			</div>
 			<div className='absolute bottom-0 flex flex-row items-center justify-around w-full bg-white border-t-2 border-black lg:hidden h-1/4 bg-opacity-90'>
 				<Link
