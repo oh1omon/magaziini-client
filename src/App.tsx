@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
 import Footer from './components/Footer'
 import Header from './components/Header'
 import Main from './components/Main'
@@ -52,7 +52,9 @@ export const App = () => {
 				<Route path={`/delivery`} component={DeliveryModal} />
 				<Route path={`/returnsPolicy`} component={ReturnModal} />
 				<Route path={`/history`} component={HistoryModal} />
-				<Route path={'/working'} component={WorkingModal} />
+				<Route path={'/working'}>
+					{user && user.type === 'admin' ? <WorkingModal /> : <Redirect to={'/'} />}
+				</Route>
 			</Switch>
 		</Router>
 	)

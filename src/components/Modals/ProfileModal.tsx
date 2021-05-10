@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 import { signout, updateUser } from '../../services/dispatchers'
 import { SET_USER } from '../../store/actions/userActions'
 import Modal from './Modal'
 
 export default function ProfileModal() {
+	const user = useSelector((state: IRootState) => state.user)
 	const dispatch = useDispatch()
 	const [passwordObj, setPasswordObj] = useState({ password: '' })
 	const [passInputShown, setPassInputShown] = useState(false)
@@ -94,23 +95,27 @@ export default function ProfileModal() {
 							Exitini de le Accountini
 						</button>
 					</div>
-					<div
-						className={`${
-							passInputShown ? 'hidden' : 'flex'
-						} w-full border-b border-black border-opacity-80`}
-					></div>
-					<div
-						className={`${
-							passInputShown ? 'hidden' : 'flex'
-						} flex flex-col items-center justify-center h-2/5`}
-					>
-						<Link
-							to={'/working'}
-							className='flex items-center justify-center w-full h-12 font-sans text-xl duration-150 bg-white border-2 border-black hover:bg-blue-400'
-						>
-							Add item
-						</Link>
-					</div>
+					{user!.type === 'admin' && (
+						<>
+							<div
+								className={`${
+									passInputShown ? 'hidden' : 'flex'
+								} w-full border-b border-black border-opacity-80`}
+							></div>
+							<div
+								className={`${
+									passInputShown ? 'hidden' : 'flex'
+								} flex flex-col items-center justify-center h-2/5`}
+							>
+								<Link
+									to={'/working'}
+									className='flex items-center justify-center w-full h-12 font-sans text-xl duration-150 bg-white border-2 border-black hover:bg-blue-400'
+								>
+									Add item
+								</Link>
+							</div>
+						</>
+					)}
 				</div>
 			</div>
 		</Modal>
