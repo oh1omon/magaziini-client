@@ -24,11 +24,12 @@ export default function WorkingModal() {
 			setErr(validationResult)
 			return
 		}
-		console.log(form.sizes)
-		typeof form.sizes !== 'object' && true && setForm({ ...form, sizes: form!.sizes!.split(' ') })
-		console.log(form.sizes)
+		const formObject = form
+		// setForm({ ...form, sizes: (form!.sizes as string).split(' ') })
+		// console.log(form.sizes)
+		formObject.sizes = formObject.sizes!.toString().split(' ')
 
-		addItem(form).then((r) => {
+		addItem(formObject).then((r) => {
 			setInfo({ type: r.type, message: r.message })
 		})
 	}
