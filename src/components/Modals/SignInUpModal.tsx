@@ -8,7 +8,6 @@ import Modal from './Modal'
 export default function SignInUpModal() {
 	const dispatch = useDispatch()
 	const [newAccount, setNewAccount] = useState(false)
-	//Initializing error state array
 	const [err, setErr] = useState<string[]>([])
 
 	const [form, setForm] = useState({ email: '', password: '', name: '' })
@@ -71,7 +70,7 @@ export default function SignInUpModal() {
 								<input
 									className={`w-full h-12 px-4 mb-4 font-mono text-sm border-2 ${
 										err.includes('email') ? 'border-red-700' : 'border-black'
-									}  focus:border-blue-500 focus:outline-none`}
+									}  focus:border-gray-500 focus:outline-none`}
 									name='email'
 									type='email'
 									placeholder='E-mail'
@@ -82,7 +81,7 @@ export default function SignInUpModal() {
 								<input
 									className={`w-full h-12 px-4 mb-4 font-mono text-sm border-2 ${
 										err.includes('password') ? 'border-red-700' : 'border-black'
-									}  focus:border-blue-500 focus:outline-none`}
+									}  focus:border-gray-500 focus:outline-none`}
 									name='password'
 									type='password'
 									placeholder='Password'
@@ -94,7 +93,7 @@ export default function SignInUpModal() {
 									<input
 										className={`w-full h-12 px-4 mb-4 font-mono text-sm border-2 ${
 											err.includes('name') ? 'border-red-700' : 'border-black'
-										}  focus:border-blue-500 focus:outline-none`}
+										}  focus:border-gray-500 focus:outline-none`}
 										name='name'
 										type='text'
 										placeholder='Your Name'
@@ -108,7 +107,7 @@ export default function SignInUpModal() {
 						</div>
 						<button
 							onClick={(e) => submitHandler(e)}
-							className='flex items-center justify-center w-full h-12 font-sans text-xl duration-150 bg-white border-2 border-black hover:bg-blue-400'
+							className='flex items-center justify-center w-full h-12 font-sans text-xl duration-150 bg-white border-2 border-black hover:bg-gray-200'
 						>
 							{newAccount ? 'Sign Up!' : 'Sign In'}
 						</button>

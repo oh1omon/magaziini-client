@@ -12,8 +12,8 @@ export default function DeliveryModal() {
 					<h1 className='font-sans text-xl lg:text-3xl'>Delivery </h1>
 					<p className='text-xs lg:text-lg'>
 						We will deliver your parcel within 2-7 business days, excluding customs processing times. During
-						high season, delivery might take a little longer. Please note that 2MOOD is not responsible for
-						any additional time incurred while your parcel is held at Customs.
+						high season, delivery might take a little longer. Please note that Magaziini is not responsible
+						for any additional time incurred while your parcel is held at Customs.
 					</p>
 					<div className='w-full border-b border-black border-opacity-80'></div>
 					<p className='text-xs lg:text-lg'>

@@ -35,12 +35,12 @@ const ItemCard = ({ id, name, description, img, price, url }: IItemCardProps) =>
 				X
 			</button>
 			<div className='w-full h-full'>
-				<img className='object-cover w-full h-full' src={`${img}`} alt={name + ' image'} />
+				<img className='object-cover w-full h-full filter grayscale-40' src={`${img}`} alt={name + ' image'} />
 			</div>
 			<div className='absolute bottom-0 flex flex-row items-center justify-around w-full bg-white border-t-2 border-black lg:hidden h-1/4 bg-opacity-90'>
 				<Link
 					to={url}
-					className='flex items-center justify-center w-2/3 py-2 text-2xl font-medium text-black uppercase duration-150 bg-white border-2 border-black hover:bg-blue-600'
+					className='flex items-center justify-center w-2/3 py-2 text-2xl font-medium text-black uppercase duration-150 bg-white border-2 border-black hover:bg-gray-200'
 				>
 					{name}
 				</Link>
@@ -52,7 +52,7 @@ const ItemCard = ({ id, name, description, img, price, url }: IItemCardProps) =>
 				<div className='flex flex-row justify-between w-3/4'>
 					<Link
 						to={url}
-						className='flex items-center justify-center w-2/3 py-2 text-black duration-150 bg-white border-2 border-black hover:bg-blue-600'
+						className='flex items-center justify-center w-2/3 py-2 text-black duration-150 bg-white border-2 border-black hover:bg-gray-200'
 					>
 						Read More
 					</Link>

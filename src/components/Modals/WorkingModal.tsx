@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
-import { addItem } from '../../services/dispatchers'
+import { useDispatch } from 'react-redux'
+import { addItem, retrieveItems } from '../../services/dispatchers'
 import Validator from '../../services/validator'
+import { SET_ITEMS } from '../../store/actions/itemActions'
 import Modal from './Modal'
 
 export default function WorkingModal() {
 	const [form, setForm] = useState<ICreateItemProps>({})
 	const [info, setInfo] = useState({ type: '', message: '' })
 	const [err, setErr] = useState<string[]>([])
+	const dispatch = useDispatch()
 
 	const changeHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
 		e.preventDefault()
@@ -30,6 +33,7 @@ export default function WorkingModal() {
 		formObject.sizes = formObject.sizes!.toString().split(' ')
 
 		addItem(formObject).then((r) => {
+			retrieveItems().then((resp) => dispatch({ type: SET_ITEMS, payload: resp }))
 			setInfo({ type: r.type, message: r.message })
 		})
 	}
@@ -81,7 +85,7 @@ export default function WorkingModal() {
 									></textarea>
 								</div>
 								<div className='flex flex-col items-baseline mb-4 lg:mb-0'>
-									<label htmlFor={'sizes'}>Sizes</label>
+									<label htmlFor={'sizes'}>Sizes (Put the next size after space)</label>
 									<textarea
 										onChange={(e) => changeHandler(e)}
 										id={'sizes'}
@@ -131,7 +135,7 @@ export default function WorkingModal() {
 										onClick={(e) => {
 											sendHandler(e)
 										}}
-										className='flex items-center justify-center w-3/5 py-1 font-sans text-xl duration-150 bg-white border-2 border-black xl:w-3/4 xl:py-2 xl:text-2xl hover:bg-blue-400'
+										className='flex items-center justify-center w-3/5 py-1 font-sans text-xl duration-150 bg-white border-2 border-black xl:w-3/4 xl:py-2 xl:text-2xl hover:bg-gray-200'
 									>
 										Create
 									</button>

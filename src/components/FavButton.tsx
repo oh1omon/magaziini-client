@@ -24,8 +24,10 @@ export default function FavButton({ id }: IFavButtonProps) {
 
 	return (
 		<button
-			className={`flex items-center justify-center duration-150  border-2 border-black h-10 w-10 lg:h-14 lg:w-14 hover:bg-black hover:text-white ${
-				favs.includes(id) ? 'bg-blue-400' : 'bg-white'
+			className={`flex items-center justify-center duration-150  border-2 border-black h-10 w-10 lg:h-14 lg:w-14  ${
+				favs.includes(id)
+					? 'bg-black text-white hover:bg-white hover:text-black'
+					: 'bg-white text-black hover:bg-black hover:text-white'
 			}`}
 			onClick={(e) => FavHandler(e)}
 		>

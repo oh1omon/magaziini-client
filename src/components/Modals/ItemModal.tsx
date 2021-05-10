@@ -56,7 +56,7 @@ export default function ItemModal() {
 								<img
 									src={`${item.image}`}
 									alt={`${item!.name}`}
-									className='object-scale-down w-full border border-black lg:object-cover lg:h-full '
+									className='object-scale-down w-full border border-black lg:object-cover lg:h-full filter grayscale-40'
 								/>
 							</div>
 							<div className='w-full h-full lg:w-2/5'>
@@ -82,7 +82,6 @@ export default function ItemModal() {
 															value={s}
 															id={s}
 															onChange={(e) => valueHandler(e)}
-															// checked={order.size === s}
 														/>
 														<label
 															htmlFor={s}
@@ -112,13 +111,13 @@ export default function ItemModal() {
 										{user ? (
 											<button
 												onClick={(e) => submitHandler(e)}
-												className='flex items-center justify-center w-3/5 py-1 font-sans text-xl duration-150 bg-white border-2 border-black xl:w-3/4 xl:py-2 xl:text-2xl hover:bg-blue-400'
+												className='flex items-center justify-center w-3/5 py-1 font-sans text-xl duration-150 bg-white border-2 border-black xl:w-3/4 xl:py-2 xl:text-2xl hover:bg-gray-200'
 											>
 												Buy
 											</button>
 										) : (
 											<Link
-												className='flex items-center justify-center w-3/5 py-1 font-sans text-xl duration-150 bg-white border-2 border-black xl:w-3/4 xl:py-2 lg:text-xl xl:text-2xl hover:bg-blue-400'
+												className='flex items-center justify-center w-3/5 py-1 font-sans text-xl duration-150 bg-white border-2 border-black xl:w-3/4 xl:py-2 lg:text-xl xl:text-2xl hover:bg-gray-200'
 												to='/user'
 											>
 												Sign In first

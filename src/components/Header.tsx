@@ -3,6 +3,7 @@ import Headroom from 'react-headroom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { HashLink } from 'react-router-hash-link'
+import { ReactComponent as Logo } from '../logo.svg'
 import { SET_SEX } from '../store/actions/sexActions'
 
 const Header = ({ user }: IHeaderProps) => {
@@ -10,18 +11,15 @@ const Header = ({ user }: IHeaderProps) => {
 	const sex = useSelector((state: IRootState) => state.sex)
 	const clickHandler = (str: string) => {
 		dispatch({ type: SET_SEX, payload: str })
-		// setSex(str)
 	}
 
 	return (
 		<Headroom style={{ zIndex: 10 }}>
-			<div className='flex flex-row flex-wrap items-center justify-around w-full h-auto bg-blue-500 bg-opacity-75 border-b-4 border-black '>
+			<div className='flex flex-row flex-wrap items-center justify-around w-full h-auto bg-gray-200 bg-opacity-75 border-b-4 border-black '>
 				<div className='flex flex-wrap items-center justify-between h-auto pt-5 lg:py-5 w-9/10'>
 					<div className='flex items-center justify-center w-1/2 lg:w-36 logo'>
 						<HashLink to='#top' smooth={true}>
-							<h1 className='text-4xl'>
-								my<span className='font-bold'>Shop</span>
-							</h1>
+							<Logo className={'w-28 sm:w-full'} />
 						</HashLink>
 					</div>
 					<div className='flex-row items-center justify-around hidden lg:flex w-96'>
@@ -69,17 +67,6 @@ const Header = ({ user }: IHeaderProps) => {
 						</Link>
 					</div>
 					<div className='flex items-center justify-center w-full h-16 lg:hidden '>
-						{/* <svg
-							className='w-6 h-6 text-black animate-bounce'
-							fill='none'
-							strokeLinecap='round'
-							strokeLinejoin='round'
-							strokeWidth='2'
-							viewBox='0 0 24 24'
-							stroke='currentColor'
-						>
-							<path fill='currentCollor' d='M19 14l-7 7m0 0l-7-7m7 7V3'></path>
-						</svg> */}
 						<div className='flex flex-row items-center justify-between w-9/10'>
 							<HashLink to='#items' smooth>
 								<button

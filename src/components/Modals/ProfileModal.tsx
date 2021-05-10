@@ -47,7 +47,7 @@ export default function ProfileModal() {
 							onClick={(e) => passwordShowHandler(e)}
 							className={` ${
 								passInputShown ? 'hidden' : 'flex'
-							} items-center justify-center w-full h-12 font-sans text-xl duration-150 bg-white border-2 border-black hover:bg-blue-400`}
+							} items-center justify-center w-full h-12 font-sans text-xl duration-150 bg-white border-2 border-black hover:bg-gray-200`}
 						>
 							Change Password
 						</button>
@@ -72,7 +72,7 @@ export default function ProfileModal() {
 							</div>
 							<button
 								onClick={(e) => passwordSubmitHandler(e)}
-								className={`flex items-center justify-center w-full h-12 font-sans text-xl duration-150 bg-white border-2 border-black hover:bg-blue-400`}
+								className={`flex items-center justify-center w-full h-12 font-sans text-xl duration-150 bg-white border-2 border-black hover:bg-gray-200`}
 							>
 								Change Password
 							</button>
@@ -90,7 +90,7 @@ export default function ProfileModal() {
 					>
 						<button
 							onClick={(e) => signOutHandler(e)}
-							className='flex items-center justify-center w-full h-12 font-sans text-xl duration-150 bg-white border-2 border-black hover:bg-blue-400'
+							className='flex items-center justify-center w-full h-12 font-sans text-xl duration-150 bg-white border-2 border-black hover:bg-gray-200'
 						>
 							Exitini de le Accountini
 						</button>
@@ -109,7 +109,7 @@ export default function ProfileModal() {
 							>
 								<Link
 									to={'/working'}
-									className='flex items-center justify-center w-full h-12 font-sans text-xl duration-150 bg-white border-2 border-black hover:bg-blue-400'
+									className='flex items-center justify-center w-full h-12 font-sans text-xl duration-150 bg-white border-2 border-black hover:bg-gray-200'
 								>
 									Add item
 								</Link>

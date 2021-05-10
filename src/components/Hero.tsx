@@ -7,7 +7,7 @@ const Hero = () => {
 			<Link
 				smooth
 				to='#items'
-				className='relative py-1.5 px-6 border-2 text-2xl border-black text-black justify-center duration-150 hover:bg-blue-600'
+				className='relative py-1.5 px-6 border-2 text-2xl border-black text-black justify-center duration-150 hover:bg-gray-200'
 			>
 				Take a look.
 			</Link>

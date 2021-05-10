@@ -1,4 +1,3 @@
-// import Loader from '../Loader/Loader'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import Loader from '../Loader'
