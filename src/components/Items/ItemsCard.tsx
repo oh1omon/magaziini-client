@@ -28,7 +28,7 @@ const ItemCard = ({ id, name, description, img, price, url }: IItemCardProps) =>
 				onClick={(e) => deleteHandler(e)}
 				className={` ${
 					user && user.type === 'admin'
-						? 'absolute -top-1 -right-1 border-2 border-black pt-1 px-1 bg-white cursor-pointer'
+						? 'absolute -top-1 -right-1 border-2 border-black pt-1 px-1 z-5 bg-white cursor-pointer'
 						: 'hidden'
 				}`}
 			>
