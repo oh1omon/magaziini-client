@@ -71,49 +71,29 @@ export default function ItemModal() {
 									</div>
 									<div className='flex items-baseline mb-4 lg:mb-0'>
 										<div className='flex space-x-2 text-sm font-bold leading-none text-center text-gray-500 lg:space-x-5 lg:text-lg'>
-											{item.sizes && typeof item.sizes !== 'string'
-												? item.sizes.map((s) => (
-														<div key={s}>
-															<input
-																className='fixed w-0 opacity-0'
-																name='size'
-																type='radio'
-																value={s}
-																id={s}
-																onChange={(e) => valueHandler(e)}
-																// checked={order.size === s}
-															/>
-															<label
-																htmlFor={s}
-																className={`p-2 font-mono cursor-pointer 
+											{item.sizes &&
+												typeof item.sizes !== 'string' &&
+												item.sizes.map((s) => (
+													<div key={s}>
+														<input
+															className='fixed w-0 opacity-0'
+															name='size'
+															type='radio'
+															value={s}
+															id={s}
+															onChange={(e) => valueHandler(e)}
+															// checked={order.size === s}
+														/>
+														<label
+															htmlFor={s}
+															className={`p-2 font-mono cursor-pointer 
 															${order.size === s && 'text-black'}
 															`}
-															>
-																{s}
-															</label>
-														</div>
-												  ))
-												: item.sizes.split(' ').map((s) => (
-														<div key={s}>
-															<input
-																className='fixed w-0 opacity-0'
-																name='size'
-																type='radio'
-																value={s}
-																id={s}
-																onChange={(e) => valueHandler(e)}
-																// checked={order.size === s}
-															/>
-															<label
-																htmlFor={s}
-																className={`p-2 font-mono cursor-pointer 
-															${order.size === s && 'text-black'}
-															`}
-															>
-																{s}
-															</label>
-														</div>
-												  ))}
+														>
+															{s}
+														</label>
+													</div>
+												))}
 										</div>
 									</div>
 									<div className='mb-4 lg:mb-0'>

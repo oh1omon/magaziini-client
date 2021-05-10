@@ -107,7 +107,7 @@ interface ICreateItemProps {
 	name?: string
 	description?: string
 	sex?: string
-	sizes?: string | string[]
+	sizes?: string[] | string
 	price?: string
 	photo?: File
 }

@@ -24,7 +24,9 @@ export default function WorkingModal() {
 			setErr(validationResult)
 			return
 		}
-		if (typeof form.sizes === 'string') setForm({ ...form, sizes: form!.sizes!.split(' ') })
+		console.log(form.sizes)
+		typeof form.sizes !== 'object' && setForm({ ...form, sizes: form!.sizes!.split(' ') })
+		console.log(form.sizes)
 
 		addItem(form).then((r) => {
 			setInfo({ type: r.type, message: r.message })
