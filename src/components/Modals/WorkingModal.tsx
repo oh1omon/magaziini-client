@@ -40,16 +40,12 @@ export default function WorkingModal() {
 				onClick={(e) => e.stopPropagation()}
 			>
 				<div
-					className={`flex flex-col lg:flex-row items-center 
+					className={`flex flex-col items-center 
 						'justify-between'
 					 w-4/5 h-auto lg:h-4/5 text-xs`}
 				>
 					<>
-						<div className='flex flex-col items-center justify-center w-auto h-auto mb-4 lg:mb-0 lg:w-2/5'>
-							<label htmlFor={'file'}>Insert here image of the future Item</label>
-							<input onChange={(e) => changeHandler(e)} type={'file'} id={'file'} name={'photo'} />
-						</div>
-						<div className='w-full h-full lg:w-2/5'>
+						<div className='w-full h-full lg:w-4/5 '>
 							<form className='flex flex-col justify-between h-full' encType='multipart/form-data'>
 								<div className='mb-4 lg:mb-0 flex flex-col'>
 									<label htmlFor={'name'}>Name</label>
@@ -70,6 +66,17 @@ export default function WorkingModal() {
 										name={'description'}
 										className={`border-2 font-mono w-full h-64 text-xs text-justify lg:text-sm text-opacity-80 ${
 											err.includes('description') ? 'border-red-700' : 'border-black'
+										}`}
+									></textarea>
+								</div>
+								<div className='mb-4 lg:mb-0 flex flex-col'>
+									<label htmlFor={'image'}>Image</label>
+									<textarea
+										onChange={(e) => changeHandler(e)}
+										id={'image'}
+										name={'image'}
+										className={`border-2 font-mono w-full h-full text-xs text-justify lg:text-sm text-opacity-80 ${
+											err.includes('image') ? 'border-red-700' : 'border-black'
 										}`}
 									></textarea>
 								</div>
