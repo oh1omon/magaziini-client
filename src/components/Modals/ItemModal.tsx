@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 import { createOrder, retrieveItem } from '../../services/dispatchers'
 import FavButton from '../FavButton'
-import { Input } from '../Items/Input'
+import { Input } from '../Input'
 import Loader from '../Loader'
 import Modal from './Modal'
 
@@ -90,24 +90,6 @@ export default function ItemModal() {
 															valueHandler(e)
 														}
 													/>
-													// <div key={s}>
-													// 	<input
-													// className='fixed w-0 opacity-0'
-													// name='size'
-													// type='radio'
-													// value={s}
-													// id={s}
-													// onChange={(e) => valueHandler(e)}
-													// 	/>
-													// 	<label
-													// 		htmlFor={s}
-													// className={`p-2 font-mono cursor-pointer
-													// ${order.size === s && 'text-black'}
-													// `}
-													// 	>
-													// 		{s}
-													// 	</label>
-													// </div>
 												))}
 										</div>
 									</div>

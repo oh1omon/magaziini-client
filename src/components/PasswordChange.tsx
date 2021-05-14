@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { updateUser } from '../services/dispatchers'
 import Validator from '../services/validator'
-import { Input } from './Items/Input'
+import { Input } from './Input'
 
 export const PasswordChange = ({ passInputShown, passwordShowHandler }: IPasswordChangeProps) => {
 	const [passwordObj, setPasswordObj] = useState({ password: '' })
@@ -44,15 +44,6 @@ export const PasswordChange = ({ passInputShown, passwordShowHandler }: IPasswor
 				Change Password
 			</button>
 			<form className={`${passInputShown ? 'flex' : 'hidden'} flex-col h-3/4`}>
-				{/* <label className='font-mono'>
-								<input
-									className='w-full h-12 px-4 mb-4 font-mono text-sm border-2 border-black focus:border-blue-500 focus:outline-none'
-									name='password'
-									type='password'
-									placeholder='New Password'
-									onChange={(e) => passwordValueHandler(e)}
-								/>
-							</label> */}
 				<Input
 					className='w-full h-12 px-4 mb-4 font-mono text-sm border-2 border-black focus:border-gray-500 focus:outline-none'
 					name='password'

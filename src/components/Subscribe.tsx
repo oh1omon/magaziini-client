@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { addSub } from '../services/dispatchers'
-import { Input } from './Items/Input'
+import { Input } from './Input'
 import { Error } from './SVGs/Error'
 import { Okay } from './SVGs/Okay'
 import { Send } from './SVGs/Send'
@@ -39,13 +39,6 @@ export const Subscribe = () => {
 				onChange={(e: React.ChangeEvent<HTMLInputElement>) => valueHandler(e)}
 				className='w-full h-12 px-4 font-mono text-sm border-2 border-gray-500 lg:w-full focus:border-black focus:outline-none'
 			/>
-			{/* <input
-				placeholder='E-mail'
-				type='email'
-				name='email'
-				onChange={(e) => valueHandler(e)}
-				className='w-full h-12 px-4 font-mono text-sm border-2 border-gray-500 lg:w-4/5 focus:border-black focus:outline-none'
-			/> */}
 			<button
 				onClick={(e) => submitHandler(e)}
 				className='h-12 px-4 text-white bg-black border-2 border-gray-500 lg:-ml-12'

@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { loginUser, register } from '../../services/dispatchers'
 import Validator from '../../services/validator'
 import { SET_USER } from '../../store/actions/userActions'
-import { Input } from '../Items/Input'
+import { Input } from '../Input'
 import Modal from './Modal'
 
 export default function SignInUpModal() {
