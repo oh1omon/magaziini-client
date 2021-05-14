@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import errorMessages from '../assets/texts/errors'
 import { updateUser } from '../services/dispatchers'
 import Validator from '../services/validator'
 import { Input } from './Input'
@@ -9,12 +10,7 @@ export const PasswordChange = ({ passInputShown, passwordShowHandler }: IPasswor
 	const [infoMessage, setInfoMessage] = useState({ message: '', type: '' })
 
 	//Error messages
-	const [errorsMsg] = useState([
-		{
-			type: 'password',
-			message: 'Password has to be at least 8 characters',
-		},
-	])
+	const [errorsMsg] = useState(errorMessages)
 
 	const passwordSubmitHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 		e.preventDefault()

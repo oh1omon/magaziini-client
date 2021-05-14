@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import errorMessages from '../../assets/texts/errors'
+import inputMessages from '../../assets/texts/inputs'
 import { loginUser, register } from '../../services/dispatchers'
 import Validator from '../../services/validator'
 import { SET_USER } from '../../store/actions/userActions'
@@ -13,42 +15,10 @@ export default function SignInUpModal() {
 	const [errMessage, setErrMessage] = useState({ message: '' })
 	const [form, setForm] = useState<ISignInUpFormState>({ email: '', password: '', name: '' })
 
-	const [inputs, setInputs] = useState([
-		{
-			className: `w-full h-12 px-4 mb-4 font-mono text-sm border-2 focus:border-gray-500 focus:outline-none`,
-			name: 'email',
-			type: 'email',
-			placeholder: 'E-mail',
-			activated: true,
-		},
-		{
-			className: `w-full h-12 px-4 mb-4 font-mono text-sm border-2 focus:border-gray-500 focus:outline-none`,
-			name: 'password',
-			type: 'password',
-			placeholder: 'Password',
-			activated: true,
-		},
-		{
-			className: `w-full h-12 px-4 mb-4 font-mono text-sm border-2 focus:border-gray-500 focus:outline-none`,
-			name: 'name',
-			type: 'text',
-			placeholder: 'Your name',
-			activated: false,
-		},
-	])
+	const [inputs, setInputs] = useState(inputMessages)
 
 	//Error messages
-	const [errorsMsg] = useState([
-		{ type: 'email', message: 'You have provided invalid email' },
-		{
-			type: 'password',
-			message: 'Password has to be at least 8 characters',
-		},
-		{
-			type: 'name',
-			message: 'Please give us your name',
-		},
-	])
+	const [errorsMsg] = useState(errorMessages)
 
 	const valueHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setForm({ ...form, [e.target.name]: e.target.value })
