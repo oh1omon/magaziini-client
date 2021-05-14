@@ -4,7 +4,10 @@ import Loader from '../Loader'
 import ItemCard from './ItemsCard'
 
 const Items = () => {
+	//Retrieving items array from the state
 	const items = useSelector((state: IRootState) => state.items)
+
+	//Retrieving sex identifier to filter only selected items
 	const sex = useSelector((state: IRootState) => state.sex)
 
 	return (

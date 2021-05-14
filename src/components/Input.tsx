@@ -1,5 +1,10 @@
 import React from 'react'
 
+/**
+ *
+ * @param {IInputProps} propsObj all possible props
+ * This input can take all possible(in this project, ofc) props and render right accessible inputs
+ */
 export const Input = ({
 	className,
 	type,

@@ -24,6 +24,7 @@ const createItemUrl = '/api/item/create'
 /**
  * Function for retrieving user from DB if it is logged in
  * Should be dispatched in App component
+ * @returns {null | IUser} req.data
  */
 export const retrieveUser = async () => {
 	let user = null
@@ -38,6 +39,7 @@ export const retrieveUser = async () => {
 
 /**
  * Function for logging user in
+ * @returns {null | IUser} req.data
  */
 export const loginUser = async (signInObj: ILoginUserProps) => {
 	let user = null
@@ -52,6 +54,7 @@ export const loginUser = async (signInObj: ILoginUserProps) => {
 
 /**
  * Function for registering user
+ * @returns {null | IUser} req.data
  */
 export const register = async (signUpObj: ILoginUserProps) => {
 	let user = null
@@ -65,9 +68,10 @@ export const register = async (signUpObj: ILoginUserProps) => {
 }
 
 /**
- * Function for registering user
+ * Function for signing user out
+ * @returns {null} req.data
  */
-export const signout = async () => {
+export const signOut = async () => {
 	return axios.post(signOutUrl).then((r) => {
 		//TODO delete console.log()
 		console.log(r)
@@ -77,7 +81,8 @@ export const signout = async () => {
 }
 
 /**
- * Function for registering user
+ * Function for updating user
+ * @returns {null | IUser} req.data
  */
 export const updateUser = async (updatesObj: IUpdateProps) => {
 	let user = null
@@ -109,7 +114,9 @@ export const retrieveItems = () => {
 
 /**
  * Function for retrieving one special item from DB
+ * #TODO change ItemModal to normal component
  * Should be dispatched in ItemModal component
+ * @returns {IITem} req.data[0]
  */
 export const retrieveItem = (id: string) => {
 	let item = null
@@ -124,6 +131,7 @@ export const retrieveItem = (id: string) => {
 
 /**
  * Function for deleting item
+ * @returns {string} req.data.message
  */
 export const deleteItem = async (_id: string) => {
 	return axios.post(removeItemUrl, { _id }).then((r) => {
@@ -138,18 +146,10 @@ export const deleteItem = async (_id: string) => {
 }
 
 /**
- * Function for retrieving one special item from DB
- * Should be dispatched in ItemModal component
+ * Function for creating new item
+ * @returns {object} object with message and type fields
  */
 export const addItem = (itemObj: ICreateItemProps) => {
-	// const formData = new FormData()
-	// formData.append('name', itemObj.name!)
-	// formData.append('description', itemObj.description!)
-	// formData.append('sex', itemObj.sex!)
-	// formData.append('sizes', JSON.stringify(itemObj.sizes!))
-	// formData.append('price', itemObj.price!)
-	// if (itemObj.photo) formData.append('photo', itemObj.photo!)
-
 	return axios.post(createItemUrl, itemObj).then((r) => {
 		//TODO delete console.log()
 		console.log(r)
@@ -162,7 +162,8 @@ export const addItem = (itemObj: ICreateItemProps) => {
 //======================ORDERS======================
 
 /**
- * Function for registering user
+ * Function for creating order
+ * @returns {null | object} req.data
  */
 export const createOrder = async (orderObj: ICreateOrderProps) => {
 	let order = null
@@ -178,7 +179,8 @@ export const createOrder = async (orderObj: ICreateOrderProps) => {
 //======================SUBs======================
 
 /**
- * Function for subscripting user byt email
+ * Function for subscripting user by email
+ * @returns {object} req.data
  */
 export const addSub = async (email: string) => {
 	return axios.post(addSubUrl, { email }).then((r) => {

@@ -19,18 +19,23 @@ import { SET_USER } from './store/actions/userActions'
 
 export const App = () => {
 	const dispatch = useDispatch()
+
+	//Retrieving user from the global state
 	const user = useSelector((state: IRootState) => state.user)
 
+	//Retrieving all items from DB to put them into global state
 	useEffect(() => {
 		retrieveItems().then((r) => dispatch({ type: SET_ITEMS, payload: r }))
 	}, [dispatch])
 
+	//Retrieving user from DB to put him into global state
 	useEffect(() => {
 		retrieveUser().then((r) => {
 			dispatch({ type: SET_USER, payload: r })
 		})
 	}, [dispatch])
 
+	//Retrieving all favs from local storage or creating empty array, and putting them into global state
 	useEffect(() => {
 		dispatch({ type: SET_FAVS, payload: JSON.parse(window.localStorage.getItem('favorite')!) || [] })
 	}, [dispatch])
@@ -39,7 +44,7 @@ export const App = () => {
 		<Router>
 			<div id='top'></div>
 			<div className='font-sans text-sm xl:text-2xl'>
-				<Header user={user} />
+				<Header />
 				<Main />
 				<Footer />
 			</div>
@@ -52,9 +57,7 @@ export const App = () => {
 				<Route path={`/delivery`} component={DeliveryModal} />
 				<Route path={`/returnsPolicy`} component={ReturnModal} />
 				<Route path={`/history`} component={HistoryModal} />
-				<Route path={'/working'}>
-					{user && user.type === 'admin' ? <WorkingModal /> : <Redirect to={'/'} />}
-				</Route>
+				<Route path={'/working'}>{user && user.type === 'admin' ? <WorkingModal /> : <Redirect to={'/'} />}</Route>
 			</Switch>
 		</Router>
 	)

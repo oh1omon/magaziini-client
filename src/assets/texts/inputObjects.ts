@@ -1,4 +1,7 @@
-const inputMessages = [
+/**
+ * Input objects containing base information about every input for SignIn/Up component
+ */
+const inputObjects = [
 	{
 		className: `w-full h-12 px-4 mb-4 font-mono text-sm border-2 focus:border-gray-500 focus:outline-none`,
 		name: 'email',
@@ -22,4 +25,4 @@ const inputMessages = [
 	},
 ]
 
-export default inputMessages
+export default inputObjects

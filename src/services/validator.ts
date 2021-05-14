@@ -1,8 +1,8 @@
 class Validator {
 	/**
-	 *	Perfoms checking password for errors and length
+	 * Performs checking password for errors and length
 	 * @param {string} password
-	 * @returns {array} error array
+	 * @returns {array} string array, that contains error field's names
 	 */
 	password(password: any, err: string[]) {
 		if (typeof password !== 'string' || password.length < 8) {
@@ -13,9 +13,9 @@ class Validator {
 	}
 
 	/**
-	 *	Perfoms checking email for errors
+	 * Performs checking email for errors
 	 * @param {string} email
-	 * @returns {array} error array
+	 * @returns {array} string array, that contains error field's names
 	 */
 	email(email: any, err: string[]) {
 		if (typeof email !== 'string') {
@@ -34,9 +34,9 @@ class Validator {
 	}
 
 	/**
-	 *	Perfoms checking signUp object for errors, for example it checks email with regex and password to be at least 8 symbols
+	 * Performs checking signUp object for errors, for example it checks email with regex and password to be at least 8 symbols
 	 * @param {object} formObject
-	 * @returns {array} error array
+	 * @returns {array} string array, that contains error field's names
 	 */
 	signUp(formObject: ISignUpProps) {
 		const err: string[] = []
@@ -51,8 +51,9 @@ class Validator {
 	}
 
 	/**
-	 *	Perfoms checking signIn object for errors, for example it checks email with regex and password to be at least 8 symbols     * @param {object} formObject
-	 * @returns {array} error array
+	 * Performs checking signIn object for errors, for example it checks email with regex and password to be at least 8 symbols
+	 * @param {object} formObject
+	 * @returns {array} string array, that contains error field's names
 	 */
 	signIn(formObject: ILoginUserProps) {
 		const err: string[] = []
@@ -64,9 +65,9 @@ class Validator {
 	}
 
 	/**
-	 *
+	 * Performs validation of item object
 	 * @param {ICreateItemProps} createObj
-	 * @returns {array} error array
+	 * @returns {array} string array, that contains error field's names
 	 */
 	createItem(createObj: ICreateItemProps) {
 		let err: string[] = []

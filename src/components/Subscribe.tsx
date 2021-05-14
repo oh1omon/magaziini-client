@@ -1,21 +1,35 @@
 import React, { useState } from 'react'
-import { RenderSwitch } from '../RenderSwitch'
 import { addSub } from '../services/dispatchers'
 import { Input } from './Input'
+import { RenderSwitch } from './RenderSwitch'
 
 export const Subscribe = () => {
+	//Setting local state for email string
 	const [subEmail, setSubEmail] = useState('')
 
-	const [infoMessage, setInfoMessage] = useState({ type: '' })
+	//Creating local state for information type
+	const [info, setInfo] = useState({ type: '' })
 
+	/**
+	 * Function to keep updated email state according to user inputs
+	 * @param {React.ChangeEvent<HTMLInputElement>} e
+	 */
 	const valueHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setSubEmail(`${e.target.value}`)
 	}
 
+	/**
+	 *
+	 * @param {React.MouseEvent<HTMLButtonElement, MouseEvent>} e
+	 *
+	 * If email string has passed validation, then we are submitting it to the dispatcher.
+	 * Then we printing icon that suits the response we get from server
+	 */
 	const submitHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 		e.preventDefault()
-		addSub(subEmail).then((r) => setInfoMessage({ type: r.type }))
+		addSub(subEmail).then((r) => setInfo({ type: r.type }))
 	}
+
 	return (
 		<form className='flex flex-row group'>
 			<Input
@@ -30,7 +44,7 @@ export const Subscribe = () => {
 				onClick={(e) => submitHandler(e)}
 				className='h-12 px-4 text-white bg-black border-2 border-gray-500 lg:-ml-12'
 			>
-				<RenderSwitch param={infoMessage.type} />
+				<RenderSwitch param={info.type} />
 			</button>
 		</form>
 	)

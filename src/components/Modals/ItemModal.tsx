@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { createOrder, retrieveItem } from '../../services/dispatchers'
 import FavButton from '../FavButton'
@@ -8,22 +7,41 @@ import Loader from '../Loader'
 import Modal from './Modal'
 
 export default function ItemModal() {
-	const user = useSelector((store: IRootState) => store.user)
+	//Creating local state for the item, that is shown here
 	const [item, setItem] = useState<IITem>({} as IITem)
+
+	//Loader state
+	//When component mounts it is true and changed later
 	const [isLoading, setIsLoading] = useState(true)
+
+	//InfoMessage prints to the user current situation with the actions he has dispatched
 	const [infoMessage, setInfoMessage] = useState({ message: '', type: '' })
+
+	//We get right id of this item from the link
+	//It is needed for us to create an order, if the user decides to but this item
 	let { id } = useParams<{ id: string }>()
 
+	//Order form
+	//Id is predefined from the link
 	const [order, setOrder] = useState({
 		itemId: `${id}`,
 		size: '',
 	})
 
+	/**
+	 *
+	 * @param {React.ChangeEvent<HTMLInputElement>} e Event
+	 * Function updates the local state according to the user actions
+	 */
 	const valueHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setOrder({ ...order, [e.target.name]: e.target.value })
-		console.log(e.target.value)
 	}
 
+	/**
+	 *
+	 * @param {React.MouseEvent<HTMLButtonElement, MouseEvent>} e Event
+	 * Function sending the order form to the actual dispatcher, then depending on the result sets infoMessage to show the user if the order has been created or not
+	 */
 	const submitHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 		e.preventDefault()
 
@@ -32,6 +50,8 @@ export default function ItemModal() {
 		})
 	}
 
+	//Item retrieving is called only once, when component is mounted, since it's dependency list consists of only id, which is only one for every component
+	//After retrieving item from the server we set loader to false and then render the actual item
 	useEffect(() => {
 		retrieveItem(id).then((r) => {
 			setIsLoading(false)
@@ -86,9 +106,7 @@ export default function ItemModal() {
 														type='radio'
 														value={s}
 														id={s}
-														onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-															valueHandler(e)
-														}
+														onChange={(e: React.ChangeEvent<HTMLInputElement>) => valueHandler(e)}
 													/>
 												))}
 										</div>
