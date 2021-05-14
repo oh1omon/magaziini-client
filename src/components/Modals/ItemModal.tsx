@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 import { createOrder, retrieveItem } from '../../services/dispatchers'
 import FavButton from '../FavButton'
+import { Input } from '../Items/Input'
 import Loader from '../Loader'
 import Modal from './Modal'
 
@@ -20,6 +21,7 @@ export default function ItemModal() {
 
 	const valueHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setOrder({ ...order, [e.target.name]: e.target.value })
+		console.log(e.target.value)
 	}
 
 	const submitHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -55,7 +57,7 @@ export default function ItemModal() {
 							<div className='flex items-center justify-center w-auto h-auto mb-4 lg:mb-0 lg:w-2/5'>
 								<img
 									src={`${item.image}`}
-									alt={`${item!.name}`}
+									alt={`${item?.name}`}
 									className='object-scale-down w-full border border-black lg:object-cover lg:h-full filter grayscale-40'
 								/>
 							</div>
@@ -74,24 +76,38 @@ export default function ItemModal() {
 											{item.sizes &&
 												typeof item.sizes !== 'string' &&
 												item.sizes.map((s) => (
-													<div key={s}>
-														<input
-															className='fixed w-0 opacity-0'
-															name='size'
-															type='radio'
-															value={s}
-															id={s}
-															onChange={(e) => valueHandler(e)}
-														/>
-														<label
-															htmlFor={s}
-															className={`p-2 font-mono cursor-pointer 
+													<Input
+														labelClassName={`p-2 font-mono cursor-pointer
 															${order.size === s && 'text-black'}
 															`}
-														>
-															{s}
-														</label>
-													</div>
+														key={s}
+														className='fixed w-0 opacity-0'
+														name='size'
+														type='radio'
+														value={s}
+														id={s}
+														onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+															valueHandler(e)
+														}
+													/>
+													// <div key={s}>
+													// 	<input
+													// className='fixed w-0 opacity-0'
+													// name='size'
+													// type='radio'
+													// value={s}
+													// id={s}
+													// onChange={(e) => valueHandler(e)}
+													// 	/>
+													// 	<label
+													// 		htmlFor={s}
+													// className={`p-2 font-mono cursor-pointer
+													// ${order.size === s && 'text-black'}
+													// `}
+													// 	>
+													// 		{s}
+													// 	</label>
+													// </div>
 												))}
 										</div>
 									</div>

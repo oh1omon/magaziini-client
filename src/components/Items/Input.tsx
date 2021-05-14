@@ -6,8 +6,9 @@ export const Input = ({
 	name,
 	placeholder,
 	onChange,
+	id = '',
 	err = false,
-	value = '',
+	value,
 	labelClassName = '',
 }: IInputProps) => {
 	return (
@@ -19,6 +20,7 @@ export const Input = ({
 					type={type}
 					placeholder={placeholder}
 					onChange={(e) => onChange(e)}
+					value={value}
 				/>
 				{value}
 			</label>

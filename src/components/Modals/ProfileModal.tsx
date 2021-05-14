@@ -1,23 +1,16 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
-import { signout, updateUser } from '../../services/dispatchers'
+import { signout } from '../../services/dispatchers'
 import { SET_USER } from '../../store/actions/userActions'
+import { PasswordChange } from '../PasswordChange'
 import Modal from './Modal'
 
 export default function ProfileModal() {
 	const user = useSelector((state: IRootState) => state.user)
 	const dispatch = useDispatch()
-	const [passwordObj, setPasswordObj] = useState({ password: '' })
 	const [passInputShown, setPassInputShown] = useState(false)
 	const history = useHistory()
-
-	const passwordSubmitHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-		e.preventDefault()
-		updateUser(passwordObj).then((r) => {
-			setInfoMessage({ message: r.message, type: 'info' })
-		})
-	}
 
 	const signOutHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 		e.preventDefault()
@@ -30,11 +23,6 @@ export default function ProfileModal() {
 		setPassInputShown(true)
 	}
 
-	const passwordValueHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setPasswordObj({ ...passwordObj, [e.target.name]: e.target.value })
-	}
-
-	const [infoMessage, setInfoMessage] = useState({ message: '', type: '' })
 	return (
 		<Modal>
 			<div
@@ -42,42 +30,7 @@ export default function ProfileModal() {
 				onClick={(e) => e.stopPropagation()}
 			>
 				<div className='flex flex-col justify-between w-4/5 font-mono text-xs text-justify lg:font-sans h-9/10 lg:h-4/5 text-opacity-80'>
-					<div className='flex flex-col items-center justify-center h-2/5'>
-						<button
-							onClick={(e) => passwordShowHandler(e)}
-							className={` ${
-								passInputShown ? 'hidden' : 'flex'
-							} items-center justify-center w-full h-12 font-sans text-xl duration-150 bg-white border-2 border-black hover:bg-gray-200`}
-						>
-							Change Password
-						</button>
-						<form className={`${passInputShown ? 'flex' : 'hidden'} flex-col h-3/4`}>
-							<label className='font-mono'>
-								<input
-									className='w-full h-12 px-4 mb-4 font-mono text-sm border-2 border-black focus:border-blue-500 focus:outline-none'
-									name='password'
-									type='password'
-									placeholder='New Password'
-									onChange={(e) => passwordValueHandler(e)}
-								/>
-							</label>
-							<div
-								className={`${
-									!passInputShown ? 'hidden' : 'flex'
-								} text-mono justify-center items-center`}
-							>
-								<p className={`${infoMessage.type === 'info' ? 'text-blue-700' : 'text-red-700'} `}>
-									{infoMessage.message}
-								</p>
-							</div>
-							<button
-								onClick={(e) => passwordSubmitHandler(e)}
-								className={`flex items-center justify-center w-full h-12 font-sans text-xl duration-150 bg-white border-2 border-black hover:bg-gray-200`}
-							>
-								Change Password
-							</button>
-						</form>
-					</div>
+					<PasswordChange passInputShown={passInputShown} passwordShowHandler={passwordShowHandler} />
 					<div
 						className={`${
 							passInputShown ? 'hidden' : 'flex'

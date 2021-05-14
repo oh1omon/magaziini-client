@@ -87,7 +87,6 @@ export default function SignInUpModal() {
 		const validationResult = Validator.signIn(form)
 		if (validationResult.length > 0) {
 			setErr(validationResult)
-			console.log(err)
 			return
 		}
 		loginUser(form).then((r) => {
@@ -143,7 +142,6 @@ export default function SignInUpModal() {
 						className={'mr-3 font-mono'}
 						type={'checkbox'}
 						name='newAccount'
-						placeholder={''}
 						onChange={signInChangeHandler}
 						labelClassName={'absolute font-sans bottom-4'}
 						value={"I don't have an account"}

@@ -117,14 +117,20 @@ interface IInputProps {
 	labelClassName?: string
 	type: string
 	name: string
-	placeholder: string
+	placeholder?: string
 	onChange: function
 	err?: boolean
 	value?: string
+	id?: string
 }
 
 interface ISignInUpFormState {
 	email: string
 	password: string
 	name?: string
+}
+
+interface IPasswordChangeProps {
+	passInputShown: boolean
+	passwordShowHandler: function
 }
