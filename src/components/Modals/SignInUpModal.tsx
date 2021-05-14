@@ -32,7 +32,7 @@ export default function SignInUpModal() {
 
 	//Error messages local state
 	//As initial state we are using array of error messages imported from the another file
-	const [errorsMsg] = useState(errorMessages)
+	const [errMessages] = useState(errorMessages)
 
 	/**
 	 *
@@ -168,7 +168,7 @@ export default function SignInUpModal() {
 								{
 									//This paragraph contains always the first error message out of all error messages
 								}
-								{err.length > 0 && errorsMsg.filter((e) => e.type === err[0])[0].message}
+								{err.length > 0 && errMessages.filter((e) => e.type === err[0])[0].message}
 							</p>
 						</div>
 						<button
