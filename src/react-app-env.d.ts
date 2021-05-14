@@ -134,3 +134,7 @@ interface IPasswordChangeProps {
 	passInputShown: boolean
 	passwordShowHandler: function
 }
+
+interface IRenderSwitchProps {
+	param: string
+}

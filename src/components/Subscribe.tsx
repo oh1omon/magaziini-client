@@ -1,22 +1,9 @@
 import React, { useState } from 'react'
+import { RenderSwitch } from '../RenderSwitch'
 import { addSub } from '../services/dispatchers'
 import { Input } from './Input'
-import { Error } from './SVGs/Error'
-import { Okay } from './SVGs/Okay'
-import { Send } from './SVGs/Send'
 
 export const Subscribe = () => {
-	const renderSwitch = (param: string) => {
-		switch (param) {
-			case 'error':
-				return <Error />
-			case 'info':
-				return <Okay />
-			default:
-				return <Send />
-		}
-	}
-
 	const [subEmail, setSubEmail] = useState('')
 
 	const [infoMessage, setInfoMessage] = useState({ type: '' })
@@ -43,7 +30,7 @@ export const Subscribe = () => {
 				onClick={(e) => submitHandler(e)}
 				className='h-12 px-4 text-white bg-black border-2 border-gray-500 lg:-ml-12'
 			>
-				{renderSwitch(infoMessage.type)}
+				<RenderSwitch param={infoMessage.type} />
 			</button>
 		</form>
 	)
