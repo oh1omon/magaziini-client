@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { createOrder, retrieveItem } from '../../services/dispatchers'
 import FavButton from '../FavButton'
 import { Input } from '../Input'
@@ -26,10 +26,10 @@ export default function ItemModal() {
 
 	const submitHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 		e.preventDefault()
-		if (user)
-			createOrder({ ...order }).then((r) => {
-				setInfoMessage({ message: r.message, type: 'info' })
-			})
+
+		createOrder({ ...order }).then((r) => {
+			setInfoMessage({ message: r.message, type: 'info' })
+		})
 	}
 
 	useEffect(() => {
@@ -106,21 +106,12 @@ export default function ItemModal() {
 										</p>
 									</div>
 									<div className='flex flex-row justify-between w-full mb-4 lg:mb-0'>
-										{user ? (
-											<button
-												onClick={(e) => submitHandler(e)}
-												className='flex items-center justify-center w-3/5 py-1 font-sans text-xl duration-150 bg-white border-2 border-black xl:w-3/4 xl:py-2 xl:text-2xl hover:bg-gray-200'
-											>
-												Buy
-											</button>
-										) : (
-											<Link
-												className='flex items-center justify-center w-3/5 py-1 font-sans text-xl duration-150 bg-white border-2 border-black xl:w-3/4 xl:py-2 lg:text-xl xl:text-2xl hover:bg-gray-200'
-												to='/user'
-											>
-												Sign In first
-											</Link>
-										)}
+										<button
+											onClick={(e) => submitHandler(e)}
+											className='flex items-center justify-center w-3/5 py-1 font-sans text-xl duration-150 bg-white border-2 border-black xl:w-3/4 xl:py-2 xl:text-2xl hover:bg-gray-200'
+										>
+											Buy
+										</button>
 										<FavButton id={item!._id} />
 									</div>
 								</form>
