@@ -6,9 +6,20 @@ import { HashLink } from 'react-router-hash-link'
 import { ReactComponent as Logo } from '../logo.svg'
 import { SET_SEX } from '../store/actions/sexActions'
 
-const Header = ({ user }: IHeaderProps) => {
+const Header = () => {
 	const dispatch = useDispatch()
+
+	//Retrieving user from the global state
+	const user = useSelector((state: IRootState) => state.user)
+
+	//Retrieving sex identifier to show the right department of the clothes
 	const sex = useSelector((state: IRootState) => state.sex)
+
+	/**
+	 *
+	 * @param {string} str type of sex
+	 * Function dispatches a new selected type of sex to the global state
+	 */
 	const clickHandler = (str: string) => {
 		dispatch({ type: SET_SEX, payload: str })
 	}
@@ -63,6 +74,9 @@ const Header = ({ user }: IHeaderProps) => {
 							to={'/user'}
 							className='px-4 py-1 text-xl duration-200 border-2 border-black lg:py-2 hover:text-white hover:bg-black '
 						>
+							{
+								//Since I am building client-oriented shop, I need to say hello to the user personally
+							}
 							{user ? `Hello, ${user.name.split(' ', 1)}!` : 'Sign In'}
 						</Link>
 					</div>

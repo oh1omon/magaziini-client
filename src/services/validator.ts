@@ -1,23 +1,49 @@
 class Validator {
 	/**
-	 *	Perfoms checking signUp object for errors, for example it checks email with regex and password to be at least 8 symbols
-	 * @param {object} formObject
-	 * @returns {array} error array
+	 * Performs checking password for errors and length
+	 * @param {string} password
+	 * @returns {array} string array, that contains error field's names
 	 */
-	signUp(formObject: ISignUpProps) {
-		const err = []
+	password(password: any, err: string[]) {
+		if (typeof password !== 'string' || password.length < 8) {
+			err.push('password')
+		}
 
-		if (!formObject.email) {
+		return err
+	}
+
+	/**
+	 * Performs checking email for errors
+	 * @param {string} email
+	 * @returns {array} string array, that contains error field's names
+	 */
+	email(email: any, err: string[]) {
+		if (typeof email !== 'string') {
 			err.push('email')
 		} else {
-			const testRes = /^[^\s@]+@[^\s@]+$/.test(formObject.email)
+			const testRes =
+				/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/.test(
+					email
+				)
 			if (!testRes) {
 				err.push('email')
 			}
 		}
-		if (!formObject.password || formObject.password.length < 8) {
-			err.push('password')
-		}
+
+		return err
+	}
+
+	/**
+	 * Performs checking signUp object for errors, for example it checks email with regex and password to be at least 8 symbols
+	 * @param {object} formObject
+	 * @returns {array} string array, that contains error field's names
+	 */
+	signUp(formObject: ISignUpProps) {
+		const err: string[] = []
+
+		this.email(formObject?.email, err)
+		this.password(formObject?.password, err)
+
 		if (!formObject.name) {
 			err.push('name')
 		}
@@ -25,27 +51,24 @@ class Validator {
 	}
 
 	/**
-	 *	Perfoms checking signIn object for errors, for example it checks email with regex and password to be at least 8 symbols     * @param {object} formObject
-	 * @returns {array} error array
+	 * Performs checking signIn object for errors, for example it checks email with regex and password to be at least 8 symbols
+	 * @param {object} formObject
+	 * @returns {array} string array, that contains error field's names
 	 */
 	signIn(formObject: ILoginUserProps) {
-		const err = []
+		const err: string[] = []
 
-		if (!formObject.email) {
-			err.push('email')
-		} else {
-			const testRes = /^[^\s@]+@[^\s@]+$/.test(formObject.email)
-			if (!testRes) {
-				err.push('email')
-			}
-		}
-		if (!formObject.password || formObject.password.length < 8) {
-			err.push('password')
-		}
+		this.email(formObject.email, err)
+		this.password(formObject?.password, err)
 
 		return err
 	}
 
+	/**
+	 * Performs validation of item object
+	 * @param {ICreateItemProps} createObj
+	 * @returns {array} string array, that contains error field's names
+	 */
 	createItem(createObj: ICreateItemProps) {
 		let err: string[] = []
 		if (!createObj.name) {

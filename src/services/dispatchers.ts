@@ -24,6 +24,7 @@ const createItemUrl = '/api/item/create'
 /**
  * Function for retrieving user from DB if it is logged in
  * Should be dispatched in App component
+ * @returns {null | IUser} req.data
  */
 export const retrieveUser = async () => {
 	let user = null
@@ -38,12 +39,13 @@ export const retrieveUser = async () => {
 
 /**
  * Function for logging user in
+ * @returns {null | IUser} req.data
  */
 export const loginUser = async (signInObj: ILoginUserProps) => {
 	let user = null
 	return axios.post(loginUrl, signInObj).then((r) => {
 		//TODO delete console.log()
-		// console.log(r)
+		console.log(r)
 		//
 		user = r.data
 		return user
@@ -52,12 +54,13 @@ export const loginUser = async (signInObj: ILoginUserProps) => {
 
 /**
  * Function for registering user
+ * @returns {null | IUser} req.data
  */
 export const register = async (signUpObj: ILoginUserProps) => {
 	let user = null
 	return axios.post(registerUrl, signUpObj).then((r) => {
 		//TODO delete console.log()
-		// console.log(r)
+		console.log(r)
 		//
 		user = r.data
 		return user
@@ -65,25 +68,27 @@ export const register = async (signUpObj: ILoginUserProps) => {
 }
 
 /**
- * Function for registering user
+ * Function for signing user out
+ * @returns {null} req.data
  */
-export const signout = async () => {
+export const signOut = async () => {
 	return axios.post(signOutUrl).then((r) => {
 		//TODO delete console.log()
-		// console.log(r)
+		console.log(r)
 		//
 		return r.data.user
 	})
 }
 
 /**
- * Function for registering user
+ * Function for updating user
+ * @returns {null | IUser} req.data
  */
 export const updateUser = async (updatesObj: IUpdateProps) => {
 	let user = null
 	return axios.post(updateUserUrl, updatesObj).then((r) => {
 		//TODO delete console.log()
-		// console.log(r)
+		console.log(r)
 		//
 		user = r.data
 		return user
@@ -100,7 +105,7 @@ export const retrieveItems = () => {
 	let items = null
 	return axios.get(getItemsUrl).then((r) => {
 		//TODO delete console.log()
-		// console.log(r)
+		console.log(r)
 		//
 		items = r.data
 		return items
@@ -109,13 +114,15 @@ export const retrieveItems = () => {
 
 /**
  * Function for retrieving one special item from DB
+ * #TODO change ItemModal to normal component
  * Should be dispatched in ItemModal component
+ * @returns {IITem} req.data[0]
  */
 export const retrieveItem = (id: string) => {
 	let item = null
 	return axios.get(`${getItemsUrl}/${id}`).then((r) => {
 		//TODO delete console.log()
-		// console.log(r)
+		console.log(r)
 		//
 		item = r.data[0]
 		return item
@@ -124,11 +131,12 @@ export const retrieveItem = (id: string) => {
 
 /**
  * Function for deleting item
+ * @returns {string} req.data.message
  */
 export const deleteItem = async (_id: string) => {
 	return axios.post(removeItemUrl, { _id }).then((r) => {
 		//TODO delete console.log()
-		// console.log(r)
+		console.log(r)
 		//
 		if (r.data.message) {
 			return true
@@ -138,21 +146,13 @@ export const deleteItem = async (_id: string) => {
 }
 
 /**
- * Function for retrieving one special item from DB
- * Should be dispatched in ItemModal component
+ * Function for creating new item
+ * @returns {object} object with message and type fields
  */
 export const addItem = (itemObj: ICreateItemProps) => {
-	// const formData = new FormData()
-	// formData.append('name', itemObj.name!)
-	// formData.append('description', itemObj.description!)
-	// formData.append('sex', itemObj.sex!)
-	// formData.append('sizes', JSON.stringify(itemObj.sizes!))
-	// formData.append('price', itemObj.price!)
-	// if (itemObj.photo) formData.append('photo', itemObj.photo!)
-
 	return axios.post(createItemUrl, itemObj).then((r) => {
 		//TODO delete console.log()
-		// console.log(r)
+		console.log(r)
 		//
 		if (r.data.message) return { message: r.data.message, type: 'info' }
 		return { message: r.data.err, type: 'error' }
@@ -162,13 +162,14 @@ export const addItem = (itemObj: ICreateItemProps) => {
 //======================ORDERS======================
 
 /**
- * Function for registering user
+ * Function for creating order
+ * @returns {null | object} req.data
  */
 export const createOrder = async (orderObj: ICreateOrderProps) => {
 	let order = null
 	return axios.post(createOrderUrl, orderObj).then((r) => {
 		//TODO delete console.log()
-		// console.log(r)
+		console.log(r)
 		//
 		order = r.data
 		return order
@@ -178,12 +179,13 @@ export const createOrder = async (orderObj: ICreateOrderProps) => {
 //======================SUBs======================
 
 /**
- * Function for subscripting user byt email
+ * Function for subscripting user by email
+ * @returns {object} req.data
  */
 export const addSub = async (email: string) => {
 	return axios.post(addSubUrl, { email }).then((r) => {
 		//TODO delete console.log()
-		// console.log(r)
+		console.log(r)
 		//
 		return r.data
 	})

@@ -6,37 +6,62 @@ import { SET_ITEMS } from '../../store/actions/itemActions'
 import Modal from './Modal'
 
 export default function WorkingModal() {
+	//Creating local state for th form
 	const [form, setForm] = useState<ICreateItemProps>({})
+
+	//Creating local state for information messages
 	const [info, setInfo] = useState({ type: '', message: '' })
+
+	//Setting local err state
+	//This err array will have only names of the inputs where errors has happened
 	const [err, setErr] = useState<string[]>([])
+
 	const dispatch = useDispatch()
 
+	/**
+	 *
+	 * @param {React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>} e
+	 * Updates form state according to the user's input
+	 */
 	const changeHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
 		e.preventDefault()
-		if (e.target instanceof HTMLInputElement) {
-			if (e.target.files) return setForm({ ...form, [e.target.name]: e.target.files[0] })
-		}
 		setForm({ ...form, [e.target.name]: e.target.value })
 	}
 
+	/**
+	 *
+	 * @param {React.MouseEvent<HTMLButtonElement, MouseEvent>} e
+	 * Handles item form validation checking and then controls it's submitting to the dispatcher
+	 */
 	const sendHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 		e.preventDefault()
+
+		//Cleaning input errors array
 		setErr([])
+
+		//Getting validation result from our Validator class
 		const validationResult = Validator.createItem(form)
+
+		//If we have at least one problem with the user's input, we are stopping the function and setting input errors array
 		if (validationResult.length > 0) {
 			setErr(validationResult)
 			return
 		}
+
+		//Creating a new form object based on form state
 		const formObject = form
-		// setForm({ ...form, sizes: (form!.sizes as string).split(' ') })
-		// console.log(form.sizes)
+
+		//Since size input is just a string we need to create an array of {string} sizes
 		formObject.sizes = formObject.sizes!.toString().split(' ')
 
+		//If form has passed validation, then we are submitting it to the dispatcher.
+		//Then depending on the result we gain from the server, we either updating the global user state, or printing error message to the user
 		addItem(formObject).then((r) => {
 			retrieveItems().then((resp) => dispatch({ type: SET_ITEMS, payload: resp }))
 			setInfo({ type: r.type, message: r.message })
 		})
 	}
+
 	return (
 		<Modal>
 			<div

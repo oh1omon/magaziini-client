@@ -1,40 +1,46 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
-import { signout, updateUser } from '../../services/dispatchers'
+import { signOut } from '../../services/dispatchers'
 import { SET_USER } from '../../store/actions/userActions'
+import { PasswordChange } from '../PasswordChange'
 import Modal from './Modal'
 
 export default function ProfileModal() {
+	//Retrieving user from the global state
 	const user = useSelector((state: IRootState) => state.user)
+
 	const dispatch = useDispatch()
-	const [passwordObj, setPasswordObj] = useState({ password: '' })
+
+	//Creating local state to keep boolean about showing or not the password change window
 	const [passInputShown, setPassInputShown] = useState(false)
+
+	//Setting history API from react-router-dom
 	const history = useHistory()
 
-	const passwordSubmitHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-		e.preventDefault()
-		updateUser(passwordObj).then((r) => {
-			setInfoMessage({ message: r.message, type: 'info' })
-		})
-	}
-
+	/**
+	 *
+	 * @param {React.MouseEvent<HTMLButtonElement, MouseEvent>} e Event
+	 * Function sends signOut function call to the dispatcher, and after that updates user global state with null.
+	 * After that we using our history API to get back to our root page '/'
+	 */
 	const signOutHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 		e.preventDefault()
-		signout().then((r) => dispatch({ type: SET_USER, payload: r }))
+
+		signOut().then((r) => dispatch({ type: SET_USER, payload: r }))
 		history.push('/')
 	}
 
+	/**
+	 *
+	 * @param {React.MouseEvent<HTMLButtonElement, MouseEvent>} e
+	 * Function just toggles showing on and off password changed window
+	 */
 	const passwordShowHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 		e.preventDefault()
 		setPassInputShown(true)
 	}
 
-	const passwordValueHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setPasswordObj({ ...passwordObj, [e.target.name]: e.target.value })
-	}
-
-	const [infoMessage, setInfoMessage] = useState({ message: '', type: '' })
 	return (
 		<Modal>
 			<div
@@ -42,65 +48,20 @@ export default function ProfileModal() {
 				onClick={(e) => e.stopPropagation()}
 			>
 				<div className='flex flex-col justify-between w-4/5 font-mono text-xs text-justify lg:font-sans h-9/10 lg:h-4/5 text-opacity-80'>
-					<div className='flex flex-col items-center justify-center h-2/5'>
-						<button
-							onClick={(e) => passwordShowHandler(e)}
-							className={` ${
-								passInputShown ? 'hidden' : 'flex'
-							} items-center justify-center w-full h-12 font-sans text-xl duration-150 bg-white border-2 border-black hover:bg-gray-200`}
-						>
-							Change Password
-						</button>
-						<form className={`${passInputShown ? 'flex' : 'hidden'} flex-col h-3/4`}>
-							<label className='font-mono'>
-								<input
-									className='w-full h-12 px-4 mb-4 font-mono text-sm border-2 border-black focus:border-blue-500 focus:outline-none'
-									name='password'
-									type='password'
-									placeholder='New Password'
-									onChange={(e) => passwordValueHandler(e)}
-								/>
-							</label>
-							<div
-								className={`${
-									!passInputShown ? 'hidden' : 'flex'
-								} text-mono justify-center items-center`}
-							>
-								<p className={`${infoMessage.type === 'info' ? 'text-blue-700' : 'text-red-700'} `}>
-									{infoMessage.message}
-								</p>
-							</div>
-							<button
-								onClick={(e) => passwordSubmitHandler(e)}
-								className={`flex items-center justify-center w-full h-12 font-sans text-xl duration-150 bg-white border-2 border-black hover:bg-gray-200`}
-							>
-								Change Password
-							</button>
-						</form>
-					</div>
-					<div
-						className={`${
-							passInputShown ? 'hidden' : 'flex'
-						} w-full border-b border-black border-opacity-80`}
-					></div>
-					<div
-						className={`${
-							passInputShown ? 'hidden' : 'flex'
-						} flex flex-col items-center justify-center h-2/5`}
-					>
+					<PasswordChange passInputShown={passInputShown} passwordShowHandler={passwordShowHandler} />
+					<div className={`${passInputShown ? 'hidden' : 'flex'} w-full border-b border-black border-opacity-80`}></div>
+					<div className={`${passInputShown ? 'hidden' : 'flex'} flex flex-col items-center justify-center h-2/5`}>
 						<button
 							onClick={(e) => signOutHandler(e)}
 							className='flex items-center justify-center w-full h-12 font-sans text-xl duration-150 bg-white border-2 border-black hover:bg-gray-200'
 						>
-							Exitini de le Accountini
+							Sign Out
 						</button>
 					</div>
 					{user!.type === 'admin' && (
 						<>
 							<div
-								className={`${
-									passInputShown ? 'hidden' : 'flex'
-								} w-full border-b border-black border-opacity-80`}
+								className={`${passInputShown ? 'hidden' : 'flex'} w-full border-b border-black border-opacity-80`}
 							></div>
 							<div
 								className={`${

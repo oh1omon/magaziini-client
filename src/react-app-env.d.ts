@@ -10,7 +10,7 @@ interface IRootState {
 
 type IUserState = IUser | null
 
-interface UserStateAction extends Action {
+interface IUserStateAction extends Action {
 	type: string
 	payload: IUserState
 }
@@ -37,7 +37,7 @@ interface IITem {
 	inStock: number
 	price: number
 	color: string
-	availiableColors: string[]
+	availableColors: string[]
 	season: string
 	structure: {}
 }
@@ -66,10 +66,6 @@ interface ISexActions extends Action {
 //PROPS
 interface IModalProps {
 	children: JSX.IntrinsicElements.div
-}
-
-interface IHeaderProps {
-	user: IUser | null
 }
 
 interface IItemCardProps {
@@ -110,4 +106,31 @@ interface ICreateItemProps {
 	sizes?: string[] | string
 	price?: string
 	photo?: File
+}
+
+interface IInputProps {
+	className: string
+	labelClassName?: string
+	type: string
+	name: string
+	placeholder?: string
+	onChange: function
+	err?: boolean
+	value?: string
+	id?: string
+}
+
+interface ISignInUpFormState {
+	email: string
+	password: string
+	name?: string
+}
+
+interface IPasswordChangeProps {
+	passInputShown: boolean
+	passwordShowHandler: function
+}
+
+interface IRenderSwitchProps {
+	param: string
 }

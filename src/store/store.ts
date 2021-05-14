@@ -11,4 +11,5 @@ export const rootReducer = combineReducers({
 	sex: sexReducer,
 })
 
+//Default redux, without thunk, since in my opinion it is overpowering this project
 export const store: Store<IRootState> = createStore(rootReducer)
