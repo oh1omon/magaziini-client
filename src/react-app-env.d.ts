@@ -114,11 +114,13 @@ interface ICreateItemProps {
 
 interface IInputProps {
 	className: string
+	labelClassName?: string
 	type: string
 	name: string
 	placeholder: string
 	onChange: function
-	err: boolean
+	err?: boolean
+	value?: string
 }
 
 interface ISignInUpFormState {

@@ -10,6 +10,8 @@ export default function SignInUpModal() {
 	const dispatch = useDispatch()
 	const [newAccount, setNewAccount] = useState(false)
 	const [err, setErr] = useState<string[]>([])
+	const [errMessage, setErrMessage] = useState({ message: '' })
+	const [form, setForm] = useState<ISignInUpFormState>({ email: '', password: '', name: '' })
 
 	const [inputs, setInputs] = useState([
 		{
@@ -47,8 +49,6 @@ export default function SignInUpModal() {
 			message: 'Please give us your name',
 		},
 	])
-
-	const [form, setForm] = useState<ISignInUpFormState>({ email: '', password: '', name: '' })
 
 	const valueHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setForm({ ...form, [e.target.name]: e.target.value })
@@ -98,8 +98,6 @@ export default function SignInUpModal() {
 		})
 	}
 
-	const [errMessage, setErrMessage] = useState({ message: '' })
-
 	const submitHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 		e.preventDefault()
 		newAccount ? signUpHandler() : signInHandler()
@@ -141,15 +139,15 @@ export default function SignInUpModal() {
 							{newAccount ? 'Sign Up!' : 'Sign In'}
 						</button>
 					</form>
-					<label className='absolute font-sans bottom-4'>
-						<input
-							className='mr-3 font-mono'
-							name='newAccount'
-							type='checkbox'
-							onChange={signInChangeHandler}
-						/>
-						I don't have an account
-					</label>
+					<Input
+						className={'mr-3 font-mono'}
+						type={'checkbox'}
+						name='newAccount'
+						placeholder={''}
+						onChange={signInChangeHandler}
+						labelClassName={'absolute font-sans bottom-4'}
+						value={"I don't have an account"}
+					/>
 				</div>
 			</div>
 		</Modal>
