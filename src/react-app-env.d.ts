@@ -118,4 +118,11 @@ interface IInputProps {
 	name: string
 	placeholder: string
 	onChange: function
+	err: boolean
+}
+
+interface ISignInUpFormState {
+	email: string
+	password: string
+	name?: string
 }
