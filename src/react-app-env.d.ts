@@ -111,3 +111,11 @@ interface ICreateItemProps {
 	price?: string
 	photo?: File
 }
+
+interface IInputProps {
+	className: string
+	type: string
+	name: string
+	placeholder: string
+	onChange: function
+}
