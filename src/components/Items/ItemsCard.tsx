@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import { deleteItem, retrieveItems } from '../../services/dispatchers'
 import { SET_ITEMS } from '../../store/actions/itemActions'
 import FavButton from '../FavButton'
+import { Delete } from '../SVGs/Delete'
+import { Edit } from '../SVGs/Edit'
 
 const ItemCard = ({ id, name, description, img, price, url }: IItemCardProps) => {
 	const dispatch = useDispatch()
@@ -33,20 +35,21 @@ const ItemCard = ({ id, name, description, img, price, url }: IItemCardProps) =>
 	return (
 		<div className='relative flex flex-col m-8 overflow-hidden border-2 border-black w-105 h-140'>
 			{
-				//This button is only visible if you have admin account
+				//These buttons are only visible if you have admin account
 			}
-			<button
-				onClick={(e) => deleteHandler(e)}
-				className={` ${
-					user && user.type === 'admin'
-						? 'absolute -top-1 -right-1 border-2 border-black pt-1 px-1 z-5 bg-white cursor-pointer'
-						: 'hidden'
-				}`}
-			>
-				X
-			</button>
+			<div className={` ${user && user.type === 'admin' ? 'absolute -top-1 -right-1 flex flex-row' : 'hidden'}`}>
+				<Link to={`/updateitem/${id}`} className={' border-2 border-black pt-1 px-1 z-5 bg-white cursor-pointer'}>
+					<Edit />
+				</Link>
+				<button
+					onClick={(e) => deleteHandler(e)}
+					className={' border-2 border-black pt-1 px-1 z-5 bg-white cursor-pointer'}
+				>
+					<Delete />
+				</button>
+			</div>
 			{
-				//Admin button ended
+				//Admin buttons ended
 			}
 			<div className='w-full h-full'>
 				<img className='object-cover w-full h-full filter grayscale-40' src={`${img}`} alt={name + ' image'} />

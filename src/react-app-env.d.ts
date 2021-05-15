@@ -144,3 +144,7 @@ interface ITextareaProps {
 	changeHandler: function
 	label: string
 }
+
+interface IProfileProps {
+	clickHandler: Function
+}

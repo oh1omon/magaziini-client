@@ -150,7 +150,7 @@ const Header = () => {
 						</div>
 					</div>
 				</div>
-				{profVisible && <Profile />}
+				{profVisible && <Profile clickHandler={setProfVisible} />}
 			</div>
 		</Headroom>
 	)

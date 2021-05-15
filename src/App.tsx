@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
+import { ErrorPage } from './components/ErrorPage'
 import Footer from './components/Footer'
 import Header from './components/Header'
 import { Delivery } from './components/InfoWindows/Delivery'
@@ -64,6 +65,10 @@ export const App = () => {
 					<Returns />
 				</Route>
 				<Route path={'/additem'}>{user && user.type === 'admin' ? <Working /> : <Redirect to={'/'} />}</Route>
+				<Route path={'/updateitem/:id'}>{user && user.type === 'admin' ? <Working /> : <Redirect to={'/'} />}</Route>
+				<Route path={'/*'}>
+					<ErrorPage />
+				</Route>
 			</Switch>
 			<Footer />
 		</Router>

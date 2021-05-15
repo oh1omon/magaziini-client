@@ -146,8 +146,8 @@ export default function Working() {
 							<p className='text-red-700'>
 								{
 									//This paragraph contains always the first error message out of all error messages
+									err.length > 0 && errMessages.filter((e) => e.type === err[0])[0].message
 								}
-								{err.length > 0 && errMessages.filter((e) => e.type === err[0])[0].message}
 							</p>
 						</div>
 						<div className='flex flex-row justify-between w-full mb-4 lg:mb-0'>
