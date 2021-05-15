@@ -4,7 +4,7 @@ import { Subscribe } from './Subscribe'
 
 export default function Footer() {
 	return (
-		<div className='flex items-center justify-center w-full h-auto text-gray-700 bg-gray-200 border-t-4 border-black lg:h-96 '>
+		<div className='flex items-center justify-center w-full h-auto text-gray-700 bg-gray-200 border-t-4 border-black lg:h-96  font-sans text-sm xl:text-2xl'>
 			<div className='flex flex-col items-center justify-between w-4/5 lg:flex-row h-4/5'>
 				<div className='w-full h-full pb-6 lg:w-1/3'>
 					<h2 className='w-full py-4 uppercase border-b border-gray-700 lg:w-4/5'>Customer info</h2>

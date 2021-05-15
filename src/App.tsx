@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
 import Footer from './components/Footer'
 import Header from './components/Header'
+import { Item } from './components/Item'
 import Main from './components/Main'
 import DeliveryModal from './components/Modals/DeliveryModal'
 import HistoryModal from './components/Modals/HistoryModal'
-import ItemModal from './components/Modals/ItemModal'
 import PaymentModal from './components/Modals/PaymentModal'
 import ProfileModal from './components/Modals/ProfileModal'
 import ReturnModal from './components/Modals/ReturnModal'
@@ -43,15 +43,22 @@ export const App = () => {
 	return (
 		<Router>
 			<div id='top'></div>
-			<div className='font-sans text-sm xl:text-2xl'>
+			{/* <div className='font-sans text-sm xl:text-2xl'>
 				<Header />
 				<Main />
 				<Footer />
-			</div>
+			</div> */}
+			<Header />
 			<Switch>
+				<Route exact path={'/'}>
+					<div className='font-sans text-sm xl:text-2xl'>
+						<Main />
+					</div>
+				</Route>
 				<Route path={`/user`}>{user ? <ProfileModal /> : <SignInUpModal />}</Route>
 				<Route path={`/item/:id`}>
-					<ItemModal />
+					{/* <ItemModal /> */}
+					<Item />
 				</Route>
 				<Route path={`/payment`} component={PaymentModal} />
 				<Route path={`/delivery`} component={DeliveryModal} />
@@ -59,6 +66,7 @@ export const App = () => {
 				<Route path={`/history`} component={HistoryModal} />
 				<Route path={'/working'}>{user && user.type === 'admin' ? <WorkingModal /> : <Redirect to={'/'} />}</Route>
 			</Switch>
+			<Footer />
 		</Router>
 	)
 }

@@ -32,6 +32,7 @@ module.exports = {
 			'1/4': '25%',
 			'1/2': '50%',
 			'3/4': '75%',
+
 			full: '100%',
 		},
 		minHeight: {
@@ -39,6 +40,7 @@ module.exports = {
 			'1/4': '25%',
 			'1/2': '50%',
 			'3/4': '75%',
+			hero: 'calc(100vh - 5rem)',
 			full: '100%',
 		},
 		extend: {
