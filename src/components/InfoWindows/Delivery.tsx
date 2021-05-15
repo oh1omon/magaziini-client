@@ -2,10 +2,7 @@ import React from 'react'
 
 export const Delivery = () => {
 	return (
-		<div
-			className='z-10 flex items-center justify-center  overflow-y-scroll lg:overscroll-none text-xs bg-white w-full min-h-hero'
-			onClick={(e) => e.stopPropagation()}
-		>
+		<div className='z-10 flex items-center justify-center  overflow-y-scroll lg:overscroll-none text-xs bg-white w-full min-h-hero'>
 			<div className='flex flex-col justify-between w-4/5 font-mono lg:font-sans text-xs text-justify h-128 lg:h-140 text-opacity-80 my-12'>
 				<h1 className='font-sans text-xl lg:text-3xl'>Delivery </h1>
 				<p className='text-xs lg:text-lg'>

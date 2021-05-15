@@ -59,10 +59,7 @@ export const Item = () => {
 	}, [id])
 
 	return (
-		<div
-			className='z-10 flex items-center justify-center  overflow-y-scroll lg:overscroll-none text-xs bg-white w-full min-h-hero'
-			onClick={(e) => e.stopPropagation()}
-		>
+		<div className='z-10 flex items-center justify-center  overflow-y-scroll lg:overscroll-none text-xs bg-white w-full min-h-hero'>
 			<div
 				className={`flex flex-col lg:flex-row items-center ${
 					isLoading ? 'justify-center' : 'justify-between'

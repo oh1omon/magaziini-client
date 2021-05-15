@@ -6,12 +6,11 @@ import Header from './components/Header'
 import { Delivery } from './components/InfoWindows/Delivery'
 import { History } from './components/InfoWindows/History'
 import { Payment } from './components/InfoWindows/Payment'
-import ProfileModal from './components/InfoWindows/ProfileModal'
 import { Returns } from './components/InfoWindows/Returns'
-import SignInUpModal from './components/InfoWindows/SignInUpModal'
 import WorkingModal from './components/InfoWindows/WorkingModal'
 import { Item } from './components/Item'
 import Main from './components/Main'
+import SignInUp from './components/SignInUp'
 import { retrieveItems, retrieveUser } from './services/dispatchers'
 import { SET_FAVS } from './store/actions/favActions'
 import { SET_ITEMS } from './store/actions/itemActions'
@@ -48,7 +47,7 @@ export const App = () => {
 				<Route exact path={'/'}>
 					<Main />
 				</Route>
-				<Route path={`/login`}>{user ? <ProfileModal /> : <SignInUpModal />}</Route>
+				<Route path={'/login'}>{user ? <Redirect to={'/'} /> : <SignInUp />}</Route>
 				<Route path={`/item/:id`}>
 					<Item />
 				</Route>
