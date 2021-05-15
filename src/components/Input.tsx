@@ -15,6 +15,7 @@ export const Input = ({
 	err = false,
 	value,
 	labelClassName = '',
+	label,
 }: IInputProps) => {
 	return (
 		<>
@@ -23,6 +24,7 @@ export const Input = ({
 					className={`${err ? 'border-red-700' : 'border-black'} ${className}`}
 					name={name}
 					type={type}
+					id={name}
 					placeholder={placeholder}
 					onChange={(e) => onChange(e)}
 					value={value}

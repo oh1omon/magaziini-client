@@ -7,10 +7,10 @@ import { Delivery } from './components/InfoWindows/Delivery'
 import { History } from './components/InfoWindows/History'
 import { Payment } from './components/InfoWindows/Payment'
 import { Returns } from './components/InfoWindows/Returns'
-import WorkingModal from './components/InfoWindows/WorkingModal'
 import { Item } from './components/Item'
 import Main from './components/Main'
 import SignInUp from './components/SignInUp'
+import Working from './components/Working/Working'
 import { retrieveItems, retrieveUser } from './services/dispatchers'
 import { SET_FAVS } from './store/actions/favActions'
 import { SET_ITEMS } from './store/actions/itemActions'
@@ -63,7 +63,7 @@ export const App = () => {
 				<Route path={'/returns'}>
 					<Returns />
 				</Route>
-				<Route path={'/working'}>{user && user.type === 'admin' ? <WorkingModal /> : <Redirect to={'/'} />}</Route>
+				<Route path={'/additem'}>{user && user.type === 'admin' ? <Working /> : <Redirect to={'/'} />}</Route>
 			</Switch>
 			<Footer />
 		</Router>
