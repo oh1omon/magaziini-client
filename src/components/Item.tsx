@@ -60,7 +60,7 @@ export const Item = () => {
 
 	return (
 		<div
-			className=' z-10 flex items-center justify-center  overflow-y-scroll lg:overscroll-none text-xs bg-white w-full min-h-hero'
+			className='z-10 flex items-center justify-center  overflow-y-scroll lg:overscroll-none text-xs bg-white w-full min-h-hero'
 			onClick={(e) => e.stopPropagation()}
 		>
 			<div

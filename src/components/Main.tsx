@@ -4,7 +4,7 @@ import Items from './Items/Items'
 
 const Main = () => {
 	return (
-		<div>
+		<div className={'font-sans text-sm xl:text-2xl'}>
 			<Hero />
 			<Items />
 		</div>

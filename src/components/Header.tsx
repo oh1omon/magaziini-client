@@ -29,9 +29,9 @@ const Header = () => {
 			<div className='flex flex-row flex-wrap items-center justify-around w-full h-auto bg-gray-200 bg-opacity-75 border-b-4 border-black font-sans text-sm xl:text-2xl'>
 				<div className='flex flex-wrap items-center justify-between h-auto pt-5 lg:py-5 w-9/10'>
 					<div className='flex items-center justify-center w-1/2 lg:w-36 logo'>
-						<HashLink to='#top' smooth={true}>
+						<Link to='/'>
 							<Logo className={'w-28 sm:w-full'} />
-						</HashLink>
+						</Link>
 					</div>
 					<div className='flex-row items-center justify-around hidden lg:flex w-96'>
 						<HashLink to='#items' smooth>

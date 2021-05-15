@@ -3,15 +3,15 @@ import { useDispatch, useSelector } from 'react-redux'
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
 import Footer from './components/Footer'
 import Header from './components/Header'
+import { Delivery } from './components/InfoWindows/Delivery'
+import { History } from './components/InfoWindows/History'
+import { Payment } from './components/InfoWindows/Payment'
+import ProfileModal from './components/InfoWindows/ProfileModal'
+import { Returns } from './components/InfoWindows/Returns'
+import SignInUpModal from './components/InfoWindows/SignInUpModal'
+import WorkingModal from './components/InfoWindows/WorkingModal'
 import { Item } from './components/Item'
 import Main from './components/Main'
-import DeliveryModal from './components/Modals/DeliveryModal'
-import HistoryModal from './components/Modals/HistoryModal'
-import PaymentModal from './components/Modals/PaymentModal'
-import ProfileModal from './components/Modals/ProfileModal'
-import ReturnModal from './components/Modals/ReturnModal'
-import SignInUpModal from './components/Modals/SignInUpModal'
-import WorkingModal from './components/Modals/WorkingModal'
 import { retrieveItems, retrieveUser } from './services/dispatchers'
 import { SET_FAVS } from './store/actions/favActions'
 import { SET_ITEMS } from './store/actions/itemActions'
@@ -43,27 +43,27 @@ export const App = () => {
 	return (
 		<Router>
 			<div id='top'></div>
-			{/* <div className='font-sans text-sm xl:text-2xl'>
-				<Header />
-				<Main />
-				<Footer />
-			</div> */}
 			<Header />
 			<Switch>
 				<Route exact path={'/'}>
-					<div className='font-sans text-sm xl:text-2xl'>
-						<Main />
-					</div>
+					<Main />
 				</Route>
 				<Route path={`/user`}>{user ? <ProfileModal /> : <SignInUpModal />}</Route>
 				<Route path={`/item/:id`}>
-					{/* <ItemModal /> */}
 					<Item />
 				</Route>
-				<Route path={`/payment`} component={PaymentModal} />
-				<Route path={`/delivery`} component={DeliveryModal} />
-				<Route path={`/returnsPolicy`} component={ReturnModal} />
-				<Route path={`/history`} component={HistoryModal} />
+				<Route path={'/delivery'}>
+					<Delivery />
+				</Route>
+				<Route path={'/payment'}>
+					<Payment />
+				</Route>
+				<Route path={'/history'}>
+					<History />
+				</Route>
+				<Route path={'/returns'}>
+					<Returns />
+				</Route>
 				<Route path={'/working'}>{user && user.type === 'admin' ? <WorkingModal /> : <Redirect to={'/'} />}</Route>
 			</Switch>
 			<Footer />

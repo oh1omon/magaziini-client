@@ -19,7 +19,7 @@ export default function Footer() {
 						</Link>
 					</p>
 					<p className='py-1 font-mono text-sm text-justify lg:py-3'>
-						<Link to='/returnsPolicy' className='duration-200 hover:text-black'>
+						<Link to='/returns' className='duration-200 hover:text-black'>
 							Returns Policy
 						</Link>
 					</p>
