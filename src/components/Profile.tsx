@@ -64,8 +64,8 @@ export const Profile = () => {
 	const user = useSelector((state: IRootState) => state.user)
 
 	return (
-		<div className={`w-full h-64 flex flex-row justify-center items-center`}>
-			<div className={'lg:w-9/10 w-4/5 h-full flex flex-col lg:flex-row justify-around items-center '}>
+		<div className={`w-full h-64 lg:h-32 flex flex-row justify-center items-center`}>
+			<div className={'lg:w-9/10 w-4/5 h-full flex flex-col lg:flex-row justify-around items-center'}>
 				{user && (
 					<>
 						<ProfilePart children={<PasswordChange />} />
