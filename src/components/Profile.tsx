@@ -5,6 +5,7 @@ import { CreateItemLink } from '../ProfileParts/CreateItemLink'
 import { ProfilePart } from '../ProfileParts/ProfilePart'
 import { SignOutBtn } from '../ProfileParts/SignOutBtn'
 import { PasswordChange } from './PasswordChange'
+import { Arrow } from './SVGs/Arrow'
 
 export const Profile = ({ clickHandler }: IProfileProps) => {
 	//Retrieving user from the global state
@@ -19,19 +20,11 @@ export const Profile = ({ clickHandler }: IProfileProps) => {
 						{user!.type === 'admin' && <ProfilePart children={<CreateItemLink />} />}
 						<ProfilePart children={<CheckOrdersLink />} />
 						<ProfilePart children={<SignOutBtn />} />
+						{
+							//This div is needed, so we can beautifully center our arrow for closing profile
+						}
 						<div className={'lg:hidden w-4/5 h-full'}></div>
-						<svg
-							onClick={() => clickHandler()}
-							className='transform -translate-x-1/2 -rotate-180 w-6 h-6 text-black cursor-pointer absolute left-1/2 right-1/2 bottom-4'
-							fill='none'
-							strokeLinecap='round'
-							strokeLinejoin='round'
-							strokeWidth='2'
-							viewBox='0 0 24 24'
-							stroke='currentColor'
-						>
-							<path d='M19 14l-7 7m0 0l-7-7m7 7V3'></path>
-						</svg>
+						<Arrow clickHandler={clickHandler} />
 					</>
 				)}
 			</div>

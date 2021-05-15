@@ -38,6 +38,8 @@ const Header = () => {
 		setProfVisible(!profVisible)
 	}
 
+	//It will listen for user global state changes and it is going to set showing of profile to false, if there is no user
+	//It is needed, for example, when user decides to sign out, so we should not show profile to him anymore
 	useEffect(() => {
 		if (user === null) {
 			setProfVisible(false)

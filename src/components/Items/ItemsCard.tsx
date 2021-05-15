@@ -20,7 +20,6 @@ const ItemCard = ({ id, name, description, img, price, url }: IItemCardProps) =>
 	 */
 	const deleteHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 		e.preventDefault()
-
 		user &&
 			user.type === 'admin' &&
 			deleteItem(id).then((r) => {
