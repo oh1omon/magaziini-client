@@ -48,7 +48,7 @@ export const App = () => {
 				<Route exact path={'/'}>
 					<Main />
 				</Route>
-				<Route path={`/user`}>{user ? <ProfileModal /> : <SignInUpModal />}</Route>
+				<Route path={`/login`}>{user ? <ProfileModal /> : <SignInUpModal />}</Route>
 				<Route path={`/item/:id`}>
 					<Item />
 				</Route>

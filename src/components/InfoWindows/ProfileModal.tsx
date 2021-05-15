@@ -48,7 +48,7 @@ export default function ProfileModal() {
 				onClick={(e) => e.stopPropagation()}
 			>
 				<div className='flex flex-col justify-between w-4/5 font-mono text-xs text-justify lg:font-sans h-9/10 lg:h-4/5 text-opacity-80'>
-					<PasswordChange passInputShown={passInputShown} passwordShowHandler={passwordShowHandler} />
+					<PasswordChange />
 					<div className={`${passInputShown ? 'hidden' : 'flex'} w-full border-b border-black border-opacity-80`}></div>
 					<div className={`${passInputShown ? 'hidden' : 'flex'} flex flex-col items-center justify-center h-2/5`}>
 						<button
