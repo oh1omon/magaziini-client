@@ -150,3 +150,12 @@ interface ITextareaProps {
 interface IProfileProps {
 	clickHandler: function
 }
+
+interface IOrder {
+	_id: string
+	itemId: string
+	submitter: string
+	size: string
+	color: string
+	status: string
+}

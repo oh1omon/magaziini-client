@@ -27,14 +27,6 @@ module.exports = {
 			sans: ['Roboto', 'sans-serif'],
 			mono: ['"Source Code Pro"', 'monospace'],
 		},
-		minWidth: {
-			0: '0',
-			'1/4': '25%',
-			'1/2': '50%',
-			'3/4': '75%',
-
-			full: '100%',
-		},
 		minHeight: {
 			0: '0',
 			'1/4': '25%',
@@ -54,6 +46,14 @@ module.exports = {
 				300: '75rem',
 				hero: 'calc(100vh - 5rem)',
 			}),
+
+			minWidth: {
+				0: '0',
+				'1/4': '25%',
+				'1/2': '50%',
+				'3/4': '75%',
+				full: '100%',
+			},
 			grayscale: (theme) => ({
 				20: '20%',
 				40: '40%',

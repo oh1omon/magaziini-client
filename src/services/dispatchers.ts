@@ -9,6 +9,7 @@ const signOutUrl = '/api/user/signout'
 
 //ORDER urls
 const createOrderUrl = '/api/order/create'
+const retrieveOrdersUrl = '/api/order/retrieve'
 
 //ORDER urls
 const addSubUrl = '/api/sub/add'
@@ -187,6 +188,21 @@ export const createOrder = async (orderObj: ICreateOrderProps) => {
 		//
 		order = r.data
 		return order
+	})
+}
+
+/**
+ * Function for finding orders
+ * @returns {[]} req.data
+ */
+export const retrieveOrders = async () => {
+	let orders = null
+	return axios.get(retrieveOrdersUrl).then((r) => {
+		//TODO delete console.log()
+		console.log(r)
+		//
+		orders = r.data
+		return orders
 	})
 }
 
