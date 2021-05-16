@@ -8,6 +8,7 @@ export const PasswordChange = () => {
 	//Predefining the password object for the future
 	const [passwordObj, setPasswordObj] = useState({ password: '' })
 
+	//Local state for toggling on and off pass input visibility
 	const [passInputShown, setPassInputShown] = useState(false)
 
 	//Setting local err state
