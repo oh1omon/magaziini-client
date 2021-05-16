@@ -105,7 +105,8 @@ interface ICreateItemProps {
 	sex?: string
 	sizes?: string[] | string
 	price?: string
-	photo?: string
+	image?: string
+	_id?: string
 }
 
 interface IInputProps {
@@ -143,8 +144,9 @@ interface ITextareaProps {
 	err: boolean
 	changeHandler: function
 	label: string
+	defaultValue?: string
 }
 
 interface IProfileProps {
-	clickHandler: Function
+	clickHandler: function
 }

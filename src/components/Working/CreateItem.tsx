@@ -6,7 +6,7 @@ import { addItem, retrieveItems } from '../../services/dispatchers'
 import Validator from '../../services/validator'
 import { SET_ITEMS } from '../../store/actions/itemActions'
 import { Textarea } from './Textarea'
-import { WorkingInput } from './WorkingInput'
+import { WorkingInput } from './ItemInput'
 
 export default function Working() {
 	//Creating local state for th form
@@ -63,7 +63,7 @@ export default function Working() {
 		const formObject = form
 
 		//Since size input is just a string we need to create an array of {string} sizes
-		formObject.sizes = formObject.sizes!.toString().split(' ')
+		formObject.sizes = formObject.sizes!.toString().split(',')
 
 		//If form has passed validation, then we are submitting it to the dispatcher.
 		//Then depending on the result we gain from the server, we either updating the global user state, or printing error message to the user
@@ -74,16 +74,13 @@ export default function Working() {
 	}
 
 	return (
-		<div
-			className='z-10 flex items-center justify-center lg:overscroll-none text-xs bg-white w-full min-h-hero'
-			onClick={(e) => e.stopPropagation()}
-		>
+		<div className='z-10 flex items-center justify-center lg:overscroll-none text-xs bg-white w-full min-h-hero'>
 			<div className='relative flex flex-col justify-between items-center w-4/5 font-mono lg:font-sans text-xs text-justify h-auto my-12'>
 				<div className='w-full h-auto lg:w-4/5 flex md:flex-row flex-col justify-between'>
 					<div className='flex items-center justify-center w-full h-140 md:w-2/5'>
-						{form.photo ? (
+						{form.image ? (
 							<img
-								src={form?.photo}
+								src={form?.image}
 								alt={' you have just uploaded'}
 								className='object-scale-down w-auto h-auto border border-black lg:object-cover filter grayscale-40'
 							/>

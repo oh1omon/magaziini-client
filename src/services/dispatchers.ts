@@ -17,7 +17,7 @@ const addSubUrl = '/api/sub/add'
 const getItemsUrl = '/api/item'
 const removeItemUrl = '/api/item/remove'
 const createItemUrl = '/api/item/create'
-// const updateItemUrl = '/api/item/update'
+const updateItemUrl = '/api/item/update'
 
 //======================USERS======================
 
@@ -151,6 +151,20 @@ export const deleteItem = async (_id: string) => {
  */
 export const addItem = (itemObj: ICreateItemProps) => {
 	return axios.post(createItemUrl, itemObj).then((r) => {
+		//TODO delete console.log()
+		console.log(r)
+		//
+		if (r.data.message) return { message: r.data.message, type: 'info' }
+		return { message: r.data.err, type: 'error' }
+	})
+}
+
+/**
+ * Function for creating new item
+ * @returns {object} object with message and type fields
+ */
+export const updateItem = (itemObj: ICreateItemProps) => {
+	return axios.post(updateItemUrl, itemObj).then((r) => {
 		//TODO delete console.log()
 		console.log(r)
 		//

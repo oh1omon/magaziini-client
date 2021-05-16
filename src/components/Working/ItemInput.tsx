@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const WorkingInput = ({ name, type, className, err, changeHandler, label }: ITextareaProps) => {
+export const WorkingInput = ({ name, type, className, err, changeHandler, label, defaultValue }: ITextareaProps) => {
 	return (
 		<div className={'flex flex-col'}>
 			<label htmlFor={name}>{label}</label>
@@ -10,6 +10,7 @@ export const WorkingInput = ({ name, type, className, err, changeHandler, label 
 				name={name}
 				className={`${className} ${err ? 'border-red-700' : 'border-black'}`}
 				onChange={(e) => changeHandler(e)}
+				defaultValue={defaultValue || ''}
 			/>
 		</div>
 	)

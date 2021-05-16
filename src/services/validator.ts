@@ -77,8 +77,8 @@ class Validator {
 		if (!createObj.description) {
 			err.push('description')
 		}
-		if (!createObj.photo) {
-			err.push('photo')
+		if (!createObj.image) {
+			err.push('image')
 		}
 		if (!createObj.sex) {
 			err.push('sex')

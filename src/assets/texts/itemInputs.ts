@@ -1,5 +1,5 @@
 /**
- * Input objects containing base information about every input for Working component
+ * Input objects containing base information about every input for Create- and UpdateItem component
  */
 const itemInputs = [
 	{
@@ -16,7 +16,7 @@ const itemInputs = [
 	},
 	{
 		className: `border-2 p-2 font-sans text-sm tracking-wide `,
-		name: 'photo',
+		name: 'image',
 		type: 'text',
 		label: 'Image url',
 	},
@@ -24,7 +24,7 @@ const itemInputs = [
 		className: `border-2 p-2 font-sans text-sm tracking-wide uppercase`,
 		name: 'sizes',
 		type: 'text',
-		label: 'Sizes (divide them with space)',
+		label: 'Sizes (divide them with comma(,))',
 	},
 	{
 		className: `border-2 p-2 font-sans text-sm tracking-wide uppercase`,

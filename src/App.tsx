@@ -11,7 +11,8 @@ import { Returns } from './components/InfoWindows/Returns'
 import { Item } from './components/Item'
 import Main from './components/Main'
 import SignInUp from './components/SignInUp'
-import Working from './components/Working/Working'
+import Update from './components/Working/UpdateItem'
+import Working from './components/Working/CreateItem'
 import { retrieveItems, retrieveUser } from './services/dispatchers'
 import { SET_FAVS } from './store/actions/favActions'
 import { SET_ITEMS } from './store/actions/itemActions'
@@ -65,7 +66,7 @@ export const App = () => {
 					<Returns />
 				</Route>
 				<Route path={'/additem'}>{user && user.type === 'admin' ? <Working /> : <Redirect to={'/'} />}</Route>
-				<Route path={'/updateitem/:id'}>{user && user.type === 'admin' ? <Working /> : <Redirect to={'/'} />}</Route>
+				<Route path={'/updateitem/:id'}>{user && user.type === 'admin' ? <Update /> : <Redirect to={'/'} />}</Route>
 				<Route path={'/*'}>
 					<ErrorPage />
 				</Route>

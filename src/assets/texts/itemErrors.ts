@@ -1,5 +1,5 @@
 /**
- * These messages are used in Working component
+ * These messages are used in Create- and UpdateItem component
  */
 const itemErrors = [
 	{
@@ -11,7 +11,7 @@ const itemErrors = [
 		message: 'Please provide description of the item',
 	},
 	{
-		type: 'photo',
+		type: 'image',
 		message: 'Please provide image url of the item',
 	},
 	{
