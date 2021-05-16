@@ -77,13 +77,16 @@ class Validator {
 		if (!createObj.description) {
 			err.push('description')
 		}
+		if (!createObj.image) {
+			err.push('image')
+		}
 		if (!createObj.sex) {
 			err.push('sex')
 		}
 		if (!createObj.sizes) {
 			err.push('sizes')
 		}
-		if (!createObj.price) {
+		if (!createObj.price || isNaN(parseInt(createObj.price))) {
 			err.push('price')
 		}
 		return err

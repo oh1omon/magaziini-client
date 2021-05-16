@@ -4,9 +4,12 @@ import { updateUser } from '../services/dispatchers'
 import Validator from '../services/validator'
 import { Input } from './Input'
 
-export const PasswordChange = ({ passInputShown, passwordShowHandler }: IPasswordChangeProps) => {
+export const PasswordChange = () => {
 	//Predefining the password object for the future
 	const [passwordObj, setPasswordObj] = useState({ password: '' })
+
+	//Local state for toggling on and off pass input visibility
+	const [passInputShown, setPassInputShown] = useState(false)
 
 	//Setting local err state
 	//This err array will have only names of the inputs where errors has happened, in our case only password field
@@ -51,6 +54,16 @@ export const PasswordChange = ({ passInputShown, passwordShowHandler }: IPasswor
 	}
 
 	/**
+	 *
+	 * @param {React.MouseEvent<HTMLButtonElement, MouseEvent>} e
+	 * Function just toggles showing on and off password changed window
+	 */
+	const passwordShowHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+		e.preventDefault()
+		setPassInputShown(true)
+	}
+
+	/**
 	 * Function to control the password object state to be the same as user's input
 	 * @param {React.ChangeEvent<HTMLInputElement>} e
 	 */
@@ -59,35 +72,35 @@ export const PasswordChange = ({ passInputShown, passwordShowHandler }: IPasswor
 	}
 
 	return (
-		<div className='flex flex-col items-center justify-center h-2/5'>
+		<div className='flex flex-col items-center justify-center w-full h-auto'>
 			<button
 				onClick={(e) => passwordShowHandler(e)}
 				className={` ${
 					passInputShown ? 'hidden' : 'flex'
-				} items-center justify-center w-full h-12 font-sans text-xl duration-150 bg-white border-2 border-black hover:bg-gray-200`}
+				} items-center justify-center w-full h-8 font-sans text-sm duration-150 bg-white border-2 border-black hover:bg-gray-200`}
 			>
 				Change Password
 			</button>
 			<form className={`${passInputShown ? 'flex' : 'hidden'} flex-col h-3/4`}>
 				<Input
-					className='w-full h-12 px-4 mb-4 font-mono text-sm border-2 border-black focus:border-gray-500 focus:outline-none'
+					className='w-full h-8 px-4 mb-4 font-mono text-sm border-2 border-black focus:border-gray-500 focus:outline-none'
 					name='password'
 					type='password'
 					placeholder='New Password'
 					onChange={(e: React.ChangeEvent<HTMLInputElement>) => passwordValueHandler(e)}
 				/>
-				<div className={`${!passInputShown ? 'hidden' : 'flex'} text-mono justify-center items-center`}>
+				<div className={`${!passInputShown ? 'hidden' : 'flex'} text-mono text-xs justify-center items-center`}>
 					<p className={`${infoMessage.type === 'info' ? 'text-blue-700' : 'text-red-700'} `}>{infoMessage.message}</p>
 					<p className={`${infoMessage.type === 'info' ? 'text-blue-700' : 'text-red-700'} `}>
 						{
 							//This paragraph contains always the first info message out of all info messages
+							err.length > 0 && errorsMsg.filter((e) => e.type === err[0])[0].message
 						}
-						{err.length > 0 && errorsMsg.filter((e) => e.type === err[0])[0].message}
 					</p>
 				</div>
 				<button
 					onClick={(e) => passwordSubmitHandler(e)}
-					className={`flex items-center justify-center w-full h-12 font-sans text-xl duration-150 bg-white border-2 border-black hover:bg-gray-200`}
+					className={`flex items-center justify-center w-full h-8 font-sans text-sm duration-150 bg-white border-2 border-black hover:bg-gray-200`}
 				>
 					Change Password
 				</button>

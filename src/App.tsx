@@ -1,17 +1,21 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
+import { ErrorPage } from './components/ErrorPage'
 import Footer from './components/Footer'
 import Header from './components/Header'
+import { Delivery } from './components/InfoWindows/Delivery'
+import { History } from './components/InfoWindows/History'
+import { News } from './components/InfoWindows/News/News'
+import { NewsButton } from './components/InfoWindows/News/NewsButton'
+import { Payment } from './components/InfoWindows/Payment'
+import { Returns } from './components/InfoWindows/Returns'
+import { Item } from './components/Item'
 import Main from './components/Main'
-import DeliveryModal from './components/Modals/DeliveryModal'
-import HistoryModal from './components/Modals/HistoryModal'
-import ItemModal from './components/Modals/ItemModal'
-import PaymentModal from './components/Modals/PaymentModal'
-import ProfileModal from './components/Modals/ProfileModal'
-import ReturnModal from './components/Modals/ReturnModal'
-import SignInUpModal from './components/Modals/SignInUpModal'
-import WorkingModal from './components/Modals/WorkingModal'
+import { Orders } from './components/Orders'
+import SignInUp from './components/SignInUp'
+import Working from './components/Working/CreateItem'
+import Update from './components/Working/UpdateItem'
 import { retrieveItems, retrieveUser } from './services/dispatchers'
 import { SET_FAVS } from './store/actions/favActions'
 import { SET_ITEMS } from './store/actions/itemActions'
@@ -22,6 +26,9 @@ export const App = () => {
 
 	//Retrieving user from the global state
 	const user = useSelector((state: IRootState) => state.user)
+
+	//Creating local state for showing or not NewsButton
+	const [showNews, setShowNews] = useState(true)
 
 	//Retrieving all items from DB to put them into global state
 	useEffect(() => {
@@ -40,25 +47,51 @@ export const App = () => {
 		dispatch({ type: SET_FAVS, payload: JSON.parse(window.localStorage.getItem('favorite')!) || [] })
 	}, [dispatch])
 
+	//So, if user has already clicked NewsButton, then localStorage now has an newsShown value set, and we are not showing this button him anymore
+	useEffect(() => {
+		if (window.localStorage.getItem('newsShown')) {
+			setShowNews(false)
+		}
+	}, [])
+
 	return (
 		<Router>
 			<div id='top'></div>
-			<div className='font-sans text-sm xl:text-2xl'>
-				<Header />
-				<Main />
-				<Footer />
-			</div>
+			<Header />
+			{showNews && <NewsButton setShowNews={setShowNews} />}
 			<Switch>
-				<Route path={`/user`}>{user ? <ProfileModal /> : <SignInUpModal />}</Route>
-				<Route path={`/item/:id`}>
-					<ItemModal />
+				<Route exact path={'/'}>
+					<Main />
 				</Route>
-				<Route path={`/payment`} component={PaymentModal} />
-				<Route path={`/delivery`} component={DeliveryModal} />
-				<Route path={`/returnsPolicy`} component={ReturnModal} />
-				<Route path={`/history`} component={HistoryModal} />
-				<Route path={'/working'}>{user && user.type === 'admin' ? <WorkingModal /> : <Redirect to={'/'} />}</Route>
+				<Route path={'/login'}>{user ? <Redirect to={'/'} /> : <SignInUp />}</Route>
+				<Route path={`/item/:id`}>
+					<Item />
+				</Route>
+				<Route path={'/delivery'}>
+					<Delivery />
+				</Route>
+				<Route path={'/payment'}>
+					<Payment />
+				</Route>
+				<Route path={'/history'}>
+					<History />
+				</Route>
+				<Route path={'/returns'}>
+					<Returns />
+				</Route>
+				<Route path={'/orders'}>
+					<Orders />
+				</Route>
+				<Route path={'/additem'}>{user && user.type === 'admin' ? <Working /> : <Redirect to={'/'} />}</Route>
+				<Route path={'/updateitem/:id'}>{user && user.type === 'admin' ? <Update /> : <Redirect to={'/'} />}</Route>
+				<Route path={'/news'}>
+					<News />
+				</Route>
+				<Route path={'/*'}>
+					<ErrorPage />
+				</Route>
 			</Switch>
+			<Footer />
 		</Router>
 	)
 }

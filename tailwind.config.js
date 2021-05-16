@@ -27,18 +27,12 @@ module.exports = {
 			sans: ['Roboto', 'sans-serif'],
 			mono: ['"Source Code Pro"', 'monospace'],
 		},
-		minWidth: {
-			0: '0',
-			'1/4': '25%',
-			'1/2': '50%',
-			'3/4': '75%',
-			full: '100%',
-		},
 		minHeight: {
 			0: '0',
 			'1/4': '25%',
 			'1/2': '50%',
 			'3/4': '75%',
+			hero: 'calc(100vh - 5rem)',
 			full: '100%',
 		},
 		extend: {
@@ -49,8 +43,18 @@ module.exports = {
 				172: '43rem',
 				128: '32rem',
 				140: '35rem',
+				260: '65rem',
+				300: '75rem',
 				hero: 'calc(100vh - 5rem)',
 			}),
+
+			minWidth: {
+				0: '0',
+				'1/4': '25%',
+				'1/2': '50%',
+				'3/4': '75%',
+				full: '100%',
+			},
 			grayscale: (theme) => ({
 				20: '20%',
 				40: '40%',
@@ -119,6 +123,7 @@ module.exports = {
 			animation: {
 				cardHeaderAnimationIn: 'cardHeaderKeyframeIn 500ms ease-in-out forwards',
 				cardHeaderAnimationOut: 'cardHeaderKeyframeOut 500ms ease-in-out forwards',
+				ping: 'ping 1.5s cubic-bezier(0, 0, 0.2, 1) 3',
 			},
 		},
 	},

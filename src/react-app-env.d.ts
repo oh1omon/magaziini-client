@@ -105,7 +105,8 @@ interface ICreateItemProps {
 	sex?: string
 	sizes?: string[] | string
 	price?: string
-	photo?: File
+	image?: string
+	_id?: string
 }
 
 interface IInputProps {
@@ -118,6 +119,7 @@ interface IInputProps {
 	err?: boolean
 	value?: string
 	id?: string
+	label?: string
 }
 
 interface ISignInUpFormState {
@@ -133,4 +135,35 @@ interface IPasswordChangeProps {
 
 interface IRenderSwitchProps {
 	param: string
+}
+
+interface ITextareaProps {
+	name: string
+	type?: string
+	className: string
+	err: boolean
+	changeHandler: function
+	label: string
+	defaultValue?: string
+}
+
+interface IProfileProps {
+	clickHandler: function
+}
+
+interface INewsButtonProps {
+	setShowNews: function
+}
+
+interface IOrder {
+	_id: string
+	itemId: string
+	submitter: string
+	size: string
+	color: string
+	status: string
+}
+
+interface IBackBtnProps {
+	backHandler: function
 }

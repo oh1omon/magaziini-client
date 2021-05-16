@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Headroom from 'react-headroom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { HashLink } from 'react-router-hash-link'
-import { ReactComponent as Logo } from '../logo.svg'
 import { SET_SEX } from '../store/actions/sexActions'
+import { Profile } from './Profile'
+import { Logo } from './SVGs/Logo'
 
 const Header = () => {
 	const dispatch = useDispatch()
@@ -15,6 +16,9 @@ const Header = () => {
 	//Retrieving sex identifier to show the right department of the clothes
 	const sex = useSelector((state: IRootState) => state.sex)
 
+	//Creating local state for showing or not the profile component
+	const [profVisible, setProfVisible] = useState(false)
+
 	/**
 	 *
 	 * @param {string} str type of sex
@@ -24,14 +28,32 @@ const Header = () => {
 		dispatch({ type: SET_SEX, payload: str })
 	}
 
+	/**
+	 *
+	 * @param { React.MouseEvent<HTMLButtonElement, MouseEvent> } e
+	 * Function toggles profVisible state
+	 */
+	const profileHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+		e.preventDefault()
+		setProfVisible(!profVisible)
+	}
+
+	//It will listen for user global state changes and it is going to set showing of profile to false, if there is no user
+	//It is needed, for example, when user decides to sign out, so we should not show profile to him anymore
+	useEffect(() => {
+		if (user === null) {
+			setProfVisible(false)
+		}
+	}, [user])
+
 	return (
 		<Headroom style={{ zIndex: 10 }}>
-			<div className='flex flex-row flex-wrap items-center justify-around w-full h-auto bg-gray-200 bg-opacity-75 border-b-4 border-black '>
+			<div className='flex flex-row flex-wrap items-center justify-around w-full h-auto bg-gray-200 bg-opacity-75 border-b-4 border-black font-sans text-sm xl:text-2xl'>
 				<div className='flex flex-wrap items-center justify-between h-auto pt-5 lg:py-5 w-9/10'>
 					<div className='flex items-center justify-center w-1/2 lg:w-36 logo'>
-						<HashLink to='#top' smooth={true}>
-							<Logo className={'w-28 sm:w-full'} />
-						</HashLink>
+						<Link to='/'>
+							<Logo />
+						</Link>
 					</div>
 					<div className='flex-row items-center justify-around hidden lg:flex w-96'>
 						<HashLink to='#items' smooth>
@@ -70,15 +92,26 @@ const Header = () => {
 						</HashLink>
 					</div>
 					<div className='flex items-center justify-center w-1/2 lg:w-40'>
-						<Link
-							to={'/user'}
-							className='px-4 py-1 text-xl duration-200 border-2 border-black lg:py-2 hover:text-white hover:bg-black '
-						>
-							{
-								//Since I am building client-oriented shop, I need to say hello to the user personally
-							}
-							{user ? `Hello, ${user.name.split(' ', 1)}!` : 'Sign In'}
-						</Link>
+						{user ? (
+							<button
+								onClick={(e) => {
+									profileHandler(e)
+								}}
+								className='px-4 py-1 text-xl duration-200 border-2 border-black lg:py-2 hover:text-white hover:bg-black '
+							>
+								{
+									//Since I am building client-oriented shop, I need to say hello to the user personally
+								}
+								{`Hello, ${user.name.split(' ', 1)}!`}
+							</button>
+						) : (
+							<Link
+								to={'/login'}
+								className='px-4 py-1 text-xl duration-200 border-2 border-black lg:py-2 hover:text-white hover:bg-black '
+							>
+								Sign In
+							</Link>
+						)}
 					</div>
 					<div className='flex items-center justify-center w-full h-16 lg:hidden '>
 						<div className='flex flex-row items-center justify-between w-9/10'>
@@ -119,6 +152,7 @@ const Header = () => {
 						</div>
 					</div>
 				</div>
+				{profVisible && <Profile clickHandler={setProfVisible} />}
 			</div>
 		</Headroom>
 	)

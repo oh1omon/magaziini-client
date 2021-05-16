@@ -9,6 +9,7 @@ const signOutUrl = '/api/user/signout'
 
 //ORDER urls
 const createOrderUrl = '/api/order/create'
+const retrieveOrdersUrl = '/api/order/retrieve'
 
 //ORDER urls
 const addSubUrl = '/api/sub/add'
@@ -17,7 +18,7 @@ const addSubUrl = '/api/sub/add'
 const getItemsUrl = '/api/item'
 const removeItemUrl = '/api/item/remove'
 const createItemUrl = '/api/item/create'
-// const updateItemUrl = '/api/item/update'
+const updateItemUrl = '/api/item/update'
 
 //======================USERS======================
 
@@ -159,6 +160,20 @@ export const addItem = (itemObj: ICreateItemProps) => {
 	})
 }
 
+/**
+ * Function for creating new item
+ * @returns {object} object with message and type fields
+ */
+export const updateItem = (itemObj: ICreateItemProps) => {
+	return axios.post(updateItemUrl, itemObj).then((r) => {
+		//TODO delete console.log()
+		console.log(r)
+		//
+		if (r.data.message) return { message: r.data.message, type: 'info' }
+		return { message: r.data.err, type: 'error' }
+	})
+}
+
 //======================ORDERS======================
 
 /**
@@ -173,6 +188,21 @@ export const createOrder = async (orderObj: ICreateOrderProps) => {
 		//
 		order = r.data
 		return order
+	})
+}
+
+/**
+ * Function for finding orders
+ * @returns {[]} req.data
+ */
+export const retrieveOrders = async () => {
+	let orders = null
+	return axios.get(retrieveOrdersUrl).then((r) => {
+		//TODO delete console.log()
+		console.log(r)
+		//
+		orders = r.data
+		return orders
 	})
 }
 
