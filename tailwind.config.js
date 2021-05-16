@@ -43,6 +43,7 @@ module.exports = {
 				172: '43rem',
 				128: '32rem',
 				140: '35rem',
+				260: '65rem',
 				300: '75rem',
 				hero: 'calc(100vh - 5rem)',
 			}),
@@ -122,6 +123,7 @@ module.exports = {
 			animation: {
 				cardHeaderAnimationIn: 'cardHeaderKeyframeIn 500ms ease-in-out forwards',
 				cardHeaderAnimationOut: 'cardHeaderKeyframeOut 500ms ease-in-out forwards',
+				ping: 'ping 1.5s cubic-bezier(0, 0, 0.2, 1) 3',
 			},
 		},
 	},

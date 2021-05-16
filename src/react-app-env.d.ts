@@ -151,6 +151,10 @@ interface IProfileProps {
 	clickHandler: function
 }
 
+interface INewsButtonProps {
+	setShowNews: function
+}
+
 interface IOrder {
 	_id: string
 	itemId: string

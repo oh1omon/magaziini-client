@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
 import { ErrorPage } from './components/ErrorPage'
@@ -6,10 +6,12 @@ import Footer from './components/Footer'
 import Header from './components/Header'
 import { Delivery } from './components/InfoWindows/Delivery'
 import { History } from './components/InfoWindows/History'
+import { News } from './components/InfoWindows/News'
 import { Payment } from './components/InfoWindows/Payment'
 import { Returns } from './components/InfoWindows/Returns'
 import { Item } from './components/Item'
 import Main from './components/Main'
+import { NewsButton } from './components/NewsButton'
 import { Orders } from './components/Orders'
 import SignInUp from './components/SignInUp'
 import Working from './components/Working/CreateItem'
@@ -24,6 +26,9 @@ export const App = () => {
 
 	//Retrieving user from the global state
 	const user = useSelector((state: IRootState) => state.user)
+
+	//Creating local state for showing or not NewsButton
+	const [showNews, setShowNews] = useState(true)
 
 	//Retrieving all items from DB to put them into global state
 	useEffect(() => {
@@ -42,10 +47,18 @@ export const App = () => {
 		dispatch({ type: SET_FAVS, payload: JSON.parse(window.localStorage.getItem('favorite')!) || [] })
 	}, [dispatch])
 
+	//So, if user has already clicked NewsButton, then localStorage now has an newsShown value set, and we are not showing this button him anymore
+	useEffect(() => {
+		if (window.localStorage.getItem('newsShown')) {
+			setShowNews(false)
+		}
+	}, [])
+
 	return (
 		<Router>
 			<div id='top'></div>
 			<Header />
+			{showNews && <NewsButton setShowNews={setShowNews} />}
 			<Switch>
 				<Route exact path={'/'}>
 					<Main />
@@ -71,6 +84,9 @@ export const App = () => {
 				</Route>
 				<Route path={'/additem'}>{user && user.type === 'admin' ? <Working /> : <Redirect to={'/'} />}</Route>
 				<Route path={'/updateitem/:id'}>{user && user.type === 'admin' ? <Update /> : <Redirect to={'/'} />}</Route>
+				<Route path={'/news'}>
+					<News />
+				</Route>
 				<Route path={'/*'}>
 					<ErrorPage />
 				</Route>
