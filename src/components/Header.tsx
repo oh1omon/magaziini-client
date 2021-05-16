@@ -3,9 +3,9 @@ import Headroom from 'react-headroom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { HashLink } from 'react-router-hash-link'
-import { ReactComponent as Logo } from '../logo.svg'
 import { SET_SEX } from '../store/actions/sexActions'
 import { Profile } from './Profile'
+import { Logo } from './SVGs/Logo'
 
 const Header = () => {
 	const dispatch = useDispatch()
@@ -52,7 +52,7 @@ const Header = () => {
 				<div className='flex flex-wrap items-center justify-between h-auto pt-5 lg:py-5 w-9/10'>
 					<div className='flex items-center justify-center w-1/2 lg:w-36 logo'>
 						<Link to='/'>
-							<Logo className={'w-28 sm:w-full'} />
+							<Logo />
 						</Link>
 					</div>
 					<div className='flex-row items-center justify-around hidden lg:flex w-96'>
