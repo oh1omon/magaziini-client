@@ -163,3 +163,7 @@ interface IOrder {
 	color: string
 	status: string
 }
+
+interface IBackBtnProps {
+	backHandler: function
+}

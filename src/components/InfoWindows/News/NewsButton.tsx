@@ -15,10 +15,16 @@ export const NewsButton = ({ setShowNews }: INewsButtonProps) => {
 
 	return (
 		<>
-			<span className={'fixed z-10 bottom-12 right-12 w-12 h-12 bg-white border-2 border-black animate-ping'}></span>
+			<span
+				className={
+					'fixed z-10 bottom-6 right-6 md:bottom-10 md:right-10 lg:bottom-12 lg:right-12 w-12 h-12 bg-white border-2 border-black animate-ping'
+				}
+			></span>
 			<button
 				onClick={clickHandler}
-				className={'fixed z-10 bottom-12 right-12 w-12 h-12 bg-white border-2 border-black text-3xl hover:bg-gray-200'}
+				className={
+					'fixed z-10 bottom-6 right-6 md:bottom-10 md:right-10 lg:bottom-12 lg:right-12 w-12 h-12 bg-white border-2 border-black text-3xl hover:bg-gray-200'
+				}
 			>
 				!
 			</button>

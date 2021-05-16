@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { Redirect, useParams } from 'react-router-dom'
+import { Redirect, useHistory, useParams } from 'react-router-dom'
 import { createOrder, retrieveItem } from '../services/dispatchers'
+import { BackBtn } from './BackBtn'
 import FavButton from './FavButton'
 import { Input } from './Input'
 import Loader from './Loader'
@@ -8,6 +9,8 @@ import Loader from './Loader'
 export const Item = () => {
 	//Creating local state for the item, that is shown here
 	const [item, setItem] = useState<IITem>({} as IITem)
+
+	const history = useHistory()
 
 	//Loader state
 	//When component mounts it is true and changed later
@@ -49,6 +52,17 @@ export const Item = () => {
 		})
 	}
 
+	/**
+	 *
+	 * @param {React.MouseEvent<HTMLButtonElement, MouseEvent>} e Event
+	 * Function returns us back to the item selection
+	 */
+	const backHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+		e.preventDefault()
+
+		history.goBack()
+	}
+
 	//Item retrieving is called only once, when component is mounted, since it's dependency list consists of only id, which is only one for every component
 	//After retrieving item from the server we set loader to false and then render the actual item
 	useEffect(() => {
@@ -59,7 +73,7 @@ export const Item = () => {
 	}, [id])
 
 	return (
-		<div className='z-10 flex items-center justify-center  overflow-y-scroll lg:overscroll-none text-xs bg-white w-full min-h-hero'>
+		<div className='relative z-10 flex items-center justify-center  overflow-y-scroll lg:overscroll-none text-xs bg-white w-full min-h-hero'>
 			<div
 				className={`flex flex-col lg:flex-row items-center ${
 					isLoading ? 'justify-center' : 'justify-between'
@@ -69,6 +83,7 @@ export const Item = () => {
 					<Loader />
 				) : item ? (
 					<>
+						<BackBtn backHandler={backHandler} />
 						<div className='flex items-center justify-center w-full h-140 lg:w-2/5'>
 							<img
 								src={`${item.image}`}
