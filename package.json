@@ -57,5 +57,5 @@
 		"postcss": "^7.0.35",
 		"tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.1.2"
 	},
-	"proxy": "https://mag-api.herokuapp.com/"
+	"proxy": "http://localhost:8080/"
 }

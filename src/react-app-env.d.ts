@@ -34,12 +34,8 @@ interface IITem {
 	sex: string
 	image: string
 	sizes: string[] | string
-	inStock: number
 	price: number
 	color: string
-	availableColors: string[]
-	season: string
-	structure: {}
 }
 
 type IItemsState = IITem[] | null
@@ -159,6 +155,10 @@ interface IOrder {
 	_id: string
 	itemId: string
 	submitter: string
+	submitterName: string
+	street: string
+	city: string
+	country: string
 	size: string
 	color: string
 	status: string

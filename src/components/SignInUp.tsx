@@ -125,7 +125,7 @@ export default function SignInUp() {
 			if (r.message === 'authenticated' || r.message === 'User created!') {
 				return dispatch({ type: SET_USER, payload: r.user })
 			}
-			setErrMessage({ message: r.message })
+			setErrMessage({ message: r.err })
 		})
 	}
 
