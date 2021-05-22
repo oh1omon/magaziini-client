@@ -23,7 +23,7 @@ export default function SignInUp() {
 	const [errMessage, setErrMessage] = useState({ message: '' })
 
 	//Predefining the Sign In or Sign Up form for the future
-	const [form, setForm] = useState<ISignInUpFormState>({ email: '', password: '', name: '' })
+	const [form, setForm] = useState<ISignInUpFormState>({})
 
 	//Inputs local state
 	//As initial state we are using array of input objects imported from the another file
@@ -53,8 +53,10 @@ export default function SignInUp() {
 		//Getting index of name input object in the inputs state
 		const getNameInputIndex = (inputName: string) => inputs.findIndex((i) => i.name === inputName)
 
+		//Input names, that are needed only for Sign Up
 		const signUpInputs = ['name', 'street', 'city', 'country']
 
+		//We are iterating Sign Up needed inputs and toggling them on and off
 		for (let i = 0; i < signUpInputs.length; i++) {
 			const inputIndex = getNameInputIndex(signUpInputs[i])
 
@@ -71,10 +73,13 @@ export default function SignInUp() {
 			setInputs([...inputs])
 		}
 
-		//If we are toggling from Sign Up to Sign In, then we need to delete name field from the form state
+		//If we are toggling from Sign Up to Sign In, then we need to delete those fields from the form state
 		const prevForm = form
 		if (prevForm.name) {
 			delete prevForm['name']
+			delete prevForm['city']
+			delete prevForm['street']
+			delete prevForm['country']
 		}
 
 		//Updating new form state

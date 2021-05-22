@@ -84,6 +84,9 @@ interface ILoginUserProps {
 
 interface ISignUpProps extends ILoginUserProps {
 	name?: string
+	city?: string
+	street?: string
+	country?: string
 }
 
 interface ICreateOrderProps {
@@ -119,9 +122,12 @@ interface IInputProps {
 }
 
 interface ISignInUpFormState {
-	email: string
-	password: string
+	email?: string
+	password?: string
 	name?: string
+	street?: string
+	city?: string
+	country?: string
 }
 
 interface IPasswordChangeProps {

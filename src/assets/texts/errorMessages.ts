@@ -11,6 +11,18 @@ const errorMessages = [
 		type: 'name',
 		message: 'Please give us your name',
 	},
+	{
+		type: 'street',
+		message: 'Please give us your street',
+	},
+	{
+		type: 'city',
+		message: 'Please give us your city',
+	},
+	{
+		type: 'country',
+		message: 'Please give us your country',
+	},
 ]
 
 export default errorMessages

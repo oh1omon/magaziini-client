@@ -3,6 +3,7 @@
 .hero-image {
 	background: url('./assets/img/bg-gray.png') no-repeat center center/cover;
 }
+
 .hero-image::before {
 	position: absolute;
 	content: '';

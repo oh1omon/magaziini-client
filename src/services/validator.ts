@@ -13,6 +13,19 @@ class Validator {
 	}
 
 	/**
+	 * Performs checking any string for type and errors
+	 * @param {string} password
+	 * @returns {array} string array, that contains error field's names
+	 */
+	string(string: any, fieldName: string, err: string[]) {
+		if (typeof string !== 'string') {
+			err.push(fieldName)
+		}
+
+		return err
+	}
+
+	/**
 	 * Performs checking email for errors
 	 * @param {string} email
 	 * @returns {array} string array, that contains error field's names
@@ -43,10 +56,11 @@ class Validator {
 
 		this.email(formObject?.email, err)
 		this.password(formObject?.password, err)
+		this.string(formObject?.name, 'name', err)
+		this.string(formObject?.street, 'street', err)
+		this.string(formObject?.city, 'city', err)
+		this.string(formObject?.country, 'country', err)
 
-		if (!formObject.name) {
-			err.push('name')
-		}
 		return err
 	}
 
