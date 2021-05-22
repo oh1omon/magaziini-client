@@ -22,7 +22,7 @@ const Items = () => {
 							name={item.name}
 							description={item.description}
 							img={item.image}
-							url={`item/${item._id}`}
+							url={`item/${item._id}#top`}
 							price={item.price}
 						/>
 					))
