@@ -15,6 +15,7 @@ import { Item } from './components/Item'
 import Main from './components/Main'
 import { Orders } from './components/Orders'
 import SignInUp from './components/SignInUp'
+import { UserUpdate } from './components/UserUpdate'
 import Working from './components/Working/CreateItem'
 import Update from './components/Working/UpdateItem'
 import { retrieveItems, retrieveUser } from './services/dispatchers'
@@ -88,6 +89,7 @@ export const App = () => {
 				</Route>
 				<Route path={'/additem'}>{user && user.type === 'admin' ? <Working /> : <Redirect to={'/'} />}</Route>
 				<Route path={'/updateitem/:id'}>{user && user.type === 'admin' ? <Update /> : <Redirect to={'/'} />}</Route>
+				<Route path={'/userUpdate'}>{user ? <UserUpdate /> : <Redirect to={'/'} />}</Route>
 				<Route path={'/news'}>
 					<News />
 				</Route>

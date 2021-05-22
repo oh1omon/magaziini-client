@@ -95,7 +95,13 @@ interface ICreateOrderProps {
 }
 
 interface IUpdateProps {
-	password: string
+	name?: string
+	email?: string
+	password?: string
+	orders?: string
+	street?: string
+	city?: string
+	country?: string
 }
 
 interface ICreateItemProps {
