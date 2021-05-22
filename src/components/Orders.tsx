@@ -26,17 +26,23 @@ export const Orders = () => {
 
 	return (
 		<div className='z-10 flex items-center justify-center  overflow-y-scroll lg:overscroll-none text-xs bg-white w-full min-h-hero'>
-			<div className={`flex flex-col items-center ${isLoading ? 'justify-center' : 'justify-between'} w-4/5 h-4/5 text-xs`}>
+			<div
+				className={`flex flex-col items-center ${isLoading ? 'justify-center' : 'justify-between'} w-9/10 h-9/10 text-xs`}
+			>
 				{isLoading ? (
 					<Loader />
 				) : orders.length > 0 ? (
-					<div className={'w-full overflow-x-auto text-lg '}>
+					<div className={'w-full overflow-x-auto text-xs '}>
 						<table className={'w-full border-collapse'}>
 							<thead>
 								<tr className={''}>
 									<th className={'text-left p-4 border-black border-4'}>Item ID</th>
 									<th className={'text-left p-4 border-black border-4'}>Item Name</th>
-									<th className={'text-left p-4 border-black border-4'}>Buyer</th>
+									<th className={'text-left p-4 border-black border-4'}>Buyer Id</th>
+									<th className={'text-left p-4 border-black border-4'}>Buyer Name</th>
+									<th className={'text-left p-4 border-black border-4'}>Street</th>
+									<th className={'text-left p-4 border-black border-4'}>City</th>
+									<th className={'text-left p-4 border-black border-4'}>Country</th>
 									<th className={'text-left p-4 border-black border-4'}>Size</th>
 									<th className={'text-left p-4 border-black border-4'}>Price</th>
 								</tr>
@@ -54,6 +60,18 @@ export const Orders = () => {
 										</td>
 										<td className={'p-4 border-black border-2'}>
 											<div>{o.submitter || 'anonymous'}</div>
+										</td>
+										<td className={'p-4 border-black border-2'}>
+											<div>{o.submitterName || 'anonymous'}</div>
+										</td>
+										<td className={'p-4 border-black border-2'}>
+											<div>{o.street || 'anonymous'}</div>
+										</td>
+										<td className={'p-4 border-black border-2'}>
+											<div>{o.city || 'anonymous'}</div>
+										</td>
+										<td className={'p-4 border-black border-2'}>
+											<div>{o.country || 'anonymous'}</div>
 										</td>
 										<td className={'p-4 border-black border-2'}>
 											<div>{o.size}</div>
