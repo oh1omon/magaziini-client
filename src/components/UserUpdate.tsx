@@ -58,8 +58,8 @@ export const UserUpdate = () => {
 
 	return (
 		<div className='z-10 flex items-center justify-center  overflow-y-scroll lg:overscroll-none text-xs bg-white w-full min-h-hero'>
-			<div className='relative flex flex-col justify-between items-center w-4/5 font-mono lg:font-sans text-xs text-justify h-128 lg:h-160 text-opacity-80 my-12'>
-				<form className='flex flex-col justify-around lg:w-3/5 h-5/6'>
+			<div className='relative flex flex-col justify-between items-center w-4/5 font-mono lg:font-sans text-xs text-justify h-140 lg:h-160 text-opacity-80 my-12'>
+				<form className='flex flex-col justify-around w-5/6 lg:w-3/5 h-5/6'>
 					<div className='h-140'>
 						{inputs
 							.filter((input) => input.name !== 'email')
