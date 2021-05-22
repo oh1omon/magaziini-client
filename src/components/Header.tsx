@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Headroom from 'react-headroom'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { HashLink } from 'react-router-hash-link'
 import { SET_SEX } from '../store/actions/sexActions'
 import { Profile } from './Profile'
@@ -9,6 +9,7 @@ import { Logo } from './SVGs/Logo'
 
 const Header = () => {
 	const dispatch = useDispatch()
+	const location = useLocation()
 
 	//Retrieving user from the global state
 	const user = useSelector((state: IRootState) => state.user)
@@ -45,6 +46,12 @@ const Header = () => {
 			setProfVisible(false)
 		}
 	}, [user])
+
+	//It will listen for url location changes and it is going to set showing of profile to false, if it changes
+	//It is needed, for example, when user goes to the another page, so we should not show profile to him anymore
+	useEffect(() => {
+		setProfVisible(false)
+	}, [location.pathname])
 
 	return (
 		<Headroom style={{ zIndex: 10 }}>
