@@ -55,7 +55,7 @@ export default function SignInUp() {
 
 		const signUpInputs = ['name', 'street', 'city', 'country']
 
-		for (let i = 0; i < signUpInputs.length - 1; i++) {
+		for (let i = 0; i < signUpInputs.length; i++) {
 			const inputIndex = getNameInputIndex(signUpInputs[i])
 
 			//Creating a new name input field based on the one in the state
@@ -131,7 +131,7 @@ export default function SignInUp() {
 			if (r.message === 'authenticated' || r.message === 'User created!') {
 				return dispatch({ type: SET_USER, payload: r.user })
 			}
-			setErrMessage({ message: r.err })
+			setErrMessage({ message: r.message })
 		})
 	}
 
@@ -148,7 +148,7 @@ export default function SignInUp() {
 		<div className='z-10 flex items-center justify-center  overflow-y-scroll lg:overscroll-none text-xs bg-white w-full min-h-hero'>
 			<div className='relative flex flex-col justify-between items-center w-4/5 font-mono lg:font-sans text-xs text-justify h-128 lg:h-140 text-opacity-80 my-12'>
 				<form className='flex flex-col justify-around lg:w-3/5 h-5/6'>
-					<div className='h-48'>
+					<div className='h-96'>
 						{inputs
 							.filter((input) => input.activated)
 							.map((i) => (

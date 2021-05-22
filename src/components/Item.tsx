@@ -123,7 +123,7 @@ export const Item = () => {
 									</div>
 								</div>
 								<div className='mb-4 lg:mb-0'>
-									<h2 className='font-mono text-lg tracking-wide lg:text-2xl'>{item!.price}$</h2>
+									<h2 className='font-mono text-lg tracking-wide lg:text-2xl'>{item!.price}€</h2>
 								</div>
 								<div className='mb-4 lg:mb-0'>
 									<p

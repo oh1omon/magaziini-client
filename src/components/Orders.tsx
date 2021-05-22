@@ -5,6 +5,8 @@ import { retrieveOrders } from '../services/dispatchers'
 import Loader from './Loader'
 
 export const Orders = () => {
+	const user = useSelector((state: IRootState) => state.user)
+
 	//Creating local state for the orders, that is shown here
 	const [orders, setOrders] = useState<IOrder[]>([])
 
@@ -38,7 +40,9 @@ export const Orders = () => {
 								<tr className={''}>
 									<th className={'text-left p-4 border-black border-4'}>Item ID</th>
 									<th className={'text-left p-4 border-black border-4'}>Item Name</th>
-									<th className={'text-left p-4 border-black border-4'}>Buyer Id</th>
+									{user?.type === 'admin' && (
+										<th className={'text-left p-4 border-black border-4'}>Buyer Id</th>
+									)}
 									<th className={'text-left p-4 border-black border-4'}>Buyer Name</th>
 									<th className={'text-left p-4 border-black border-4'}>Street</th>
 									<th className={'text-left p-4 border-black border-4'}>City</th>
@@ -58,9 +62,11 @@ export const Orders = () => {
 												{items?.find((item) => item._id === o.itemId)?.name}
 											</Link>
 										</td>
-										<td className={'p-4 border-black border-2'}>
-											<div>{o.submitter || 'anonymous'}</div>
-										</td>
+										{user?.type === 'admin' && (
+											<td className={'p-4 border-black border-2'}>
+												<div>{o.submitter || 'anonymous'}</div>
+											</td>
+										)}
 										<td className={'p-4 border-black border-2'}>
 											<div>{o.submitterName || 'anonymous'}</div>
 										</td>
@@ -77,7 +83,7 @@ export const Orders = () => {
 											<div>{o.size}</div>
 										</td>
 										<td className={'p-4 border-black border-2'}>
-											<div>{`${items?.find((item) => item._id === o.itemId)?.price} `}</div>
+											<div>{`${items?.find((item) => item._id === o.itemId)?.price}€`}</div>
 										</td>
 									</tr>
 								))}

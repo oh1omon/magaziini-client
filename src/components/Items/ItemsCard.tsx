@@ -67,7 +67,7 @@ const ItemCard = ({ id, name, description, img, price, url }: IItemCardProps) =>
 					//Prints no more than 25 words of the description
 				}
 				<p className='w-3/4 font-mono text-sm text-justify'>{`${description.split(' ', 25).join(' ')}...`}</p>
-				<h3 className='font-mono text-2xl font-bold uppercase'>{price}$</h3>
+				<h3 className='font-mono text-2xl font-bold uppercase'>{price}€</h3>
 				<div className='flex flex-row justify-between w-3/4'>
 					<Link
 						to={url}
