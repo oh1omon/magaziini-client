@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
+import smoothscroll from 'smoothscroll-polyfill'
 import { ErrorPage } from './components/ErrorPage'
 import Footer from './components/Footer'
 import Header from './components/Header'
@@ -20,6 +21,9 @@ import { retrieveItems, retrieveUser } from './services/dispatchers'
 import { SET_FAVS } from './store/actions/favActions'
 import { SET_ITEMS } from './store/actions/itemActions'
 import { SET_USER } from './store/actions/userActions'
+
+//Kicking off the polyfill for smooth scrolling to items
+smoothscroll.polyfill()
 
 export const App = () => {
 	const dispatch = useDispatch()
@@ -56,7 +60,7 @@ export const App = () => {
 
 	return (
 		<Router>
-			<div id='top'></div>
+			<div id={'top'}></div>
 			<Header />
 			{showNews && <NewsButton setShowNews={setShowNews} />}
 			<Switch>

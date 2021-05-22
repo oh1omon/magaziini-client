@@ -20,6 +20,7 @@
 		"react-router-hash-link": "^2.4.1",
 		"react-scripts": "4.0.3",
 		"redux": "^4.0.5",
+		"smoothscroll-polyfill": "^0.4.4",
 		"typescript": "^4.2.3",
 		"web-vitals": "^1.1.1"
 	},
@@ -51,6 +52,7 @@
 		"@types/react-headroom": "^2.2.1",
 		"@types/react-router-dom": "^5.1.7",
 		"@types/react-router-hash-link": "^2.0.0",
+		"@types/smoothscroll-polyfill": "^0.3.1",
 		"autoprefixer": "^9.8.6",
 		"postcss": "^7.0.35",
 		"tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.1.2"
