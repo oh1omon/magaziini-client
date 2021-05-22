@@ -51,19 +51,25 @@ export default function SignInUp() {
 		setNewAccount(!newAccount)
 
 		//Getting index of name input object in the inputs state
-		const nameInputIndex = inputs.findIndex((input) => input.name === 'name')!
+		const getNameInputIndex = (inputName: string) => inputs.findIndex((i) => i.name === inputName)
 
-		//Creating a new name input field based on the one in the state
-		const input = inputs[nameInputIndex]
+		const signUpInputs = ['name', 'street', 'city', 'country']
 
-		//Toggling the input's activated value
-		input.activated = !input.activated
+		for (let i = 0; i < signUpInputs.length - 1; i++) {
+			const inputIndex = getNameInputIndex(signUpInputs[i])
 
-		//Here we changing old name input field version with new, toggled one
-		inputs.splice(nameInputIndex, 1, input)
+			//Creating a new name input field based on the one in the state
+			const input = inputs[inputIndex]
 
-		//Updating the state
-		setInputs([...inputs])
+			//Toggling the input's activated value
+			input.activated = !input.activated
+
+			//Here we changing old name input field version with new, toggled one
+			inputs.splice(inputIndex, 1, input)
+
+			//Updating the state
+			setInputs([...inputs])
+		}
 
 		//If we are toggling from Sign Up to Sign In, then we need to delete name field from the form state
 		const prevForm = form
