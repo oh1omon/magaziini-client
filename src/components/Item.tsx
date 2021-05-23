@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Redirect, useHistory, useParams } from 'react-router-dom'
 import errorMessages from '../assets/texts/errorMessages'
-import inputObjects from '../assets/texts/inputObjects'
+import orderObjects from '../assets/texts/orderInputs'
 import { createOrder, retrieveItem } from '../services/dispatchers'
 import Validator from '../services/validator'
 import { BackBtn } from './BackBtn'
@@ -25,7 +25,7 @@ export const Item = () => {
 
 	//Inputs local state
 	//As initial state we are using array of input objects imported from the another file
-	const [inputs, setInputs] = useState(inputObjects)
+	const [inputs, setInputs] = useState(orderObjects)
 
 	//Error messages local state
 	//As initial state we are using array of error messages imported from the another file
