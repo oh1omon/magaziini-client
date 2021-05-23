@@ -86,13 +86,13 @@ export const signOut = async () => {
  * @returns {null | IUser} req.data
  */
 export const updateUser = async (updatesObj: IUpdateProps) => {
-	let user = null
+	let resp = null
 	return axios.post(updateUserUrl, updatesObj).then((r) => {
 		//TODO delete console.log()
 		// console.log(r)
 		//
-		user = r.data
-		return user
+		resp = r.data
+		return resp
 	})
 }
 

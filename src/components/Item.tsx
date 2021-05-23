@@ -1,16 +1,39 @@
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { Redirect, useHistory, useParams } from 'react-router-dom'
+import errorMessages from '../assets/texts/errorMessages'
+import inputObjects from '../assets/texts/inputObjects'
 import { createOrder, retrieveItem } from '../services/dispatchers'
+import Validator from '../services/validator'
 import { BackBtn } from './BackBtn'
 import FavButton from './FavButton'
 import { Input } from './Input'
 import Loader from './Loader'
 
 export const Item = () => {
+	const history = useHistory()
+
+	//Fetching user from global state
+	const user = useSelector((state: IRootState) => state.user)
+
 	//Creating local state for the item, that is shown here
 	const [item, setItem] = useState<IITem>({} as IITem)
 
-	const history = useHistory()
+	//Setting local err state
+	//This err array will have only names of the inputs where errors has happened
+	const [err, setErr] = useState<string[]>([])
+
+	//Inputs local state
+	//As initial state we are using array of input objects imported from the another file
+	const [inputs, setInputs] = useState(inputObjects)
+
+	//Error messages local state
+	//As initial state we are using array of error messages imported from the another file
+	const [errMessages] = useState(errorMessages)
+
+	//Local state keeping boolean.
+	//According to this bool we will show form or description
+	const [showForm, setShowForm] = useState(false)
 
 	//Loader state
 	//When component mounts it is true and changed later
@@ -25,9 +48,8 @@ export const Item = () => {
 
 	//Order form
 	//Id is predefined from the link
-	const [order, setOrder] = useState({
+	const [order, setOrder] = useState<ICreateOrderProps>({
 		itemId: `${id}`,
-		size: '',
 	})
 
 	/**
@@ -42,11 +64,40 @@ export const Item = () => {
 	/**
 	 *
 	 * @param {React.MouseEvent<HTMLButtonElement, MouseEvent>} e Event
-	 * Function sending the order form to the actual dispatcher, then depending on the result sets infoMessage to show the user if the order has been created or not
+	 * Function checks form for problems, and sending the order form to the actual dispatcher, then depending on the result sets infoMessage to show the user if the order has been created or not
 	 */
 	const submitHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 		e.preventDefault()
 
+		//Cleaning input errors array
+		setErr([])
+		setInfoMessage({ type: '', message: '' })
+
+		//Getting validation result from our Validator class
+		const validationResult = Validator.order(order)
+
+		//If user has not mentioned the size we will show him error about that
+		if (validationResult.find((e) => e === 'size')) {
+			setInfoMessage({ type: 'err', message: 'please, mention the size' })
+			return
+		}
+
+		//If user's input has any problems, we will work with them in this script
+		if (validationResult.length !== 0) {
+			//If form is already shown, then we setting error to be shown
+			if (showForm) {
+				setErr(validationResult)
+				setInfoMessage({ type: 'err', message: errMessages.filter((e) => e.type === validationResult[0])[0].message })
+				return
+			}
+
+			//If form has not been shown before, then we will show inputs, that are needed for order
+			setShowForm(true)
+			setInputs(inputs.filter((i: any) => validationResult.find((r) => r === i.name)))
+			return
+		}
+
+		//If no problems found during validation, then we will create and order
 		createOrder({ ...order }).then((r) => {
 			setInfoMessage({ message: r.message, type: 'info' })
 		})
@@ -59,7 +110,6 @@ export const Item = () => {
 	 */
 	const backHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 		e.preventDefault()
-
 		history.goBack()
 	}
 
@@ -72,8 +122,13 @@ export const Item = () => {
 		})
 	}, [id])
 
+	useEffect(() => {
+		setOrder({ ...order, name: user?.name, street: user?.street, city: user?.city, country: user?.country })
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
+
 	return (
-		<div className='relative z-10 flex items-center justify-center  overflow-y-scroll lg:overscroll-none text-xs bg-white w-full min-h-hero'>
+		<div className='relative flex items-center justify-center  overflow-y-scroll lg:overscroll-none text-xs bg-white w-full min-h-hero'>
 			<div
 				className={`flex flex-col lg:flex-row items-center ${
 					isLoading ? 'justify-center' : 'justify-between'
@@ -97,33 +152,51 @@ export const Item = () => {
 								<div className='mb-4 lg:mb-0'>
 									<h1 className='font-sans text-4xl tracking-wide uppercase'>{item!.name}</h1>
 								</div>
-								<div className='mb-4 lg:mb-0'>
-									<p className='font-mono text-xs text-justify lg:text-sm text-opacity-80'>
-										{item!.description}
-									</p>
-								</div>
-								<div className='flex items-baseline mb-4 lg:mb-0'>
-									<div className='flex space-x-2 text-sm font-bold leading-none text-center text-gray-500 lg:space-x-5 lg:text-lg'>
-										{item.sizes &&
-											typeof item.sizes !== 'string' &&
-											item.sizes.map((s) => (
-												<Input
-													labelClassName={`p-2 font-mono cursor-pointer
-															${order.size === s && 'text-black'}
-															`}
-													key={s}
-													className='fixed w-0 opacity-0'
-													name='size'
-													type='radio'
-													value={s}
-													id={s}
-													onChange={(e: React.ChangeEvent<HTMLInputElement>) => valueHandler(e)}
-												/>
-											))}
+								{showForm ? (
+									<div className='h-auto'>
+										{inputs.map((i) => (
+											<Input
+												key={i.name}
+												className={i.className}
+												type={i.type}
+												name={i.name}
+												placeholder={i.placeholder}
+												onChange={(e: React.ChangeEvent<HTMLInputElement>) => valueHandler(e)}
+												err={err.includes(i.name)}
+											/>
+										))}
 									</div>
-								</div>
+								) : (
+									<>
+										<div className='mb-4 lg:mb-0'>
+											<p className='font-mono text-xs text-justify lg:text-sm text-opacity-80'>
+												{item!.description}
+											</p>
+										</div>
+										<div className='flex items-baseline mb-4 lg:mb-0'>
+											<div className='flex space-x-2 text-sm font-bold leading-none text-center text-gray-500 lg:space-x-5 lg:text-lg'>
+												{item.sizes &&
+													typeof item.sizes !== 'string' &&
+													item.sizes.map((s) => (
+														<Input
+															labelClassName={`p-2 font-mono cursor-pointer
+															${order?.size === s && 'text-black'}
+															`}
+															key={s}
+															className='fixed w-0 opacity-0'
+															name='size'
+															type='radio'
+															value={s}
+															id={s}
+															onChange={(e: React.ChangeEvent<HTMLInputElement>) => valueHandler(e)}
+														/>
+													))}
+											</div>
+										</div>
+									</>
+								)}
 								<div className='mb-4 lg:mb-0'>
-									<h2 className='font-mono text-lg tracking-wide lg:text-2xl'>{item!.price}$</h2>
+									<h2 className='font-mono text-lg tracking-wide lg:text-2xl'>{item!.price}€</h2>
 								</div>
 								<div className='mb-4 lg:mb-0'>
 									<p
@@ -139,9 +212,9 @@ export const Item = () => {
 										onClick={(e) => submitHandler(e)}
 										className='flex items-center justify-center w-3/5 py-1 font-sans text-xl duration-150 bg-white border-2 border-black xl:w-3/4 xl:py-2 xl:text-2xl hover:bg-gray-200'
 									>
-										Buy
+										{showForm ? 'Buy' : 'Continue'}
 									</button>
-									<FavButton id={item!._id} />
+									<FavButton id={item._id} />
 								</div>
 							</form>
 						</div>

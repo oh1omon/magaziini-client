@@ -34,12 +34,8 @@ interface IITem {
 	sex: string
 	image: string
 	sizes: string[] | string
-	inStock: number
 	price: number
 	color: string
-	availableColors: string[]
-	season: string
-	structure: {}
 }
 
 type IItemsState = IITem[] | null
@@ -88,15 +84,28 @@ interface ILoginUserProps {
 
 interface ISignUpProps extends ILoginUserProps {
 	name?: string
+	city?: string
+	street?: string
+	country?: string
 }
 
 interface ICreateOrderProps {
 	itemId: string
-	size: string
+	size?: string
+	name?: string
+	street?: string
+	city?: string
+	country?: string
 }
 
 interface IUpdateProps {
-	password: string
+	name?: string
+	email?: string
+	password?: string
+	orders?: string
+	street?: string
+	city?: string
+	country?: string
 }
 
 interface ICreateItemProps {
@@ -123,9 +132,12 @@ interface IInputProps {
 }
 
 interface ISignInUpFormState {
-	email: string
-	password: string
+	email?: string
+	password?: string
 	name?: string
+	street?: string
+	city?: string
+	country?: string
 }
 
 interface IPasswordChangeProps {
@@ -159,6 +171,10 @@ interface IOrder {
 	_id: string
 	itemId: string
 	submitter: string
+	submitterName: string
+	street: string
+	city: string
+	country: string
 	size: string
 	color: string
 	status: string

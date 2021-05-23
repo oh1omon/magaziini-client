@@ -5,6 +5,8 @@ import { retrieveOrders } from '../services/dispatchers'
 import Loader from './Loader'
 
 export const Orders = () => {
+	const user = useSelector((state: IRootState) => state.user)
+
 	//Creating local state for the orders, that is shown here
 	const [orders, setOrders] = useState<IOrder[]>([])
 
@@ -25,20 +27,28 @@ export const Orders = () => {
 	}, [])
 
 	return (
-		<div className='z-10 flex items-center justify-center  overflow-y-scroll lg:overscroll-none text-xs bg-white w-full min-h-hero'>
-			<div className={`flex flex-col items-center ${isLoading ? 'justify-center' : 'justify-between'} w-4/5 h-4/5 text-xs`}>
+		<div className='z-10 flex items-center justify-center overflow-y-scroll lg:overscroll-none text-xs bg-white w-full min-h-hero'>
+			<div
+				className={`flex flex-col items-center ${isLoading ? 'justify-center' : 'justify-between'} w-9/10 h-9/10 text-xs`}
+			>
 				{isLoading ? (
 					<Loader />
 				) : orders.length > 0 ? (
-					<div className={'w-full overflow-x-auto text-lg '}>
+					<div className={'w-full h-full overflow-x-auto overflow-y-auto text-xs '}>
 						<table className={'w-full border-collapse'}>
 							<thead>
 								<tr className={''}>
-									<th className={'text-left p-4 border-black border-4'}>Item ID</th>
-									<th className={'text-left p-4 border-black border-4'}>Item Name</th>
-									<th className={'text-left p-4 border-black border-4'}>Buyer</th>
-									<th className={'text-left p-4 border-black border-4'}>Size</th>
-									<th className={'text-left p-4 border-black border-4'}>Price</th>
+									<th className={'text-left p-4 border-black border-2'}>Item ID</th>
+									<th className={'text-left p-4 border-black border-2'}>Item Name</th>
+									{user?.type === 'admin' && (
+										<th className={'text-left p-4 border-black border-2'}>Buyer Id</th>
+									)}
+									<th className={'text-left p-4 border-black border-2'}>Buyer Name</th>
+									<th className={'text-left p-4 border-black border-2'}>Street</th>
+									<th className={'text-left p-4 border-black border-2'}>City</th>
+									<th className={'text-left p-4 border-black border-2'}>Country</th>
+									<th className={'text-left p-4 border-black border-2'}>Size</th>
+									<th className={'text-left p-4 border-black border-2'}>Price</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -52,14 +62,28 @@ export const Orders = () => {
 												{items?.find((item) => item._id === o.itemId)?.name}
 											</Link>
 										</td>
+										{user?.type === 'admin' && (
+											<td className={'p-4 border-black border-2'}>
+												<div>{o.submitter || 'anonymous'}</div>
+											</td>
+										)}
 										<td className={'p-4 border-black border-2'}>
-											<div>{o.submitter || 'anonymous'}</div>
+											<div>{o.submitterName || 'anonymous'}</div>
+										</td>
+										<td className={'p-4 border-black border-2'}>
+											<div>{o.street || 'anonymous'}</div>
+										</td>
+										<td className={'p-4 border-black border-2'}>
+											<div>{o.city || 'anonymous'}</div>
+										</td>
+										<td className={'p-4 border-black border-2'}>
+											<div>{o.country || 'anonymous'}</div>
 										</td>
 										<td className={'p-4 border-black border-2'}>
 											<div>{o.size}</div>
 										</td>
 										<td className={'p-4 border-black border-2'}>
-											<div>{`${items?.find((item) => item._id === o.itemId)?.price} `}</div>
+											<div>{`${items?.find((item) => item._id === o.itemId)?.price}€`}</div>
 										</td>
 									</tr>
 								))}

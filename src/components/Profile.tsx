@@ -4,8 +4,8 @@ import { CheckOrdersLink } from '../ProfileParts/CheckOrdersLink'
 import { CreateItemLink } from '../ProfileParts/CreateItemLink'
 import { ProfilePart } from '../ProfileParts/ProfilePart'
 import { SignOutBtn } from '../ProfileParts/SignOutBtn'
-import { PasswordChange } from './PasswordChange'
 import { Arrow } from './SVGs/Arrow'
+import { UserUpdateLink } from './UserUpdateLink'
 
 export const Profile = ({ clickHandler }: IProfileProps) => {
 	//Retrieving user from the global state
@@ -16,7 +16,7 @@ export const Profile = ({ clickHandler }: IProfileProps) => {
 			<div className={'lg:w-9/10 w-4/5 h-full flex flex-col lg:flex-row justify-around items-center'}>
 				{user && (
 					<>
-						<ProfilePart children={<PasswordChange />} />
+						<ProfilePart children={<UserUpdateLink />} />
 						{user!.type === 'admin' && <ProfilePart children={<CreateItemLink />} />}
 						<ProfilePart children={<CheckOrdersLink />} />
 						<ProfilePart children={<SignOutBtn />} />

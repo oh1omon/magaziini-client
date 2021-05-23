@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { HashLink } from 'react-router-hash-link'
 import { Subscribe } from './Subscribe'
 
 export default function Footer() {
@@ -9,27 +9,27 @@ export default function Footer() {
 				<div className='w-full h-full pb-6 lg:w-1/3'>
 					<h2 className='w-full py-4 uppercase border-b border-gray-700 lg:w-4/5'>Customer info</h2>
 					<p className='py-1 font-mono text-sm text-justify lg:py-3 '>
-						<Link to='/payment' className='duration-200 hover:text-black'>
+						<HashLink smooth to='/payment#top' className='duration-200 hover:text-black'>
 							Payment
-						</Link>
+						</HashLink>
 					</p>
 					<p className='py-1 font-mono text-sm text-justify lg:py-3'>
-						<Link to='/delivery' className='duration-200 hover:text-black'>
+						<HashLink smooth to='/delivery#top' className='duration-200 hover:text-black'>
 							Delivery
-						</Link>
+						</HashLink>
 					</p>
 					<p className='py-1 font-mono text-sm text-justify lg:py-3'>
-						<Link to='/returns' className='duration-200 hover:text-black'>
+						<HashLink smooth to='/returns#top' className='duration-200 hover:text-black'>
 							Returns Policy
-						</Link>
+						</HashLink>
 					</p>
 				</div>
 				<div className='w-full h-full pb-6 lg:w-1/3'>
 					<h2 className='w-full py-4 uppercase border-b border-gray-700 lg:w-4/5'>About us</h2>
 					<p className='py-1 font-mono text-sm text-justify lg:py-3 '>
-						<Link to='/history' className='duration-200 hover:text-black'>
+						<HashLink smooth to='/history#top' className='duration-200 hover:text-black'>
 							Our history
-						</Link>
+						</HashLink>
 					</p>
 				</div>
 				<div className='w-full h-full pb-6 lg:w-1/3'>

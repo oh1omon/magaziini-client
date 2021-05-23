@@ -23,7 +23,7 @@ export default function SignInUp() {
 	const [errMessage, setErrMessage] = useState({ message: '' })
 
 	//Predefining the Sign In or Sign Up form for the future
-	const [form, setForm] = useState<ISignInUpFormState>({ email: '', password: '', name: '' })
+	const [form, setForm] = useState<ISignInUpFormState>({})
 
 	//Inputs local state
 	//As initial state we are using array of input objects imported from the another file
@@ -51,24 +51,35 @@ export default function SignInUp() {
 		setNewAccount(!newAccount)
 
 		//Getting index of name input object in the inputs state
-		const nameInputIndex = inputs.findIndex((input) => input.name === 'name')!
+		const getNameInputIndex = (inputName: string) => inputs.findIndex((i) => i.name === inputName)
 
-		//Creating a new name input field based on the one in the state
-		const input = inputs[nameInputIndex]
+		//Input names, that are needed only for Sign Up
+		const signUpInputs = ['name', 'street', 'city', 'country']
 
-		//Toggling the input's activated value
-		input.activated = !input.activated
+		//We are iterating Sign Up needed inputs and toggling them on and off
+		for (let i = 0; i < signUpInputs.length; i++) {
+			const inputIndex = getNameInputIndex(signUpInputs[i])
 
-		//Here we changing old name input field version with new, toggled one
-		inputs.splice(nameInputIndex, 1, input)
+			//Creating a new name input field based on the one in the state
+			const input = inputs[inputIndex]
 
-		//Updating the state
-		setInputs([...inputs])
+			//Toggling the input's activated value
+			input.activated = !input.activated
 
-		//If we are toggling from Sign Up to Sign In, then we need to delete name field from the form state
+			//Here we changing old name input field version with new, toggled one
+			inputs.splice(inputIndex, 1, input)
+
+			//Updating the state
+			setInputs([...inputs])
+		}
+
+		//If we are toggling from Sign Up to Sign In, then we need to delete those fields from the form state
 		const prevForm = form
 		if (prevForm.name) {
 			delete prevForm['name']
+			delete prevForm['city']
+			delete prevForm['street']
+			delete prevForm['country']
 		}
 
 		//Updating new form state
@@ -142,7 +153,7 @@ export default function SignInUp() {
 		<div className='z-10 flex items-center justify-center  overflow-y-scroll lg:overscroll-none text-xs bg-white w-full min-h-hero'>
 			<div className='relative flex flex-col justify-between items-center w-4/5 font-mono lg:font-sans text-xs text-justify h-128 lg:h-140 text-opacity-80 my-12'>
 				<form className='flex flex-col justify-around lg:w-3/5 h-5/6'>
-					<div className='h-48'>
+					<div className='h-96'>
 						{inputs
 							.filter((input) => input.activated)
 							.map((i) => (

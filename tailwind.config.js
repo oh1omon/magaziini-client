@@ -43,6 +43,7 @@ module.exports = {
 				172: '43rem',
 				128: '32rem',
 				140: '35rem',
+				160: '40rem',
 				260: '65rem',
 				300: '75rem',
 				hero: 'calc(100vh - 5rem)',

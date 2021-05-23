@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
+import smoothscroll from 'smoothscroll-polyfill'
 import { ErrorPage } from './components/ErrorPage'
 import Footer from './components/Footer'
 import Header from './components/Header'
@@ -14,12 +15,16 @@ import { Item } from './components/Item'
 import Main from './components/Main'
 import { Orders } from './components/Orders'
 import SignInUp from './components/SignInUp'
+import { UserUpdate } from './components/UserUpdate'
 import Working from './components/Working/CreateItem'
 import Update from './components/Working/UpdateItem'
 import { retrieveItems, retrieveUser } from './services/dispatchers'
 import { SET_FAVS } from './store/actions/favActions'
 import { SET_ITEMS } from './store/actions/itemActions'
 import { SET_USER } from './store/actions/userActions'
+
+//Kicking off the polyfill for smooth scrolling to items
+smoothscroll.polyfill()
 
 export const App = () => {
 	const dispatch = useDispatch()
@@ -56,12 +61,13 @@ export const App = () => {
 
 	return (
 		<Router>
-			<div id='top'></div>
+			<div id={'top'}></div>
 			<Header />
-			{showNews && <NewsButton setShowNews={setShowNews} />}
+
 			<Switch>
 				<Route exact path={'/'}>
 					<Main />
+					{showNews && <NewsButton setShowNews={setShowNews} />}
 				</Route>
 				<Route path={'/login'}>{user ? <Redirect to={'/'} /> : <SignInUp />}</Route>
 				<Route path={`/item/:id`}>
@@ -84,6 +90,7 @@ export const App = () => {
 				</Route>
 				<Route path={'/additem'}>{user && user.type === 'admin' ? <Working /> : <Redirect to={'/'} />}</Route>
 				<Route path={'/updateitem/:id'}>{user && user.type === 'admin' ? <Update /> : <Redirect to={'/'} />}</Route>
+				<Route path={'/userUpdate'}>{user ? <UserUpdate /> : <Redirect to={'/'} />}</Route>
 				<Route path={'/news'}>
 					<News />
 				</Route>

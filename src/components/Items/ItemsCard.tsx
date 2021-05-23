@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { HashLink } from 'react-router-hash-link'
 import { deleteItem, retrieveItems } from '../../services/dispatchers'
 import { SET_ITEMS } from '../../store/actions/itemActions'
 import FavButton from '../FavButton'
@@ -37,9 +37,9 @@ const ItemCard = ({ id, name, description, img, price, url }: IItemCardProps) =>
 				//These buttons are only visible if you have admin account
 			}
 			<div className={` ${user && user.type === 'admin' ? 'absolute -top-1 -right-1 flex flex-row' : 'hidden'}`}>
-				<Link to={`/updateitem/${id}`} className={' border-2 border-black pt-1 px-1 z-5 bg-white cursor-pointer'}>
+				<HashLink to={`/updateitem/${id}#top`} className={' border-2 border-black pt-1 px-1 z-5 bg-white cursor-pointer'}>
 					<Edit />
-				</Link>
+				</HashLink>
 				<button
 					onClick={(e) => deleteHandler(e)}
 					className={' border-2 border-black pt-1 px-1 z-5 bg-white cursor-pointer'}
@@ -54,12 +54,12 @@ const ItemCard = ({ id, name, description, img, price, url }: IItemCardProps) =>
 				<img className='object-cover w-full h-full filter grayscale-40' src={`${img}`} alt={name + ' image'} />
 			</div>
 			<div className='absolute bottom-0 flex flex-row items-center justify-around w-full bg-white border-t-2 border-black lg:hidden h-1/4 bg-opacity-90'>
-				<Link
+				<HashLink
 					to={url}
 					className='flex items-center justify-center w-2/3 py-2 text-2xl font-medium text-black uppercase duration-150 bg-white border-2 border-black hover:bg-gray-200'
 				>
 					{name}
-				</Link>
+				</HashLink>
 			</div>
 			<div className='flex-col items-center hidden duration-500 transform bg-white border-t-2 border-black lg:flex justify-evenly min-h-3/4 bg-opacity-90 -translate-y-1/4 hover:-translate-y-full'>
 				<h2 className='text-3xl font-medium uppercase'>{name}</h2>
@@ -67,14 +67,14 @@ const ItemCard = ({ id, name, description, img, price, url }: IItemCardProps) =>
 					//Prints no more than 25 words of the description
 				}
 				<p className='w-3/4 font-mono text-sm text-justify'>{`${description.split(' ', 25).join(' ')}...`}</p>
-				<h3 className='font-mono text-2xl font-bold uppercase'>{price}$</h3>
+				<h3 className='font-mono text-2xl font-bold uppercase'>{price}€</h3>
 				<div className='flex flex-row justify-between w-3/4'>
-					<Link
+					<HashLink
 						to={url}
 						className='flex items-center justify-center w-2/3 py-2 text-black duration-150 bg-white border-2 border-black hover:bg-gray-200'
 					>
 						Read More
-					</Link>
+					</HashLink>
 					<FavButton id={id} />
 				</div>
 			</div>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Headroom from 'react-headroom'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { HashLink } from 'react-router-hash-link'
 import { SET_SEX } from '../store/actions/sexActions'
 import { Profile } from './Profile'
@@ -9,6 +9,7 @@ import { Logo } from './SVGs/Logo'
 
 const Header = () => {
 	const dispatch = useDispatch()
+	const location = useLocation()
 
 	//Retrieving user from the global state
 	const user = useSelector((state: IRootState) => state.user)
@@ -46,17 +47,23 @@ const Header = () => {
 		}
 	}, [user])
 
+	//It will listen for url location changes and it is going to set showing of profile to false, if it changes
+	//It is needed, for example, when user goes to the another page, so we should not show profile to him anymore
+	useEffect(() => {
+		setProfVisible(false)
+	}, [location.pathname])
+
 	return (
 		<Headroom style={{ zIndex: 10 }}>
 			<div className='flex flex-row flex-wrap items-center justify-around w-full h-auto bg-gray-200 bg-opacity-75 border-b-4 border-black font-sans text-sm xl:text-2xl'>
 				<div className='flex flex-wrap items-center justify-between h-auto pt-5 lg:py-5 w-9/10'>
 					<div className='flex items-center justify-center w-1/2 lg:w-36 logo'>
-						<Link to='/'>
+						<HashLink to='/#top' smooth>
 							<Logo />
-						</Link>
+						</HashLink>
 					</div>
 					<div className='flex-row items-center justify-around hidden lg:flex w-96'>
-						<HashLink to='#items' smooth>
+						<HashLink to='/#items' smooth>
 							<button
 								className={`${
 									sex === 'm'
@@ -68,7 +75,8 @@ const Header = () => {
 								Men
 							</button>
 						</HashLink>
-						<HashLink to='#items' smooth>
+
+						<HashLink to='/#items' smooth>
 							<button
 								className={`${
 									sex === '' ? 'bg-black text-white' : 'hover:bg-black hover:text-white'
@@ -78,7 +86,7 @@ const Header = () => {
 								All
 							</button>
 						</HashLink>
-						<HashLink to='#items' smooth>
+						<HashLink to='/#items' smooth>
 							<button
 								className={`${
 									sex === 'w'
@@ -115,7 +123,7 @@ const Header = () => {
 					</div>
 					<div className='flex items-center justify-center w-full h-16 lg:hidden '>
 						<div className='flex flex-row items-center justify-between w-9/10'>
-							<HashLink to='#items' smooth>
+							<HashLink to='/#items' smooth>
 								<button
 									className={`${
 										sex === 'm'
@@ -127,7 +135,7 @@ const Header = () => {
 									Men
 								</button>
 							</HashLink>
-							<HashLink to='#items' smooth>
+							<HashLink to='/#items' smooth>
 								<button
 									className={`${
 										sex === '' ? 'bg-black text-white' : 'hover:bg-black hover:text-white'
@@ -137,7 +145,7 @@ const Header = () => {
 									All
 								</button>
 							</HashLink>
-							<HashLink to='#items' smooth>
+							<HashLink to='/#items' smooth>
 								<button
 									className={`${
 										sex === 'w'
