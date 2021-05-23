@@ -91,7 +91,11 @@ interface ISignUpProps extends ILoginUserProps {
 
 interface ICreateOrderProps {
 	itemId: string
-	size: string
+	size?: string
+	name?: string
+	street?: string
+	city?: string
+	country?: string
 }
 
 interface IUpdateProps {

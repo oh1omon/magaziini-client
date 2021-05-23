@@ -18,7 +18,7 @@ class Validator {
 	 * @returns {array} string array, that contains error field's names
 	 */
 	string(string: any, fieldName: string, err: string[]) {
-		if (typeof string !== 'string') {
+		if (typeof string !== 'string' || string.length === 0) {
 			err.push(fieldName)
 		}
 
@@ -57,9 +57,6 @@ class Validator {
 		this.email(formObject?.email, err)
 		this.password(formObject?.password, err)
 		this.string(formObject?.name, 'name', err)
-		this.string(formObject?.street, 'street', err)
-		this.string(formObject?.city, 'city', err)
-		this.string(formObject?.country, 'country', err)
 
 		return err
 	}
@@ -103,6 +100,23 @@ class Validator {
 		if (!createObj.price || isNaN(parseInt(createObj.price))) {
 			err.push('price')
 		}
+		return err
+	}
+
+	/**
+	 * Performs checking orderObj object for errors
+	 * @param {object} orderObj
+	 * @returns {array} string array, that contains error field's names
+	 */
+	order(orderObj: ICreateOrderProps) {
+		let err: string[] = []
+
+		this.string(orderObj?.size, 'size', err)
+		this.string(orderObj?.name, 'name', err)
+		this.string(orderObj?.street, 'street', err)
+		this.string(orderObj?.city, 'city', err)
+		this.string(orderObj?.country, 'country', err)
+
 		return err
 	}
 }

@@ -63,10 +63,11 @@ export const App = () => {
 		<Router>
 			<div id={'top'}></div>
 			<Header />
-			{showNews && <NewsButton setShowNews={setShowNews} />}
+
 			<Switch>
 				<Route exact path={'/'}>
 					<Main />
+					{showNews && <NewsButton setShowNews={setShowNews} />}
 				</Route>
 				<Route path={'/login'}>{user ? <Redirect to={'/'} /> : <SignInUp />}</Route>
 				<Route path={`/item/:id`}>
