@@ -1,10 +1,11 @@
 import React from 'react'
+import { IProfileProps } from '../../react-app-env'
 
 export const Arrow = ({ clickHandler }: IProfileProps) => {
 	return (
 		<svg
 			className='transform -translate-x-1/2 w-6 h-6 text-black cursor-pointer absolute left-1/2 right-1/2 bottom-4'
-			onClick={() => clickHandler()}
+			onClick={clickHandler}
 			width='16'
 			height='19'
 			viewBox='0 0 16 19'

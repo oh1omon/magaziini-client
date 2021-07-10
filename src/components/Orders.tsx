@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { retrieveOrders } from '../services/dispatchers'
 import Loader from './Loader'
+import { IOrder, IRootState } from '../react-app-env'
 
 export const Orders = () => {
 	const user = useSelector((state: IRootState) => state.user)
@@ -29,7 +30,9 @@ export const Orders = () => {
 	return (
 		<div className='z-10 flex items-center justify-center overflow-y-scroll lg:overscroll-none text-xs bg-white w-full min-h-hero'>
 			<div
-				className={`flex flex-col items-center ${isLoading ? 'justify-center' : 'justify-between'} w-9/10 h-9/10 text-xs`}
+				className={`flex flex-col items-center ${
+					isLoading ? 'justify-center' : 'justify-between'
+				} w-9/10 h-9/10 text-xs`}
 			>
 				{isLoading ? (
 					<Loader />

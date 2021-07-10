@@ -1,6 +1,8 @@
 /// <reference types="react-scripts" />
 
 // STORE TYPES AND INTERFACES
+import React from 'react'
+
 interface IRootState {
 	user: IUserState
 	items: IItemsState
@@ -36,6 +38,15 @@ interface IITem {
 	sizes: string[] | string
 	price: number
 	color: string
+}
+
+interface ICreateOrderProps {
+	itemId: string
+	size?: string
+	name?: string
+	street?: string
+	city?: string
+	country?: string
 }
 
 type IItemsState = IITem[] | null
@@ -124,11 +135,9 @@ interface IInputProps {
 	type: string
 	name: string
 	placeholder?: string
-	onChange: function
+	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 	err?: boolean
 	value?: string
-	id?: string
-	label?: string
 }
 
 interface ISignInUpFormState {
@@ -140,11 +149,6 @@ interface ISignInUpFormState {
 	country?: string
 }
 
-interface IPasswordChangeProps {
-	passInputShown: boolean
-	passwordShowHandler: function
-}
-
 interface IRenderSwitchProps {
 	param: string
 }
@@ -154,17 +158,17 @@ interface ITextareaProps {
 	type?: string
 	className: string
 	err: boolean
-	changeHandler: function
+	changeHandler: Function
 	label: string
 	defaultValue?: string
 }
 
 interface IProfileProps {
-	clickHandler: function
+	clickHandler: Dispatch<SetStateAction<boolean>>
 }
 
 interface INewsButtonProps {
-	setShowNews: function
+	setShowNews: (event: MouseEventHandler<HTMLButtonElement, MouseEvent>) => void
 }
 
 interface IOrder {
@@ -181,5 +185,5 @@ interface IOrder {
 }
 
 interface IBackBtnProps {
-	backHandler: function
+	backHandler: (event: MouseEvent<HTMLButtonElement, MouseEvent>) => void
 }

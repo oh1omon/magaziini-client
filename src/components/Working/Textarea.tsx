@@ -1,4 +1,5 @@
 import React from 'react'
+import { ITextareaProps } from '../../react-app-env'
 
 export const Textarea = ({ name, className, err, changeHandler, label, defaultValue }: ITextareaProps) => {
 	return (

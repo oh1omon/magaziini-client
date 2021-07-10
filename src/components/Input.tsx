@@ -1,4 +1,5 @@
 import React from 'react'
+import { IInputProps } from '../react-app-env'
 
 /**
  *
@@ -11,11 +12,9 @@ export const Input = ({
 	name,
 	placeholder,
 	onChange,
-	id = '',
 	err = false,
 	value,
 	labelClassName = '',
-	label,
 }: IInputProps) => {
 	return (
 		<>

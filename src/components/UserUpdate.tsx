@@ -4,6 +4,7 @@ import inputObjects from '../assets/texts/inputObjects'
 import { updateUser } from '../services/dispatchers'
 import { SET_USER } from '../store/actions/userActions'
 import { WorkingInput } from './Working/ItemInput'
+import { IRootState } from '../react-app-env'
 
 export const UserUpdate = () => {
 	const dispatch = useDispatch()

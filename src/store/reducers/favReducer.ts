@@ -1,4 +1,5 @@
 import * as actionTypes from '../actions/favActions'
+import { IFavs, IFavsActions } from '../../react-app-env'
 
 /**
  *

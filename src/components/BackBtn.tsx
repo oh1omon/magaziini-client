@@ -1,5 +1,6 @@
 import React from 'react'
 import { Back } from './SVGs/Back'
+import { IBackBtnProps } from '../react-app-env'
 
 export const BackBtn = ({ backHandler }: IBackBtnProps) => {
 	return (

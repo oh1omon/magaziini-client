@@ -1,7 +1,11 @@
+import { ICreateItemProps, ICreateOrderProps, ILoginUserProps, ISignUpProps } from '../react-app-env'
+
 class Validator {
 	/**
 	 * Performs checking password for errors and length
 	 * @param {string} password
+	 *
+	 * @param err
 	 * @returns {array} string array, that contains error field's names
 	 */
 	password(password: any, err: string[]) {
@@ -14,8 +18,10 @@ class Validator {
 
 	/**
 	 * Performs checking any string for type and errors
-	 * @param {string} password
 	 * @returns {array} string array, that contains error field's names
+	 * @param string
+	 * @param fieldName
+	 * @param err
 	 */
 	string(string: any, fieldName: string, err: string[]) {
 		if (typeof string !== 'string' || string.length === 0) {
@@ -28,6 +34,7 @@ class Validator {
 	/**
 	 * Performs checking email for errors
 	 * @param {string} email
+	 * @param err
 	 * @returns {array} string array, that contains error field's names
 	 */
 	email(email: any, err: string[]) {

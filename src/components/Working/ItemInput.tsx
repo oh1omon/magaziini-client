@@ -1,6 +1,15 @@
 import React from 'react'
+import { ITextareaProps } from '../../react-app-env'
 
-export const WorkingInput = ({ name, type, className, err, changeHandler, label, defaultValue }: ITextareaProps) => {
+export const WorkingInput = ({
+	name,
+	type,
+	className,
+	err,
+	changeHandler,
+	label,
+	defaultValue,
+}: ITextareaProps) => {
 	return (
 		<div className={'flex flex-col'}>
 			<label htmlFor={name}>{label}</label>

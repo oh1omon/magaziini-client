@@ -6,6 +6,7 @@ import { ProfilePart } from '../ProfileParts/ProfilePart'
 import { SignOutBtn } from '../ProfileParts/SignOutBtn'
 import { Arrow } from './SVGs/Arrow'
 import { UserUpdateLink } from './UserUpdateLink'
+import { IProfileProps, IRootState } from '../react-app-env'
 
 export const Profile = ({ clickHandler }: IProfileProps) => {
 	//Retrieving user from the global state

@@ -6,6 +6,7 @@ import { HashLink } from 'react-router-hash-link'
 import { SET_SEX } from '../store/actions/sexActions'
 import { Profile } from './Profile'
 import { Logo } from './SVGs/Logo'
+import { IRootState } from '../react-app-env'
 
 const Header = () => {
 	const dispatch = useDispatch()
