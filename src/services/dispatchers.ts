@@ -32,7 +32,7 @@ export const retrieveUser = async () => {
 	let user = null
 	return axios.post(getUserUrl).then((r) => {
 		// //TODO delete console.log()
-		console.log(r)
+		// console.log(r)
 		//
 		user = r.data.user
 		return user
@@ -47,7 +47,7 @@ export const loginUser = async (signInObj: ILoginUserProps) => {
 	let user = null
 	return axios.post(loginUrl, signInObj).then((r) => {
 		//TODO delete console.log()
-		console.log(r)
+		// console.log(r)
 		//
 		user = r.data
 		return user
@@ -62,7 +62,7 @@ export const register = async (signUpObj: ILoginUserProps) => {
 	let user = null
 	return axios.post(registerUrl, signUpObj).then((r) => {
 		//TODO delete console.log()
-		console.log(r)
+		// console.log(r)
 		//
 		user = r.data
 		return user
@@ -76,7 +76,7 @@ export const register = async (signUpObj: ILoginUserProps) => {
 export const signOut = async () => {
 	return axios.post(signOutUrl).then((r) => {
 		//TODO delete console.log()
-		console.log(r)
+		// console.log(r)
 		//
 		return r.data.user
 	})
@@ -90,7 +90,7 @@ export const updateUser = async (updatesObj: IUpdateProps) => {
 	let resp = null
 	return axios.post(updateUserUrl, updatesObj).then((r) => {
 		//TODO delete console.log()
-		console.log(r)
+		// console.log(r)
 		//
 		resp = r.data
 		return resp
@@ -107,7 +107,7 @@ export const retrieveItems = () => {
 	let items = null
 	return axios.get(getItemsUrl).then((r) => {
 		//TODO delete console.log()
-		console.log(r)
+		// console.log(r)
 		//
 		items = r.data
 		return items
@@ -124,7 +124,7 @@ export const retrieveItem = (id: string) => {
 	let item = null
 	return axios.get(`${getItemsUrl}/${id}`).then((r) => {
 		//TODO delete console.log()
-		console.log(r)
+		// console.log(r)
 		//
 		item = r.data[0]
 		return item
@@ -138,7 +138,7 @@ export const retrieveItem = (id: string) => {
 export const deleteItem = async (_id: string) => {
 	return axios.post(removeItemUrl, { _id }).then((r) => {
 		//TODO delete console.log()
-		console.log(r)
+		// console.log(r)
 		//
 		return !!r.data.message
 	})
@@ -151,7 +151,7 @@ export const deleteItem = async (_id: string) => {
 export const addItem = (itemObj: ICreateItemProps) => {
 	return axios.post(createItemUrl, itemObj).then((r) => {
 		//TODO delete console.log()
-		console.log(r)
+		// console.log(r)
 		//
 		if (r.data.message) return { message: r.data.message, type: 'info' }
 		return { message: r.data.err, type: 'error' }
@@ -165,7 +165,7 @@ export const addItem = (itemObj: ICreateItemProps) => {
 export const updateItem = (itemObj: ICreateItemProps) => {
 	return axios.post(updateItemUrl, itemObj).then((r) => {
 		//TODO delete console.log()
-		console.log(r)
+		// console.log(r)
 		//
 		if (r.data.message) return { message: r.data.message, type: 'info' }
 		return { message: r.data.err, type: 'error' }
@@ -182,7 +182,7 @@ export const createOrder = async (orderObj: ICreateOrderProps) => {
 	let order = null
 	return axios.post(createOrderUrl, orderObj).then((r) => {
 		//TODO delete console.log()
-		console.log(r)
+		// console.log(r)
 		//
 		order = r.data
 		return order
@@ -197,7 +197,7 @@ export const retrieveOrders = async () => {
 	let orders = null
 	return axios.get(retrieveOrdersUrl).then((r) => {
 		//TODO delete console.log()
-		console.log(r)
+		// console.log(r)
 		//
 		orders = r.data
 		return orders
@@ -213,7 +213,7 @@ export const retrieveOrders = async () => {
 export const addSub = async (email: string) => {
 	return axios.post(addSubUrl, { email }).then((r) => {
 		//TODO delete console.log()
-		console.log(r)
+		// console.log(r)
 		//
 		return r.data
 	})
