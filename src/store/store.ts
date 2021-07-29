@@ -3,6 +3,7 @@ import { favReducer } from './reducers/favReducer'
 import { itemReducer } from './reducers/itemReducer'
 import { sexReducer } from './reducers/sexReducer'
 import { userReducer } from './reducers/userReducer'
+import { IRootState } from '../react-app-env'
 
 export const rootReducer = combineReducers({
 	user: userReducer,

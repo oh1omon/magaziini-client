@@ -9,6 +9,7 @@ import { BackBtn } from './BackBtn'
 import FavButton from './FavButton'
 import { Input } from './Input'
 import Loader from './Loader'
+import { ICreateOrderProps, IITem, IRootState } from '../react-app-env'
 
 export const Item = () => {
 	const history = useHistory()
@@ -87,7 +88,10 @@ export const Item = () => {
 			//If form is already shown, then we setting error to be shown
 			if (showForm) {
 				setErr(validationResult)
-				setInfoMessage({ type: 'err', message: errMessages.filter((e) => e.type === validationResult[0])[0].message })
+				setInfoMessage({
+					type: 'err',
+					message: errMessages.filter((e) => e.type === validationResult[0])[0].message,
+				})
 				return
 			}
 
@@ -161,7 +165,9 @@ export const Item = () => {
 												type={i.type}
 												name={i.name}
 												placeholder={i.placeholder}
-												onChange={(e: React.ChangeEvent<HTMLInputElement>) => valueHandler(e)}
+												onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+													valueHandler(e)
+												}
 												err={err.includes(i.name)}
 											/>
 										))}
@@ -177,7 +183,7 @@ export const Item = () => {
 											<div className='flex space-x-2 text-sm font-bold leading-none text-center text-gray-500 lg:space-x-5 lg:text-lg'>
 												{item.sizes &&
 													typeof item.sizes !== 'string' &&
-													item.sizes.map((s) => (
+													item.sizes.map((s: string) => (
 														<Input
 															labelClassName={`p-2 font-mono cursor-pointer
 															${order?.size === s && 'text-black'}
@@ -187,8 +193,9 @@ export const Item = () => {
 															name='size'
 															type='radio'
 															value={s}
-															id={s}
-															onChange={(e: React.ChangeEvent<HTMLInputElement>) => valueHandler(e)}
+															onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+																valueHandler(e)
+															}
 														/>
 													))}
 											</div>

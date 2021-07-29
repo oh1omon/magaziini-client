@@ -22,6 +22,7 @@ import { retrieveItems, retrieveUser } from './services/dispatchers'
 import { SET_FAVS } from './store/actions/favActions'
 import { SET_ITEMS } from './store/actions/itemActions'
 import { SET_USER } from './store/actions/userActions'
+import { IRootState } from './react-app-env'
 
 //Kicking off the polyfill for smooth scrolling to items
 smoothscroll.polyfill()
@@ -88,8 +89,12 @@ export const App = () => {
 				<Route path={'/orders'}>
 					<Orders />
 				</Route>
-				<Route path={'/additem'}>{user && user.type === 'admin' ? <Working /> : <Redirect to={'/'} />}</Route>
-				<Route path={'/updateitem/:id'}>{user && user.type === 'admin' ? <Update /> : <Redirect to={'/'} />}</Route>
+				<Route path={'/additem'}>
+					{user && user.type === 'admin' ? <Working /> : <Redirect to={'/'} />}
+				</Route>
+				<Route path={'/updateitem/:id'}>
+					{user && user.type === 'admin' ? <Update /> : <Redirect to={'/'} />}
+				</Route>
 				<Route path={'/userUpdate'}>{user ? <UserUpdate /> : <Redirect to={'/'} />}</Route>
 				<Route path={'/news'}>
 					<News />

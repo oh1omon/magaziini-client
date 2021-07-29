@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { useHistory } from 'react-router-dom'
 import usePortal from '../../services/hooks/usePortal'
+import { IModalProps } from '../../react-app-env'
 
 /**
  *

@@ -6,6 +6,7 @@ import { SET_ITEMS } from '../../store/actions/itemActions'
 import FavButton from '../FavButton'
 import { Delete } from '../SVGs/Delete'
 import { Edit } from '../SVGs/Edit'
+import { IItemCardProps, IRootState } from '../../react-app-env'
 
 const ItemCard = ({ id, name, description, img, price, url }: IItemCardProps) => {
 	const dispatch = useDispatch()
@@ -36,8 +37,15 @@ const ItemCard = ({ id, name, description, img, price, url }: IItemCardProps) =>
 			{
 				//These buttons are only visible if you have admin account
 			}
-			<div className={` ${user && user.type === 'admin' ? 'absolute -top-1 -right-1 flex flex-row' : 'hidden'}`}>
-				<HashLink to={`/updateitem/${id}#top`} className={' border-2 border-black pt-1 px-1 z-5 bg-white cursor-pointer'}>
+			<div
+				className={` ${
+					user && user.type === 'admin' ? 'absolute -top-1 -right-1 flex flex-row' : 'hidden'
+				}`}
+			>
+				<HashLink
+					to={`/updateitem/${id}#top`}
+					className={' border-2 border-black pt-1 px-1 z-5 bg-white cursor-pointer'}
+				>
 					<Edit />
 				</HashLink>
 				<button
@@ -51,7 +59,11 @@ const ItemCard = ({ id, name, description, img, price, url }: IItemCardProps) =>
 				//Admin buttons ended
 			}
 			<div className='w-full h-full'>
-				<img className='object-cover w-full h-full filter grayscale-40' src={`${img}`} alt={name + ' image'} />
+				<img
+					className='object-cover w-full h-full filter grayscale-40'
+					src={`${img}`}
+					alt={name + ' image'}
+				/>
 			</div>
 			<div className='absolute bottom-0 flex flex-row items-center justify-around w-full bg-white border-t-2 border-black lg:hidden h-1/4 bg-opacity-90'>
 				<HashLink
@@ -66,7 +78,9 @@ const ItemCard = ({ id, name, description, img, price, url }: IItemCardProps) =>
 				{
 					//Prints no more than 25 words of the description
 				}
-				<p className='w-3/4 font-mono text-sm text-justify'>{`${description.split(' ', 25).join(' ')}...`}</p>
+				<p className='w-3/4 font-mono text-sm text-justify'>{`${description
+					.split(' ', 25)
+					.join(' ')}...`}</p>
 				<h3 className='font-mono text-2xl font-bold uppercase'>{price}€</h3>
 				<div className='flex flex-row justify-between w-3/4'>
 					<HashLink

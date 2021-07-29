@@ -1,4 +1,5 @@
 import * as actionTypes from '../actions/userActions'
+import { IUserState, IUserStateAction } from '../../react-app-env'
 
 /**
  *

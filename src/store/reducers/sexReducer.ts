@@ -1,4 +1,5 @@
 import * as actionTypes from '../actions/sexActions'
+import { ISex, ISexActions } from '../../react-app-env'
 
 /**
  *

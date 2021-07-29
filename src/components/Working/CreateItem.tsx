@@ -7,6 +7,7 @@ import Validator from '../../services/validator'
 import { SET_ITEMS } from '../../store/actions/itemActions'
 import { Textarea } from './Textarea'
 import { WorkingInput } from './ItemInput'
+import { ICreateItemProps } from '../../react-app-env'
 
 export default function Working() {
 	//Creating local state for th form

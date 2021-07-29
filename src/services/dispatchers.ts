@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { ICreateItemProps, ICreateOrderProps, ILoginUserProps, IUpdateProps } from '../react-app-env'
 
 //USER urls
 const getUserUrl = '/api/user/retrieve'
@@ -139,10 +140,7 @@ export const deleteItem = async (_id: string) => {
 		//TODO delete console.log()
 		// console.log(r)
 		//
-		if (r.data.message) {
-			return true
-		}
-		return false
+		return !!r.data.message
 	})
 }
 

@@ -10,6 +10,7 @@ import { SET_ITEMS } from '../../store/actions/itemActions'
 import Loader from '../Loader'
 import { Textarea } from './Textarea'
 import { WorkingInput } from './ItemInput'
+import { ICreateItemProps, IITem } from '../../react-app-env'
 
 export default function Update() {
 	//We get right id of this item from the link

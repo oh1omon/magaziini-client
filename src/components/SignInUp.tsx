@@ -6,6 +6,7 @@ import { loginUser, register } from '../services/dispatchers'
 import Validator from '../services/validator'
 import { SET_USER } from '../store/actions/userActions'
 import { Input } from './Input'
+import { ISignInUpFormState } from '../react-app-env'
 
 export default function SignInUp() {
 	const dispatch = useDispatch()

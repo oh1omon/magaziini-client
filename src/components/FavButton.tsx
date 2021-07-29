@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { SET_FAVS } from '../store/actions/favActions'
+import { IFavButtonProps, IFavs, IRootState } from '../react-app-env'
 
 export default function FavButton({ id }: IFavButtonProps) {
 	const dispatch = useDispatch()

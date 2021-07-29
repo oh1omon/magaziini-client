@@ -1,5 +1,6 @@
 import React from 'react'
 import { useHistory } from 'react-router'
+import { INewsButtonProps } from '../../../react-app-env'
 
 export const NewsButton = ({ setShowNews }: INewsButtonProps) => {
 	const history = useHistory()
